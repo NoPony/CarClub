@@ -129,14 +129,14 @@ namespace NoPony.CarClub.Api.EF
             {
                 entity.HasIndex(e => new { e.Key, e.Deleted }, "IX_User_Key");
 
-                entity.HasIndex(e => new { e.Email, e.Deleted }, "IX_User_Login");
+                //entity.HasIndex(e => new { e.Login, e.Deleted }, "IX_User_Login");
 
                 entity.HasIndex(e => e.Key, "UQ_User_Key")
                     .IsUnique();
 
-                entity.Property(e => e.Email)
-                    .IsRequired()
-                    .HasMaxLength(128);
+                //entity.Property(e => e.Login)
+                //    .IsRequired()
+                //    .HasMaxLength(128);
 
                 entity.Property(e => e.EmailVerifyKey)
                     .HasMaxLength(4)

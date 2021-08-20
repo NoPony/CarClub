@@ -42,6 +42,9 @@ namespace NoPony.CarClub.Api.EF
         public virtual DbSet<LapReaction> LapReaction { get; set; }
         public virtual DbSet<LapStatus> LapStatus { get; set; }
         public virtual DbSet<LapTag> LapTag { get; set; }
+        public virtual DbSet<Login> Login { get; set; }
+        public virtual DbSet<Login1> Login1 { get; set; }
+        public virtual DbSet<LoginRole> LoginRole { get; set; }
         public virtual DbSet<Meet> Meet { get; set; }
         public virtual DbSet<MeetAttachment> MeetAttachment { get; set; }
         public virtual DbSet<MeetOfficial> MeetOfficial { get; set; }
@@ -65,6 +68,7 @@ namespace NoPony.CarClub.Api.EF
         public virtual DbSet<PenaltyAttachment> PenaltyAttachment { get; set; }
         public virtual DbSet<PenaltyReaction> PenaltyReaction { get; set; }
         public virtual DbSet<Permission> Permission { get; set; }
+        public virtual DbSet<Permission1> Permission1 { get; set; }
         public virtual DbSet<Poll> Poll { get; set; }
         public virtual DbSet<PollAttachment> PollAttachment { get; set; }
         public virtual DbSet<PollOption> PollOption { get; set; }
@@ -78,7 +82,9 @@ namespace NoPony.CarClub.Api.EF
         public virtual DbSet<Qualification> Qualification { get; set; }
         public virtual DbSet<Reaction> Reaction { get; set; }
         public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<Role1> Role1 { get; set; }
         public virtual DbSet<RolePermission> RolePermission { get; set; }
+        public virtual DbSet<RolePermission1> RolePermission1 { get; set; }
         public virtual DbSet<Season> Season { get; set; }
         public virtual DbSet<SeasonAttachment> SeasonAttachment { get; set; }
         public virtual DbSet<SeasonEvent> SeasonEvent { get; set; }
@@ -109,7 +115,8 @@ namespace NoPony.CarClub.Api.EF
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=STUMPY-DESKTOP;Database=CarClub;Integrated Security=SSPI;");
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=.\\;Database=CarClub;Integrated Security=SSPI;");
             }
         }
 
@@ -939,6 +946,164 @@ namespace NoPony.CarClub.Api.EF
                 entity.Property(e => e.UpdatedIp).HasMaxLength(32);
             });
 
+            modelBuilder.Entity<Login>(entity =>
+            {
+                entity.ToTable("Login", "auth");
+
+                entity.HasIndex(e => new { e.Deleted, e.Key }, "IX_Composite_DeletedKey")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.Deleted, e.Login1 }, "IX_Composite_DeletedLogin")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Login1, "UQ_Login_Email")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Key, "UQ_Login_Key")
+                    .IsUnique();
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.CreatedIp)
+                    .IsRequired()
+                    .HasMaxLength(32);
+
+                entity.Property(e => e.DeletedBy).HasMaxLength(128);
+
+                entity.Property(e => e.DeletedIp).HasMaxLength(32);
+
+                entity.Property(e => e.EmailVerifiedIp).HasMaxLength(32);
+
+                entity.Property(e => e.EmailVerifyIp).HasMaxLength(32);
+
+                entity.Property(e => e.FailedLoginIp).HasMaxLength(32);
+
+                entity.Property(e => e.ForgotPasswordIp).HasMaxLength(32);
+
+                entity.Property(e => e.ForgotResetIp).HasMaxLength(32);
+
+                entity.Property(e => e.LastLoginIp).HasMaxLength(32);
+
+                entity.Property(e => e.Login1)
+                    .IsRequired()
+                    .HasMaxLength(128)
+                    .HasColumnName("Login");
+
+                entity.Property(e => e.MfaEnabledIp).HasMaxLength(32);
+
+                entity.Property(e => e.MfaEnabledUtc).HasColumnType("datetime");
+
+                entity.Property(e => e.MfaKey).HasMaxLength(128);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(128);
+
+                entity.Property(e => e.UpdatedIp).HasMaxLength(32);
+            });
+
+            modelBuilder.Entity<Login1>(entity =>
+            {
+                entity.ToTable("Login");
+
+                entity.HasIndex(e => new { e.Deleted, e.Key }, "IX_Composite_DeletedKey")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.Deleted, e.Login }, "IX_Composite_DeletedLogin")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Login, "UQ_Login_Email")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.Key, "UQ_Login_Key")
+                    .IsUnique();
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.CreatedIp)
+                    .IsRequired()
+                    .HasMaxLength(32);
+
+                entity.Property(e => e.DeletedBy).HasMaxLength(128);
+
+                entity.Property(e => e.DeletedIp).HasMaxLength(32);
+
+                entity.Property(e => e.EmailVerifiedIp).HasMaxLength(32);
+
+                entity.Property(e => e.EmailVerifyIp).HasMaxLength(32);
+
+                entity.Property(e => e.FailedLoginIp).HasMaxLength(32);
+
+                entity.Property(e => e.ForgotPasswordIp).HasMaxLength(32);
+
+                entity.Property(e => e.ForgotResetIp).HasMaxLength(32);
+
+                entity.Property(e => e.LastLoginIp).HasMaxLength(32);
+
+                entity.Property(e => e.Login)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.MfaEnabledIp).HasMaxLength(32);
+
+                entity.Property(e => e.MfaEnabledUtc).HasColumnType("datetime");
+
+                entity.Property(e => e.MfaKey).HasMaxLength(128);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(128);
+
+                entity.Property(e => e.UpdatedIp).HasMaxLength(32);
+            });
+
+            modelBuilder.Entity<LoginRole>(entity =>
+            {
+                entity.ToTable("LoginRole", "auth");
+
+                entity.HasIndex(e => new { e.Deleted, e.LoginId, e.RoleId }, "IX_Composite");
+
+                entity.HasIndex(e => e.LoginId, "IX_MemberId");
+
+                entity.HasIndex(e => e.RoleId, "IX_RoleId");
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.CreatedIp)
+                    .IsRequired()
+                    .HasMaxLength(32);
+
+                entity.Property(e => e.DeletedBy).HasMaxLength(128);
+
+                entity.Property(e => e.DeletedIp).HasMaxLength(32);
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(128);
+
+                entity.Property(e => e.UpdatedIp).HasMaxLength(32);
+
+                entity.HasOne(d => d.Login)
+                    .WithMany(p => p.LoginRole)
+                    .HasForeignKey(d => d.LoginId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MemberRole_Member_UserId");
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.LoginRole)
+                    .HasForeignKey(d => d.RoleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_MemberRole_Role_RoleId");
+            });
+
             modelBuilder.Entity<Meet>(entity =>
             {
                 entity.Property(e => e.CreatedBy)
@@ -1148,25 +1313,41 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(256);
 
-                entity.Property(e => e.Latitude).HasColumnType("decimal(18, 6)");
-
-                entity.Property(e => e.Longitude).HasColumnType("decimal(18, 6)");
-
                 entity.Property(e => e.Mobile).HasMaxLength(16);
 
                 entity.Property(e => e.Phone).HasMaxLength(16);
-
-                entity.Property(e => e.Postcode).HasMaxLength(8);
 
                 entity.Property(e => e.PreferredName)
                     .IsRequired()
                     .HasMaxLength(128);
 
-                entity.Property(e => e.State).HasMaxLength(32);
+                entity.Property(e => e.PrimaryAddressLatitude)
+                    .HasColumnType("decimal(18, 6)")
+                    .HasColumnName("PrimaryAddress_Latitude");
 
-                entity.Property(e => e.Street).HasMaxLength(128);
+                entity.Property(e => e.PrimaryAddressLongitude)
+                    .HasColumnType("decimal(18, 6)")
+                    .HasColumnName("PrimaryAddress_Longitude");
 
-                entity.Property(e => e.Suburb).HasMaxLength(128);
+                entity.Property(e => e.PrimaryAddressPostcode)
+                    .HasMaxLength(8)
+                    .HasColumnName("PrimaryAddress_Postcode");
+
+                entity.Property(e => e.PrimaryAddressState)
+                    .HasMaxLength(32)
+                    .HasColumnName("PrimaryAddress_State");
+
+                entity.Property(e => e.PrimaryAddressStreet1)
+                    .HasMaxLength(128)
+                    .HasColumnName("PrimaryAddress_Street1");
+
+                entity.Property(e => e.PrimaryAddressStreet2)
+                    .HasMaxLength(128)
+                    .HasColumnName("PrimaryAddress_Street2");
+
+                entity.Property(e => e.PrimaryAddressSuburb)
+                    .HasMaxLength(128)
+                    .HasColumnName("PrimaryAddress_Suburb");
 
                 entity.Property(e => e.UpdatedBy).HasMaxLength(128);
 
@@ -1681,6 +1862,37 @@ namespace NoPony.CarClub.Api.EF
 
             modelBuilder.Entity<Permission>(entity =>
             {
+                entity.ToTable("Permission", "auth");
+
+                entity.HasIndex(e => new { e.Deleted, e.Code }, "IX_Composite");
+
+                entity.Property(e => e.Code).HasMaxLength(32);
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.CreatedIp)
+                    .IsRequired()
+                    .HasMaxLength(32);
+
+                entity.Property(e => e.DeletedBy).HasMaxLength(128);
+
+                entity.Property(e => e.DeletedIp).HasMaxLength(32);
+
+                entity.Property(e => e.Note).HasMaxLength(1024);
+
+                entity.Property(e => e.Title).HasMaxLength(128);
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(128);
+
+                entity.Property(e => e.UpdatedIp).HasMaxLength(32);
+            });
+
+            modelBuilder.Entity<Permission1>(entity =>
+            {
+                entity.ToTable("Permission");
+
                 entity.HasIndex(e => new { e.Deleted, e.Code }, "IX_Composite");
 
                 entity.Property(e => e.Code).HasMaxLength(32);
@@ -1980,6 +2192,27 @@ namespace NoPony.CarClub.Api.EF
 
             modelBuilder.Entity<Role>(entity =>
             {
+                entity.ToTable("Role", "auth");
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasMaxLength(32);
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(1024);
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(128);
+            });
+
+            modelBuilder.Entity<Role1>(entity =>
+            {
+                entity.ToTable("Role");
+
                 entity.Property(e => e.Code)
                     .IsRequired()
                     .HasMaxLength(32);
@@ -1997,6 +2230,35 @@ namespace NoPony.CarClub.Api.EF
 
             modelBuilder.Entity<RolePermission>(entity =>
             {
+                entity.ToTable("RolePermission", "auth");
+
+                entity.HasIndex(e => new { e.Deleted, e.RoleId, e.PermissionId }, "IX_Composite");
+
+                entity.HasIndex(e => e.PermissionId, "IX_PermissionId");
+
+                entity.HasIndex(e => e.RoleId, "IX_RoleId");
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.CreatedIp)
+                    .IsRequired()
+                    .HasMaxLength(32);
+
+                entity.Property(e => e.DeletedBy).HasMaxLength(128);
+
+                entity.Property(e => e.DeletedIp).HasMaxLength(32);
+
+                entity.Property(e => e.UpdatedBy).HasMaxLength(128);
+
+                entity.Property(e => e.UpdatedIp).HasMaxLength(32);
+            });
+
+            modelBuilder.Entity<RolePermission1>(entity =>
+            {
+                entity.ToTable("RolePermission");
+
                 entity.HasIndex(e => new { e.Deleted, e.RoleId, e.PermissionId }, "IX_Composite");
 
                 entity.HasIndex(e => e.PermissionId, "IX_PermissionId");
@@ -2750,8 +3012,7 @@ namespace NoPony.CarClub.Api.EF
                 entity.HasOne(d => d.Member)
                     .WithMany(p => p.VehicleReaction)
                     .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_VehicleReaction_Member_MemberId");
+                    .OnDelete(DeleteBehavior.ClientSetNull);
 
                 entity.HasOne(d => d.Reaction)
                     .WithMany(p => p.VehicleReaction)

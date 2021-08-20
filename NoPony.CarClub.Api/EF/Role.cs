@@ -9,8 +9,7 @@ namespace NoPony.CarClub.Api.EF
     {
         public Role()
         {
-            MemberRole = new HashSet<MemberRole>();
-            UserRole = new HashSet<UserRole>();
+            LoginRole = new HashSet<LoginRole>();
         }
 
         public long Id { get; set; }
@@ -21,7 +20,6 @@ namespace NoPony.CarClub.Api.EF
         public DateTimeOffset? UpdatedUtc { get; set; }
         public string UpdatedBy { get; set; }
 
-        public virtual ICollection<MemberRole> MemberRole { get; set; }
-        public virtual ICollection<UserRole> UserRole { get; set; }
+        public virtual ICollection<LoginRole> LoginRole { get; set; }
     }
 }

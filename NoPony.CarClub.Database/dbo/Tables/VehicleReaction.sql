@@ -15,6 +15,6 @@
     CONSTRAINT [PK_VehicleReaction] PRIMARY KEY CLUSTERED ([Id]),
 
     CONSTRAINT [FK_VehicleReaction_Vehicle_VehicleId] FOREIGN KEY ([VehicleId]) REFERENCES [dbo].[Vehicle] ([Id]),
-    CONSTRAINT [FK_VehicleReaction_Member_MemberId] FOREIGN KEY ([MemberId]) REFERENCES [dbo].[User] ([Id]),
+    CONSTRAINT [FK_VehicleReaction_Member_MemberId] FOREIGN KEY ([MemberId]) REFERENCES [dbo].[Member] ([Id]),
     CONSTRAINT [FK_VehicleReaction_Reaction_ReactionId] FOREIGN KEY ([ReactionId]) REFERENCES [dbo].[Reaction] ([Id]),
 )

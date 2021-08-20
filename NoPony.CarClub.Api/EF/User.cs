@@ -10,7 +10,6 @@ namespace NoPony.CarClub.Api.EF
         public User()
         {
             UserRole = new HashSet<UserRole>();
-            VehicleReaction = new HashSet<VehicleReaction>();
         }
 
         public long Id { get; set; }
@@ -53,6 +52,5 @@ namespace NoPony.CarClub.Api.EF
         public string DeletedBy { get; set; }
 
         public virtual ICollection<UserRole> UserRole { get; set; }
-        public virtual ICollection<VehicleReaction> VehicleReaction { get; set; }
     }
 }

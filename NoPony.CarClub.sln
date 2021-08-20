@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoPony.CarClub.Api", "NoPony.CarClub.Api\NoPony.CarClub.Api.csproj", "{71E3586B-9EE4-47F1-A92A-3F4F9B358F94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoPony.CarClub.Api", "NoPony.CarClub.Api\NoPony.CarClub.Api.csproj", "{71E3586B-9EE4-47F1-A92A-3F4F9B358F94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoPony.CarClub.Web", "NoPony.CarClub.Web\NoPony.CarClub.Web.csproj", "{ADF4C513-52DA-4E7B-8A5C-85EFE504C096}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NoPony.CarClub.Web", "NoPony.CarClub.Web\NoPony.CarClub.Web.csproj", "{ADF4C513-52DA-4E7B-8A5C-85EFE504C096}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "NoPony.CarClub.Database", "NoPony.CarClub.Database\NoPony.CarClub.Database.sqlproj", "{1EE4F4AD-6364-4FC2-A3CE-C76A90CE33CD}"
 EndProject

@@ -23,6 +23,6 @@ namespace NoPony.CarClub.Api.EF
         public string DeletedBy { get; set; }
 
         public virtual Member Member { get; set; }
-        public virtual Role Role { get; set; }
+        public virtual Role1 Role { get; set; }
     }
 }

@@ -61,8 +61,8 @@ namespace NoPony.CarClub.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NoPony.CarClub.Api", Version = "v1" });
             });
 
-            services.AddScoped<IAccountService, UserService>();
-            services.AddScoped<IAccountRepository, UserRepository>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IAuthRepository, AuthRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

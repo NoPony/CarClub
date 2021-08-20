@@ -17,7 +17,7 @@ namespace NoPony.CarClub.Api.EF
         public DateTimeOffset? UpdatedUtc { get; set; }
         public string UpdatedBy { get; set; }
 
-        public virtual User Member { get; set; }
+        public virtual Member Member { get; set; }
         public virtual Reaction Reaction { get; set; }
         public virtual Vehicle Vehicle { get; set; }
     }

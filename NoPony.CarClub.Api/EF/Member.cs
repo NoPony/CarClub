@@ -30,6 +30,7 @@ namespace NoPony.CarClub.Api.EF
             SurveyResponse = new HashSet<SurveyResponse>();
             TagCreator = new HashSet<Tag>();
             TagOwner = new HashSet<Tag>();
+            VehicleReaction = new HashSet<VehicleReaction>();
         }
 
         public long Id { get; set; }
@@ -39,12 +40,13 @@ namespace NoPony.CarClub.Api.EF
         public string Phone { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }
-        public string Street { get; set; }
-        public string Suburb { get; set; }
-        public string Postcode { get; set; }
-        public string State { get; set; }
-        public decimal? Latitude { get; set; }
-        public decimal? Longitude { get; set; }
+        public string PrimaryAddressStreet1 { get; set; }
+        public string PrimaryAddressStreet2 { get; set; }
+        public string PrimaryAddressSuburb { get; set; }
+        public string PrimaryAddressPostcode { get; set; }
+        public string PrimaryAddressState { get; set; }
+        public decimal? PrimaryAddressLatitude { get; set; }
+        public decimal? PrimaryAddressLongitude { get; set; }
         public DateTimeOffset CreatedUtc { get; set; }
         public string CreatedIp { get; set; }
         public string CreatedBy { get; set; }
@@ -78,5 +80,6 @@ namespace NoPony.CarClub.Api.EF
         public virtual ICollection<SurveyResponse> SurveyResponse { get; set; }
         public virtual ICollection<Tag> TagCreator { get; set; }
         public virtual ICollection<Tag> TagOwner { get; set; }
+        public virtual ICollection<VehicleReaction> VehicleReaction { get; set; }
     }
 }
