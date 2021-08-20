@@ -1,0 +1,1 @@
+﻿-- Scaffold-DbContext -Connection 'Server=.\;Database=CarClub;Integrated Security=SSPI;' Microsoft.EntityFrameworkCore.SqlServer -OutputDir EF -NoPluralize -Force
