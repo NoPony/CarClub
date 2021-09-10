@@ -7,13 +7,7 @@ namespace NoPony.CarClub.Api.EF
 {
     public partial class Board
     {
-        public Board()
-        {
-            InverseParent = new HashSet<Board>();
-        }
-
         public long Id { get; set; }
-        public long? ParentId { get; set; }
         public long CreatorId { get; set; }
         public long OwnerId { get; set; }
         public long StatusId { get; set; }
@@ -33,7 +27,6 @@ namespace NoPony.CarClub.Api.EF
 
         public virtual Member Creator { get; set; }
         public virtual Member Owner { get; set; }
-        public virtual Board Parent { get; set; }
-        public virtual ICollection<Board> InverseParent { get; set; }
+        public virtual BoardStatus Status { get; set; }
     }
 }

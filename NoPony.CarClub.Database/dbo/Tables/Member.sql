@@ -34,3 +34,9 @@
 
     CONSTRAINT [PK_Member] PRIMARY KEY CLUSTERED ([Id]),
 )
+
+GO
+
+CREATE INDEX [IX_Key] ON [dbo].[Member] ([UserKey] ASC);
+
+GO

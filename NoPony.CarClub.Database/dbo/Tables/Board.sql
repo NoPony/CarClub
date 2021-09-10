@@ -1,7 +1,6 @@
 ﻿CREATE TABLE [dbo].[Board]
 (
 	[Id]                        BIGINT IDENTITY(1, 1)       NOT NULL,
-    [ParentId]				    BIGINT                      NULL,
 
 	[CreatorId]                 BIGINT                      NOT NULL,
     [OwnerId]                   BIGINT                      NOT NULL,
@@ -26,7 +25,26 @@
 
     CONSTRAINT [PK_Board] PRIMARY KEY CLUSTERED ([Id]),
 
-    CONSTRAINT [FK_Board_Board_ParentId] FOREIGN KEY ([ParentId]) REFERENCES [dbo].[Board] ([Id]),
-    CONSTRAINT [FK_Board_Member_CreatorId] FOREIGN KEY ([CreatorId]) REFERENCES [dbo].[Member] ([Id]),
-    CONSTRAINT [FK_Board_Member_OwnerId] FOREIGN KEY ([OwnerId]) REFERENCES [dbo].[Member] ([Id]),
+    CONSTRAINT [FK_Board_Member_CreatorId] FOREIGN KEY ([CreatorId]) REFERENCES [dbo].[Member] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Board_Member_OwnerId] FOREIGN KEY ([OwnerId]) REFERENCES [dbo].[Member] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Board_BoardStatus_StatusId] FOREIGN KEY ([StatusId]) REFERENCES [dbo].[BoardStatus] ([Id]) ON DELETE NO ACTION,
 )
+
+GO
+
+CREATE INDEX [IX_Composite] ON [dbo].[Board] ([Deleted] ASC, [CreatorId] ASC, [OwnerId] ASC, [StatusId] ASC);
+
+GO
+
+CREATE INDEX [IX_CreatorId] ON [dbo].[Board] ([CreatorId] ASC);
+
+GO
+
+CREATE INDEX [IX_OwnerId] ON [dbo].[Board] ([OwnerId] ASC);
+
+GO
+
+CREATE INDEX [IX_StatusId] ON [dbo].[Board] ([StatusId] ASC);
+
+GO
+

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace NoPony.CarClub.Api.Features.Auth.Record
 {
-    public class AuthEmailVerifyRecord
+    public class AuthVerifyRecord
     {
     }
 }

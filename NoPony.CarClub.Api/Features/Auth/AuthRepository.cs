@@ -11,70 +11,54 @@ namespace NoPony.CarClub.Api.Features.User
 {
     public class AuthRepository : IAuthRepository
     {
-        public async Task<AuthRegisterRecord> Register(AuthRegisterRequestRecord request)
+        public AuthRegisterRecord Register(AuthRegisterModel request)
         {
-            try
+            using (CarClubContext context = new CarClubContext())
             {
-                using (Context context = new Context())
+                context.User.Add(new EF.User
                 {
-                    await context.User.AddAsync(new EF.User
-                    {
-                        Key = request.Key,
-                        Email = request.Login,
-                        Password = request.Password,
-                        CreatedBy = request.Key.ToString(),
-                        CreatedUtc = DateTime.UtcNow,
-                    });
+                    Key = request.Key,
+                    Email = request.Login,
+                    Password = request.Password,
+                    CreatedIp = request.ClientIp,
+                    CreatedBy = request.Key.ToString(),
+                    CreatedUtc = DateTime.UtcNow,
+                });
 
-                    await context.SaveChangesAsync();
+                context.SaveChanges();
 
-                    return new AuthRegisterRecord();
-                }
-            }
-
-            catch (Exception)
-            {
                 return new AuthRegisterRecord();
             }
         }
 
-        public async Task<AuthEmailVerifyRecord> EmailVerify(Guid? verifyKey)
+        public AuthVerifyRecord Verify(string ClientIp, Guid? verifyKey)
         {
-            try
+            using (CarClubContext context = new CarClubContext())
             {
-                using (Context context = new Context())
-                {
-                    if (!await context.User.AnyAsync(i => i.EmailVerifyKey == verifyKey))
-                    {
-                        return null;
-                    }
+                if (!context.User.Any(i => i.EmailVerifyKey == verifyKey))
+                    return null;
 
-                    EF.User record = await context.User
-                        .SingleAsync(i => i.EmailVerifyKey == verifyKey);
+                EF.User record = context.User
+                    .Single(i => i.EmailVerifyKey == verifyKey);
 
-                    record.EmailVerify = false;
-                    record.EmailVerifiedUtc = DateTime.UtcNow;
-                    record.EmailVerifyKey = null;
-                    record.FailedLoginCount = 0;
+                record.EmailVerify = true;
+                record.EmailVerifiedIp = ClientIp;
+                record.EmailVerifiedUtc = DateTime.UtcNow;
+                record.EmailVerifyKey = null;
+                record.FailedLoginCount = 0;
 
-                    await context.SaveChangesAsync();
+                context.SaveChanges();
 
-                    return new AuthEmailVerifyRecord();
-                }
-            }
-
-            catch (Exception)
-            {
-                throw;
+                return new AuthVerifyRecord();
             }
         }
 
-        public async Task<AuthLoginRecord> Login(string Email)
+        public bool TryLoginStart(string ClientIp, string Email, out AuthLoginRecord result)
         {
-            using (Context context = new Context())
+            using (CarClubContext context = new CarClubContext())
             {
-                return await context.User
-                    //.Where(i => i.Login == Email)
+                result = context.User
+                    .Where(i => i.Email == Email)
                     .Where(i => i.Deleted == false)
                     .Where(i => i.FailedLoginCount < 5)
                     .Select(i => new AuthLoginRecord
@@ -83,57 +67,51 @@ namespace NoPony.CarClub.Api.Features.User
                         Password = i.Password,
                         MfaKey = i.MfaKey,
                     })
-                    .SingleAsync();
+                    .Single();
+
+                return true;
             }
         }
 
-        public async Task LoginPass(Guid? Key)
+        public void LoginPass(Guid? Key)
         {
-            using (Context context = new Context())
+            using (CarClubContext context = new CarClubContext())
             {
-                EF.User record = await context.User
-                    .SingleAsync(i => i.Key == Key);
+                EF.User record = context.User
+                    .Single(i => i.Key == Key);
 
                 record.FailedLoginCount = 0;
 
-                await context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 
-        public async Task LoginFail(Guid? Key)
+        public void LoginFail(Guid? Key)
         {
-            using (Context context = new Context())
+            using (CarClubContext context = new CarClubContext())
             {
-                EF.User account = await context.User
-                    .SingleAsync(i => i.Key == Key);
+                EF.User account = context.User
+                    .Single(i => i.Key == Key);
 
                 account.FailedLoginCount++;
 
-                await context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 
-        public async Task<AuthDetailsRecord> GetDetails(Guid? Key)
+        public AuthDetailsRecord GetDetails(Guid? Key)
         {
-            try
+            using (CarClubContext context = new CarClubContext())
             {
-                using (Context context = new Context())
-                {
-                    return await context.User
-                        .Where(i => i.Key == Key)
-                        .Where(i => i.Deleted == false)
-                        .Where(i => i.FailedLoginCount < 5)
-                        .Select(i => new AuthDetailsRecord
-                        {
-                            //Permissions = i.,
-                        })
-                        .SingleOrDefaultAsync();
-                }
-            }
-
-            catch (Exception)
-            {
-                return new AuthDetailsRecord();
+                return context.User
+                    .Where(i => i.Key == Key)
+                    .Where(i => i.Deleted == false)
+                    .Where(i => i.FailedLoginCount < 5)
+                    .Select(i => new AuthDetailsRecord
+                    {
+                        //Permissions = i.,
+                    })
+                    .SingleOrDefault();
             }
         }
     }

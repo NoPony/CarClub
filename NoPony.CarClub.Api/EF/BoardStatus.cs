@@ -7,6 +7,11 @@ namespace NoPony.CarClub.Api.EF
 {
     public partial class BoardStatus
     {
+        public BoardStatus()
+        {
+            Board = new HashSet<Board>();
+        }
+
         public long Id { get; set; }
         public string Code { get; set; }
         public string Title { get; set; }
@@ -21,5 +26,7 @@ namespace NoPony.CarClub.Api.EF
         public bool Deleted { get; set; }
         public string DeletedIp { get; set; }
         public DateTimeOffset? DeletedUtc { get; set; }
+
+        public virtual ICollection<Board> Board { get; set; }
     }
 }

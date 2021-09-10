@@ -2,7 +2,7 @@
 
 namespace NoPony.CarClub.Api.Features.Auth.Dto
 {
-    public class AuthEmailVerifyRequestDto
+    public class AuthVerifyRequestDto
     {
         public Guid? Key { get; set; }
     }

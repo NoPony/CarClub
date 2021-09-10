@@ -126,6 +126,14 @@ namespace NoPony.CarClub.Api.EF
 
             modelBuilder.Entity<Board>(entity =>
             {
+                entity.HasIndex(e => new { e.Deleted, e.CreatorId, e.OwnerId, e.StatusId }, "IX_Composite");
+
+                entity.HasIndex(e => e.CreatorId, "IX_CreatorId");
+
+                entity.HasIndex(e => e.OwnerId, "IX_OwnerId");
+
+                entity.HasIndex(e => e.StatusId, "IX_StatusId");
+
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
                     .HasMaxLength(128);
@@ -156,9 +164,10 @@ namespace NoPony.CarClub.Api.EF
                     .HasForeignKey(d => d.OwnerId)
                     .OnDelete(DeleteBehavior.ClientSetNull);
 
-                entity.HasOne(d => d.Parent)
-                    .WithMany(p => p.InverseParent)
-                    .HasForeignKey(d => d.ParentId);
+                entity.HasOne(d => d.Status)
+                    .WithMany(p => p.Board)
+                    .HasForeignKey(d => d.StatusId)
+                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
             modelBuilder.Entity<BoardPermission>(entity =>
@@ -1295,6 +1304,8 @@ namespace NoPony.CarClub.Api.EF
 
             modelBuilder.Entity<Member>(entity =>
             {
+                entity.HasIndex(e => e.UserKey, "IX_Key");
+
                 entity.Property(e => e.CreatedBy)
                     .IsRequired()
                     .HasMaxLength(128);

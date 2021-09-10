@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Exceptions\**" />
+    <Compile Remove="Features\Survey\**" />
+    <Content Remove="Exceptions\**" />
+    <Content Remove="Features\Survey\**" />
+    <EmbeddedResource Remove="Exceptions\**" />
+    <EmbeddedResource Remove="Features\Survey\**" />
+    <None Remove="Exceptions\**" />
+    <None Remove="Features\Survey\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="GoogleAuthenticator" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.8" />
@@ -24,12 +35,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Exceptions\" />
+    <Folder Include="EF\" />
     <Folder Include="Features\Member\Dto\" />
     <Folder Include="Features\Member\Record\" />
-    <Folder Include="Features\Survey\" />
     <Folder Include="Features\Thread\Dto\" />
     <Folder Include="Features\Thread\Record\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Templates\RegisterEmail\RegisterEmailTemplate.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

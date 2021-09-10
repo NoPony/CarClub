@@ -1,35 +1,39 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NoPony.CarClub.Api.Features.User;
+using NoPony.CarClub.Api.Templates;
 using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace NoPony.CarClub.Api
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                        .WithHeaders("content-type");
+                });
+            });
+
             services.AddControllers()
                 .AddJsonOptions(options =>
                 {
@@ -47,9 +51,9 @@ namespace NoPony.CarClub.Api
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = Constants.JwtIssuer,
-                        ValidAudience = Constants.JwtAudience,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Constants.JwtKey)),
+                        ValidIssuer = Settings.JwtIssuer,
+                        ValidAudience = Settings.JwtAudience,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Settings.JwtKey)),
                         ClockSkew = TimeSpan.Zero,
                     };
                 });
@@ -58,8 +62,10 @@ namespace NoPony.CarClub.Api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NoPony.CarClub.Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NoPony CarClub Api", Version = "v1" });
             });
+
+            services.AddScoped<ITemplateEngine, RazorTemplateEngine>();
 
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IAuthRepository, AuthRepository>();
@@ -76,6 +82,7 @@ namespace NoPony.CarClub.Api
 
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseCors();
             app.UseAuthorization();
             app.UseSerilogRequestLogging();
 

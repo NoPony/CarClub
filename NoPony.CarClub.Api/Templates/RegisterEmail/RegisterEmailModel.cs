@@ -2,8 +2,6 @@
 {
     public class RegisterEmailModel
     {
-        private readonly string _verifyUrl;
-
-        public string VerifyUrl => _verifyUrl;
+        public string VerifyUrl { get; set; }
     }
 }
