@@ -16,26 +16,26 @@ namespace NoPony.CarClub.Api.EF
         public long MemberId { get; set; }
         public long MeetId { get; set; }
         public bool Enter { get; set; }
-        public string EnterIp { get; set; }
+        public byte[] EnterIp { get; set; }
         public DateTimeOffset? EnterUtc { get; set; }
         public string EnterBy { get; set; }
         public bool Checkin { get; set; }
-        public string CheckinIp { get; set; }
+        public byte[] CheckinIp { get; set; }
         public DateTimeOffset CheckinUtc { get; set; }
         public string CheckinBy { get; set; }
         public bool Checkout { get; set; }
-        public string CheckoutIp { get; set; }
+        public byte[] CheckoutIp { get; set; }
         public DateTimeOffset CheckoutUtc { get; set; }
         public string CheckoutBy { get; set; }
-        public string CreatedIp { get; set; }
+        public byte[] CreatedIp { get; set; }
         public DateTimeOffset CreatedUtc { get; set; }
-        public string CreatedBy { get; set; }
+        public long CreatedUserId { get; set; }
         public bool Updated { get; set; }
-        public string UpdatedIp { get; set; }
+        public byte[] UpdatedIp { get; set; }
         public DateTimeOffset? UpdatedUtc { get; set; }
-        public string UpdatedBy { get; set; }
+        public long? UpdatedUserId { get; set; }
         public bool Deleted { get; set; }
-        public string DeletedIp { get; set; }
+        public byte[] DeletedIp { get; set; }
         public DateTimeOffset? DeletedUtc { get; set; }
         public bool? DeletedBy { get; set; }
 

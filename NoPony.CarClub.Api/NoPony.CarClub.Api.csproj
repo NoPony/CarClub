@@ -1,7 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>dd45a4cc-2a90-4cda-8b26-6a4a10dcffa9</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="AutofacSerilogIntegration" Version="5.0.0" />
     <PackageReference Include="GoogleAuthenticator" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.8" />
@@ -26,6 +29,7 @@
     </PackageReference>
     <PackageReference Include="RazorEngine.NetCore" Version="3.1.0" />
     <PackageReference Include="SendGrid" Version="9.24.2" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
     <PackageReference Include="Serilog.Sinks.Seq" Version="5.0.1" />
     <PackageReference Include="SerilogTimings" Version="2.3.0" />
@@ -35,17 +39,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="EF\" />
-    <Folder Include="Features\Member\Dto\" />
-    <Folder Include="Features\Member\Record\" />
-    <Folder Include="Features\Thread\Dto\" />
-    <Folder Include="Features\Thread\Record\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="Templates\RegisterEmail\RegisterEmailTemplate.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Forum\Model\" />
   </ItemGroup>
 
 </Project>

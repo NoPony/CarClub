@@ -1,50 +1,47 @@
 ﻿CREATE TABLE [dbo].[Board]
 (
 	[Id]                        BIGINT IDENTITY(1, 1)       NOT NULL,
+    [Key]                       UNIQUEIDENTIFIER            NOT NULL,
 
-	[CreatorId]                 BIGINT                      NOT NULL,
-    [OwnerId]                   BIGINT                      NOT NULL,
-    [StatusId]                  BIGINT                      NOT NULL,
-
+    [Ordinal]                   INT                         NOT NULL,
     [Title]                     NVARCHAR(128)               NULL,
     [Note]                      NVARCHAR(1024)              NULL,
     
+    [CreatedIp]                 VARBINARY(16)               NOT NULL,
     [CreatedUtc]                DATETIMEOFFSET              NOT NULL,
-    [CreatedIp]                 NVARCHAR(32)                NOT NULL,
-    [CreatedBy]                 NVARCHAR(128)               NOT NULL,
+    [CreatedUserId]             BIGINT                      NOT NULL,
 
     [Updated]                   BIT                         NOT NULL        CONSTRAINT [DF_Board_Updated] DEFAULT (0),
-    [UpdatedIp]                 NVARCHAR(32)                NULL,
+    [UpdatedIp]                 VARBINARY(16)               NULL,
     [UpdatedUtc]                DATETIMEOFFSET              NULL,
-    [UpdatedBy]                 NVARCHAR(128)               NULL,
+    [UpdatedUserId]             BIGINT                      NULL,
 
     [Deleted]                   BIT                         NOT NULL        CONSTRAINT [DF_Board_Deleted] DEFAULT (0),
-    [DeletedIp]                 NVARCHAR(32)                NULL,
+    [DeletedIp]                 VARBINARY(16)               NULL,
     [DeletedUtc]                DATETIMEOFFSET              NULL,
-    [DeletedBy]                 NVARCHAR(128)               NULL,
+    [DeletedUserId]             BIGINT                      NULL,
 
     CONSTRAINT [PK_Board] PRIMARY KEY CLUSTERED ([Id]),
 
-    CONSTRAINT [FK_Board_Member_CreatorId] FOREIGN KEY ([CreatorId]) REFERENCES [dbo].[Member] ([Id]) ON DELETE NO ACTION,
-    CONSTRAINT [FK_Board_Member_OwnerId] FOREIGN KEY ([OwnerId]) REFERENCES [dbo].[Member] ([Id]) ON DELETE NO ACTION,
-    CONSTRAINT [FK_Board_BoardStatus_StatusId] FOREIGN KEY ([StatusId]) REFERENCES [dbo].[BoardStatus] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Board_User_CreatedUserId] FOREIGN KEY ([CreatedUserId]) REFERENCES [auth].[User] ([Id]),
+    CONSTRAINT [FK_Board_User_UpdatedUserId] FOREIGN KEY ([UpdatedUserId]) REFERENCES [auth].[User] ([Id]),
+    CONSTRAINT [FK_Board_User_DeletedUserId] FOREIGN KEY ([DeletedUserId]) REFERENCES [auth].[User] ([Id]),
 )
 
 GO
 
-CREATE INDEX [IX_Composite] ON [dbo].[Board] ([Deleted] ASC, [CreatorId] ASC, [OwnerId] ASC, [StatusId] ASC);
+CREATE INDEX [IX_Composite] ON [dbo].[Board] ([Key] ASC) INCLUDE ([Deleted]);
 
 GO
 
-CREATE INDEX [IX_CreatorId] ON [dbo].[Board] ([CreatorId] ASC);
+CREATE INDEX [IX_CreatedUserId] ON [dbo].[Board] ([CreatedUserId] ASC);
 
 GO
 
-CREATE INDEX [IX_OwnerId] ON [dbo].[Board] ([OwnerId] ASC);
+CREATE INDEX [IX_UpdatedUserId] ON [dbo].[Board] ([UpdatedUserId] ASC);
 
 GO
 
-CREATE INDEX [IX_StatusId] ON [dbo].[Board] ([StatusId] ASC);
+CREATE INDEX [IX_DeletedUserId] ON [dbo].[Board] ([DeletedUserId] ASC);
 
 GO
-

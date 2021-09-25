@@ -1,6 +1,9 @@
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
+using Serilog.Events;
 using System;
 
 namespace NoPony.CarClub.Api
@@ -14,11 +17,15 @@ namespace NoPony.CarClub.Api
                 .Enrich.FromLogContext()
 #if DEBUG
                 .MinimumLevel.Verbose()
-#else
-                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-                .MinimumLevel.Information()
-#endif
                 .WriteTo.Seq("http://localhost:5341")
+#else
+                .MinimumLevel.Information()
+                .WriteTo.Seq("http://localhost:5341")
+#endif
+                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft.Extensions.Hosting.Internal.Host", LogEventLevel.Warning)
+                .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Warning)
+
                 .CreateLogger();
 
             try
@@ -26,13 +33,21 @@ namespace NoPony.CarClub.Api
                 Log.Information("Start");
 
                 CreateHostBuilder(args)
+                    .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                    .ConfigureAppConfiguration((hostContext, builder) =>
+                    {
+                        if (hostContext.HostingEnvironment.IsDevelopment())
+                        {
+                            builder.AddUserSecrets<Program>();
+                        }
+                    })
                     .Build()
                     .Run();
             }
 
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Failed to Start");
+                Log.Fatal(ex, "Unhandled Exception in Main");
             }
 
             finally

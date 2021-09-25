@@ -4,8 +4,8 @@ namespace NoPony.CarClub.Api.Utility.Cache
 {
     public class Cache<T>
     {
-        private TimeSpan _duration;
-        private Func<T> _refresh;
+        private readonly TimeSpan _duration;
+        private readonly Func<T> _refresh;
 
         private DateTime? _expiry;
 
@@ -16,7 +16,11 @@ namespace NoPony.CarClub.Api.Utility.Cache
             get
             {
                 if (_expiry == null || _expiry > DateTime.Now)
+                {
                     _value = _refresh();
+
+                    _expiry = DateTime.UtcNow.Add(_duration);
+                }
 
                 return _value;
             }
@@ -31,6 +35,7 @@ namespace NoPony.CarClub.Api.Utility.Cache
         {
             _duration = Duration;
             _refresh = Refresh;
+            _expiry = null;
         }
     }
 }

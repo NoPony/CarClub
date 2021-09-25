@@ -9,9 +9,8 @@ namespace NoPony.CarClub.Api.EF
     {
         public Member()
         {
-            BoardCreator = new HashSet<Board>();
-            BoardOwner = new HashSet<Board>();
-            EventOfficial = new HashSet<EventOfficial>();
+            CommentReaction = new HashSet<CommentReaction>();
+            EventMemberRole = new HashSet<EventMemberRole>();
             EventReaction = new HashSet<EventReaction>();
             GridReaction = new HashSet<GridReaction>();
             HeatReaction = new HashSet<HeatReaction>();
@@ -20,11 +19,9 @@ namespace NoPony.CarClub.Api.EF
             MeetReaction = new HashSet<MeetReaction>();
             MemberEvent = new HashSet<MemberEvent>();
             MemberMeet = new HashSet<MemberMeet>();
-            MemberRole = new HashSet<MemberRole>();
             MemberTransaction = new HashSet<MemberTransaction>();
             Penalty = new HashSet<Penalty>();
             PenaltyReaction = new HashSet<PenaltyReaction>();
-            PostReaction = new HashSet<PostReaction>();
             SurveyCreator = new HashSet<Survey>();
             SurveyOwner = new HashSet<Survey>();
             SurveyResponse = new HashSet<SurveyResponse>();
@@ -47,21 +44,20 @@ namespace NoPony.CarClub.Api.EF
         public string PrimaryAddressState { get; set; }
         public decimal? PrimaryAddressLatitude { get; set; }
         public decimal? PrimaryAddressLongitude { get; set; }
+        public byte[] CreatedIp { get; set; }
         public DateTimeOffset CreatedUtc { get; set; }
-        public string CreatedIp { get; set; }
-        public string CreatedBy { get; set; }
+        public long CreatedUserId { get; set; }
         public bool Updated { get; set; }
-        public string UpdatedIp { get; set; }
+        public byte[] UpdatedIp { get; set; }
         public DateTimeOffset? UpdatedUtc { get; set; }
-        public string UpdatedBy { get; set; }
+        public long? UpdatedUserId { get; set; }
         public bool Deleted { get; set; }
-        public string DeletedIp { get; set; }
+        public byte[] DeletedIp { get; set; }
         public DateTimeOffset? DeletedUtc { get; set; }
-        public string DeletedBy { get; set; }
+        public long? DeletedUserId { get; set; }
 
-        public virtual ICollection<Board> BoardCreator { get; set; }
-        public virtual ICollection<Board> BoardOwner { get; set; }
-        public virtual ICollection<EventOfficial> EventOfficial { get; set; }
+        public virtual ICollection<CommentReaction> CommentReaction { get; set; }
+        public virtual ICollection<EventMemberRole> EventMemberRole { get; set; }
         public virtual ICollection<EventReaction> EventReaction { get; set; }
         public virtual ICollection<GridReaction> GridReaction { get; set; }
         public virtual ICollection<HeatReaction> HeatReaction { get; set; }
@@ -70,11 +66,9 @@ namespace NoPony.CarClub.Api.EF
         public virtual ICollection<MeetReaction> MeetReaction { get; set; }
         public virtual ICollection<MemberEvent> MemberEvent { get; set; }
         public virtual ICollection<MemberMeet> MemberMeet { get; set; }
-        public virtual ICollection<MemberRole> MemberRole { get; set; }
         public virtual ICollection<MemberTransaction> MemberTransaction { get; set; }
         public virtual ICollection<Penalty> Penalty { get; set; }
         public virtual ICollection<PenaltyReaction> PenaltyReaction { get; set; }
-        public virtual ICollection<PostReaction> PostReaction { get; set; }
         public virtual ICollection<Survey> SurveyCreator { get; set; }
         public virtual ICollection<Survey> SurveyOwner { get; set; }
         public virtual ICollection<SurveyResponse> SurveyResponse { get; set; }

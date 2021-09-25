@@ -9,6 +9,7 @@ namespace NoPony.CarClub.Api.EF
     {
         public Survey()
         {
+            Post = new HashSet<Post>();
             SurveyQuestion = new HashSet<SurveyQuestion>();
         }
 
@@ -18,21 +19,22 @@ namespace NoPony.CarClub.Api.EF
         public long StatusId { get; set; }
         public string Title { get; set; }
         public string Note { get; set; }
-        public string CreatedIp { get; set; }
+        public byte[] CreatedIp { get; set; }
         public DateTimeOffset CreatedUtc { get; set; }
-        public string CreatedBy { get; set; }
+        public long CreatedUserId { get; set; }
         public bool Updated { get; set; }
-        public string UpdatedIp { get; set; }
+        public byte[] UpdatedIp { get; set; }
         public DateTimeOffset? UpdatedUtc { get; set; }
-        public string UpdatedBy { get; set; }
+        public long? UpdatedUserId { get; set; }
         public bool Deleted { get; set; }
-        public string DeletedIp { get; set; }
+        public byte[] DeletedIp { get; set; }
         public DateTimeOffset? DeletedUtc { get; set; }
-        public string DeletedBy { get; set; }
+        public long? DeletedUserId { get; set; }
 
         public virtual Member Creator { get; set; }
         public virtual Member Owner { get; set; }
         public virtual SurveyStatus Status { get; set; }
+        public virtual ICollection<Post> Post { get; set; }
         public virtual ICollection<SurveyQuestion> SurveyQuestion { get; set; }
     }
 }

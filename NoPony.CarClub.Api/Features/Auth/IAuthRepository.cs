@@ -1,15 +1,17 @@
 ﻿using NoPony.CarClub.Api.Features.Auth.Record;
-using NoPony.CarClub.Api.Features.User.Record;
 using System;
+using System.Collections.Generic;
+using System.Net;
 
-namespace NoPony.CarClub.Api.Features.User
+namespace NoPony.CarClub.Api.Features.Auth
 {
     public interface IAuthRepository
     {
-        AuthRegisterRecord Register(AuthRegisterModel model);
-        AuthVerifyRecord Verify(string ClientIp, Guid? key);
-        bool TryLoginStart(string ClientIp, string email, out AuthLoginRecord result);
-        void LoginPass(Guid? key);
-        void LoginFail(Guid? key);
+        bool TryRegister(IPAddress clientIp, string email, string password, out AuthRegisterModel result);
+        bool TryVerify(IPAddress ClientIp, Guid? key);
+        bool TryLogin(IPAddress ClientIp, string email, out AuthLoginModel result);
+        bool TryLoginSuccess(IPAddress clientIp, Guid? key);
+        bool TryLoginFailure(IPAddress clientIp, Guid? key);
+        bool TryGetPermissions(Guid? key, out IEnumerable<string> result);
     }
 }

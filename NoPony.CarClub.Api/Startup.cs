@@ -1,3 +1,5 @@
+using Autofac;
+using AutofacSerilogIntegration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using NoPony.CarClub.Api.Features.User;
+using NoPony.CarClub.Api.Features.Auth;
 using NoPony.CarClub.Api.Templates;
 using Serilog;
 using System;
@@ -16,11 +18,11 @@ namespace NoPony.CarClub.Api
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
+        private readonly IConfiguration _config;
 
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration config)
         {
-            Configuration = configuration;
+            _config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -30,7 +32,11 @@ namespace NoPony.CarClub.Api
                 options.AddDefaultPolicy(builder =>
                 {
                     builder.WithOrigins("http://localhost:4200")
-                        .WithHeaders("content-type");
+                        //.WithHeaders("Content-Type", "Accept", "Authorization")
+                        //.WithMethods("POST", "GET", "PATCH", "DELETE", "OPTIONS");
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials();
                 });
             });
 
@@ -51,10 +57,10 @@ namespace NoPony.CarClub.Api
                         ValidateAudience = true,
                         ValidateLifetime = true,
                         ValidateIssuerSigningKey = true,
-                        ValidIssuer = Settings.JwtIssuer,
-                        ValidAudience = Settings.JwtAudience,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Settings.JwtKey)),
-                        ClockSkew = TimeSpan.Zero,
+                        ValidIssuer = _config.GetValue<string>("Jwt:Issuer"),
+                        ValidAudience = _config.GetValue<string>("Jwt:Audience"),
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetValue<string>("Jwt:Key"))),
+                        ClockSkew = TimeSpan.FromSeconds(5),
                     };
                 });
 
@@ -62,13 +68,23 @@ namespace NoPony.CarClub.Api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NoPony CarClub Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "NoPony CarClub Api", Version = "1.0" });
             });
 
-            services.AddScoped<ITemplateEngine, RazorTemplateEngine>();
+            //services.AddScoped<ITemplateEngine, RazorTemplateEngine>();
 
-            services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IAuthRepository, AuthRepository>();
+            //services.AddScoped<IAuthService, AuthService>();
+            //services.AddScoped<IAuthRepository, AuthRepository>();
+        }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.RegisterLogger();
+
+            builder.RegisterType<RazorTemplateEngine>().As<ITemplateEngine>();
+
+            builder.RegisterType<AuthService>().As<IAuthService>();
+            builder.RegisterType<AuthRepository>().As<IAuthRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

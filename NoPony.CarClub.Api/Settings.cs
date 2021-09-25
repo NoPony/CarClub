@@ -2,10 +2,12 @@
 {
     public class Settings
     {
-        public static string JwtIssuer => "NoPony.CarClub";
-        public static string JwtAudience => "NoPony.CarClub";
-        public static string JwtKey => "This is not the real key";
+        public string JwtIssuer { get; set; }
+        public string JwtAudience { get; set; }
+        public string JwtKey { get; set; }
 
-        public static string SendgridKey => "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";
+        public string SendgridKey { get; set; }
+        public string FromEmail { get; set; }
+        public string FromName { get; set; }
     }
 }

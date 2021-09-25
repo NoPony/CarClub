@@ -10,7 +10,7 @@ namespace NoPony.CarClub.Api.EF
         public Event()
         {
             EventAttachment = new HashSet<EventAttachment>();
-            EventOfficial = new HashSet<EventOfficial>();
+            EventMemberRole = new HashSet<EventMemberRole>();
             EventReaction = new HashSet<EventReaction>();
             Heat = new HashSet<Heat>();
             MemberEvent = new HashSet<MemberEvent>();
@@ -24,22 +24,25 @@ namespace NoPony.CarClub.Api.EF
         public string Note { get; set; }
         public DateTimeOffset? StartUtc { get; set; }
         public int? DurationMinutes { get; set; }
+        public byte[] CreatedIp { get; set; }
         public DateTimeOffset CreatedUtc { get; set; }
-        public string CreatedIp { get; set; }
-        public string CreatedBy { get; set; }
+        public long CreatedUserId { get; set; }
         public bool Updated { get; set; }
-        public string UpdatedIp { get; set; }
+        public byte[] UpdatedIp { get; set; }
         public DateTimeOffset? UpdatedUtc { get; set; }
-        public string UpdatedBy { get; set; }
+        public long? UpdatedUserId { get; set; }
         public bool Deleted { get; set; }
-        public string DeletedIp { get; set; }
+        public byte[] DeletedIp { get; set; }
         public DateTimeOffset? DeletedUtc { get; set; }
-        public bool? DeletedBy { get; set; }
+        public long? DeletedUserId { get; set; }
 
+        public virtual User CreatedUser { get; set; }
+        public virtual User DeletedUser { get; set; }
         public virtual Meet Meet { get; set; }
         public virtual EventStatus Status { get; set; }
+        public virtual User UpdatedUser { get; set; }
         public virtual ICollection<EventAttachment> EventAttachment { get; set; }
-        public virtual ICollection<EventOfficial> EventOfficial { get; set; }
+        public virtual ICollection<EventMemberRole> EventMemberRole { get; set; }
         public virtual ICollection<EventReaction> EventReaction { get; set; }
         public virtual ICollection<Heat> Heat { get; set; }
         public virtual ICollection<MemberEvent> MemberEvent { get; set; }

@@ -2,108 +2,108 @@
 using Microsoft.IdentityModel.Tokens;
 using NoPony.CarClub.Api.Features.Auth.Dto;
 using NoPony.CarClub.Api.Features.Auth.Record;
-using NoPony.CarClub.Api.Features.User.Record;
 using NoPony.CarClub.Api.Templates;
 using NoPony.CarClub.Api.Templates.RegisterEmail;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+using Serilog;
 using Sodium;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace NoPony.CarClub.Api.Features.User
+namespace NoPony.CarClub.Api.Features.Auth
 {
     public class AuthService : IAuthService
     {
+        private readonly ILogger _log;
         private readonly IConfiguration _config;
         private readonly IAuthRepository _authRepository;
         private readonly ITemplateEngine _templateEngine;
 
-        public AuthService(IConfiguration config, IAuthRepository authRepository, ITemplateEngine templateEngine)
+        public AuthService(ILogger log, IConfiguration config, IAuthRepository authRepository, ITemplateEngine templateEngine)
         {
+            _log = log ?? throw new ArgumentNullException(nameof(log));
+
             _config = config ?? throw new ArgumentNullException(nameof(config));
             _authRepository = authRepository ?? throw new ArgumentNullException(nameof(authRepository));
             _templateEngine = templateEngine ?? throw new ArgumentNullException(nameof(templateEngine));
         }
 
-        public AuthRegisterResponseDto Register(string ClientIp, AuthRegisterRequestDto Request)
+        public bool TryRegister(IPAddress clientIp, AuthRegisterRequestDto request)
         {
-            AuthRegisterRecord r = _authRepository.Register(new AuthRegisterModel
+            if (!_authRepository.TryRegister(clientIp, request.Email, PasswordHash.ArgonHashString(request.Password), out AuthRegisterModel record))
+                return false;
+
+            string bodyPlain = "Yes";
+
+            string bodyHtml = _templateEngine.Process("RegisterEmail",
+                new RegisterEmailModel
+                {
+                    VerifyUrl = $"http://localhost:4200/verify/{record.EmailVerifyKey}"
+                });
+
+            Response sendgridResponse = new SendGridClient(_config.GetValue<string>("Email:SendgridKey"))
+                .SendEmailAsync(MailHelper.CreateSingleEmail(
+                    new EmailAddress(_config.GetValue<string>("Email:SystemEmail"), _config.GetValue<string>("Email:SystemName")),
+                    new EmailAddress(request.Email, request.Email),
+                    "Confirm Registration: WRX Club of Western Australia",
+                    bodyPlain,
+                    bodyHtml))
+                .Result;
+
+            if (!sendgridResponse.IsSuccessStatusCode)
             {
-                ClientIp = ClientIp,
-
-                Key = Guid.NewGuid(),
-                Login = Request.Email,
-                Password = PasswordHash.ArgonHashString(Request.Password),
-            });
-
-            if (r != null)
-            {
-                string bodyPlain = "Yes";
-
-                string bodyHtml = _templateEngine.Process("RegisterEmail",
-                    new RegisterEmailModel
-                    {
-                        VerifyUrl = "https://localhost:/Auth/Verify?"
-                    });
-
-                Response response = new SendGridClient(_config.GetValue<string>("Email:SendgridKey"))
-                    .SendEmailAsync(MailHelper.CreateSingleEmail(
-                        new EmailAddress(_config.GetValue<string>("Email:FromEmail"), _config.GetValue<string>("Email:FromName")),
-                        new EmailAddress(Request.Email, Request.Email),
-                        "Confirm Registration Registration",
-                        bodyPlain,
-                        bodyHtml))
-                    .Result;
-
-                return new AuthRegisterResponseDto();
+                throw new Exception("Failed to send email");
             }
 
-            return new AuthRegisterResponseDto();
+            return true;
         }
 
-        public AuthVerifyResponseDto Verify(string ClientIp, AuthVerifyRequestDto request)
+        public bool TryVerify(IPAddress clientIp, Guid? key)
         {
-            if (_authRepository.Verify(ClientIp, request.Key) == null)
-                return null;
+            if (!_authRepository.TryVerify(clientIp, key))
+                return false;
 
-            var key = _authRepository.Verify(ClientIp, request.Key);
-
-            _authRepository.Verify(ClientIp, request.Key);
-
-            return new AuthVerifyResponseDto
-            {
-                Token = generateToken(key.ToString(), TimeSpan.FromDays(1)),
-            };
+            return true;
         }
 
-        public AuthLoginResponseDto Login(string ClientIp, AuthLoginRequestDto request)
+        public bool TryLogin(IPAddress clientIp, AuthLoginRequestDto request, out AuthLoginResponseDto response)
         {
-            if (!_authRepository.TryLoginStart(ClientIp, request.Email, out AuthLoginRecord r))
-                return null;
-
-            if (!PasswordHash.ArgonHashStringVerify(r.Password, request.Password))
+            if (!_authRepository.TryLogin(clientIp, request.Email, out AuthLoginModel record))
             {
-                _authRepository.LoginFail(r.Key);
+                response = null;
 
-                return null;
+                return false;
             }
 
-            _authRepository.LoginPass(r.Key);
-
-            return new AuthLoginResponseDto
+            if (!PasswordHash.ArgonHashStringVerify(record.Password, request.Password))
             {
-                Token = generateToken(r.Key.ToString(), TimeSpan.FromDays(2)),
-                Permissions = null,
+                _authRepository.TryLoginFailure(clientIp, record.Key);
+
+                response = null;
+
+                return false;
+            }
+
+            _authRepository.TryLoginSuccess(clientIp, record.Key);
+            _authRepository.TryGetPermissions(record.Key, out IEnumerable<string> permissions);
+
+            response = new AuthLoginResponseDto
+            {
+                Token = token(record.Key.ToString(), TimeSpan.FromDays(2)),
+                Permissions = permissions,
             };
+
+            return true;
         }
 
-        private static string generateToken(string key, TimeSpan duration)
+        private string token(string key, TimeSpan duration)
         {
-            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Settings.JwtKey));
+            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetValue<string>("Jwt:Key")));
 
             SigningCredentials credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
@@ -112,9 +112,10 @@ namespace NoPony.CarClub.Api.Features.User
                 new Claim(JwtRegisteredClaimNames.Sub, key),
             };
 
-            JwtSecurityToken token = new JwtSecurityToken(Settings.JwtIssuer, Settings.JwtAudience, claims, null, DateTime.Now.Add(duration), credentials);
+            JwtSecurityToken token = new JwtSecurityToken(_config.GetValue<string>("Jwt:Issuer"), _config.GetValue<string>("Jwt:Audience"), claims, DateTime.UtcNow, DateTime.UtcNow.Add(duration), credentials);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return new JwtSecurityTokenHandler()
+                .WriteToken(token);
         }
     }
 }

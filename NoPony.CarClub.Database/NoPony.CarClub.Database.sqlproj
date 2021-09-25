@@ -62,7 +62,7 @@
     <Folder Include="auth\Tables" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\Post.sql" />
+    <Build Include="dbo\Tables\Comment.sql" />
     <Build Include="dbo\Tables\Survey.sql" />
     <Build Include="dbo\Tables\SurveyOption.sql" />
     <Build Include="dbo\Tables\Event.sql" />
@@ -75,24 +75,20 @@
     <Build Include="dbo\Tables\Member.sql" />
     <Build Include="dbo\Tables\Poll.sql" />
     <Build Include="dbo\Tables\PollOption.sql" />
-    <Build Include="dbo\Tables\PostReaction.sql" />
+    <Build Include="dbo\Tables\CommentReaction.sql" />
     <Build Include="dbo\Tables\MemberEventAttachment.sql" />
     <Build Include="dbo\Tables\Meet.sql" />
     <Build Include="dbo\Tables\MeetAttachment.sql" />
     <Build Include="dbo\Tables\MeetStatus.sql" />
     <Build Include="dbo\Tables\Board.sql" />
-    <Build Include="dbo\Tables\PostAttachment.sql" />
-    <Build Include="dbo\Tables\Reaction.sql" />
+    <Build Include="dbo\Tables\CommentAttachment.sql" />
     <Build Include="dbo\Tables\Lap.sql" />
     <Build Include="dbo\Tables\MemberMeet.sql" />
     <Build Include="dbo\Tables\Penalty.sql" />
     <Build Include="dbo\Tables\Grid.sql" />
     <Build Include="dbo\Tables\MemberMeetAttachment.sql" />
     <Build Include="dbo\Tables\SurveyResponse.sql" />
-    <Build Include="dbo\Tables\PollStatus.sql" />
-    <Build Include="dbo\Tables\Thread.sql" />
-    <Build Include="dbo\Tables\ThreadStatus.sql" />
-    <Build Include="dbo\Tables\BoardStatus.sql" />
+    <Build Include="dbo\Tables\Post.sql" />
     <Build Include="dbo\Tables\PenaltyAttachment.sql" />
     <Build Include="dbo\Tables\SurveyQuestion.sql" />
     <Build Include="dbo\Tables\Season.sql" />
@@ -101,28 +97,23 @@
     <Build Include="dbo\Tables\SeasonEventReward.sql" />
     <Build Include="dbo\Tables\Heat.sql" />
     <Build Include="dbo\Tables\SurveyStatus.sql" />
-    <Build Include="dbo\Tables\BoardPermission.sql" />
     <Build Include="dbo\Tables\MemberEventStatus.sql" />
     <Build Include="dbo\Tables\HeatStatus.sql" />
     <Build Include="dbo\Tables\MemberMeetStatus.sql" />
-    <Build Include="dbo\Tables\EventOfficial.sql" />
+    <Build Include="dbo\Tables\EventMemberRole.sql" />
     <Build Include="dbo\Tables\MeetOfficial.sql" />
     <Build Include="dbo\Tables\HeatAttachment.sql" />
     <Build Include="dbo\Tables\LapStatus.sql" />
-    <Build Include="dbo\Tables\EventPermission.sql" />
+    <Build Include="dbo\Tables\Role.sql" />
     <Build Include="dbo\Tables\InvoiceStatus.sql" />
-    <Build Include="dbo\Tables\PollAttachment.sql" />
     <Build Include="dbo\Tables\SeasonAttachment.sql" />
     <Build Include="dbo\Tables\SeasonEventStatus.sql" />
     <Build Include="dbo\Tables\PenaltyStatus.sql" />
     <Build Include="dbo\Tables\Vehicle.sql" />
     <Build Include="dbo\Tables\VehicleStatus.sql" />
     <Build Include="dbo\Tables\MemberVehicle.sql" />
-    <Build Include="dbo\Tables\PollOptionStatus.sql" />
     <Build Include="dbo\Tables\Tag.sql" />
     <Build Include="dbo\Tables\TagStatus.sql" />
-    <Build Include="dbo\Tables\PostMention.sql" />
-    <Build Include="dbo\Tables\PostTag.sql" />
     <Build Include="dbo\Tables\EventTag.sql" />
     <Build Include="dbo\Tables\HeatTag.sql" />
     <Build Include="dbo\Tables\EventReaction.sql" />
@@ -143,11 +134,14 @@
     <Build Include="dbo\Tables\Qualification.sql" />
     <Build Include="dbo\Tables\MemberQualification.sql" />
     <Build Include="dbo\Tables\MemberOffice.sql" />
-    <Build Include="auth\Tables\Login.sql" />
+    <Build Include="auth\Tables\User.sql" />
     <Build Include="auth\Tables\Role.sql" />
-    <Build Include="auth\Tables\LoginRole.sql" />
+    <Build Include="auth\Tables\UserRole.sql" />
     <Build Include="auth\Tables\Permission.sql" />
     <Build Include="auth.sql" />
+    <Build Include="dbo\Tables\BoardRolePermission.sql" />
+    <Build Include="dbo\Tables\RoleCategory.sql" />
+    <Build Include="dbo\Tables\BoardTag.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="PostDeploy.sql" />

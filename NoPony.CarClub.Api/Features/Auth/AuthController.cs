@@ -2,65 +2,72 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NoPony.CarClub.Api.Features.Auth.Dto;
+using Serilog;
 using System;
 
-namespace NoPony.CarClub.Api.Features.User
+namespace NoPony.CarClub.Api.Features.Auth
 {
     [ApiController]
     [Route("[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthService _userService;
+        private readonly ILogger _log;
+        private readonly IAuthService _authService;
 
-        public AuthController(IAuthService userService)
+        public AuthController(ILogger log, IAuthService userService)
         {
-            _userService = userService ?? throw new ArgumentNullException(nameof(userService));
+            _log = log ?? throw new ArgumentNullException(nameof(log));
+
+            _authService = userService ?? throw new ArgumentNullException(nameof(userService));
         }
 
         [AllowAnonymous]
         [HttpPost]
         [Route("Register")]
-        public ActionResult<AuthLoginResponseDto> Register(AuthRegisterRequestDto request)
+        public ActionResult Register([FromBody] AuthRegisterRequestDto request)
         {
             if (request == null)
+            {
                 return StatusCode(StatusCodes.Status400BadRequest);
+            }
 
             try
             {
-                AuthRegisterResponseDto response = _userService.Register(HttpContext.Connection.RemoteIpAddress?.ToString(), request);
-                
-                if (response == null)
-                    return StatusCode(StatusCodes.Status400BadRequest);
+                if (!_authService.TryRegister(HttpContext.Connection.RemoteIpAddress, request))
+                {
+                    return StatusCode(StatusCodes.Status409Conflict);
+                }
 
-                return StatusCode(StatusCodes.Status200OK, response);
+                return StatusCode(StatusCodes.Status200OK);
             }
 
             catch (Exception ex)
             {
+                _log.Error(ex, "Unhandled exception in '{controller}'.'{method}'", nameof(AuthController), nameof(Register));
+
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
         [AllowAnonymous]
-        [HttpPost]
-        [Route("VerifyEmail")]
-        public ActionResult<AuthLoginResponseDto> VerifyEmail(AuthVerifyRequestDto request)
+        [HttpGet]
+        [Route("EmailVerify/{key:Guid}")]
+        public ActionResult VerifyEmail([FromRoute] Guid key)
         {
-            if (request == null)
-                return StatusCode(StatusCodes.Status400BadRequest);
-
             try
             {
-                AuthVerifyResponseDto response = _userService.Verify(HttpContext.Connection.RemoteIpAddress?.ToString(), request);
-
-                if (response == null)
+                if (!_authService.TryVerify(HttpContext.Connection.RemoteIpAddress, key))
+                {
                     return StatusCode(StatusCodes.Status400BadRequest);
+                }
 
-                return StatusCode(StatusCodes.Status200OK, response);
+                return StatusCode(StatusCodes.Status200OK);
             }
 
             catch (Exception ex)
             {
+                _log.Error(ex, "Unhandled exception in '{controller}'.'{method}'", nameof(AuthController), nameof(VerifyEmail));
+
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }
@@ -68,27 +75,32 @@ namespace NoPony.CarClub.Api.Features.User
         [AllowAnonymous]
         [HttpPost]
         [Route("Login")]
-        public ActionResult<AuthLoginResponseDto> Login(AuthLoginRequestDto Request)
+        public ActionResult<AuthLoginResponseDto> Login([FromBody] AuthLoginRequestDto Request)
         {
             if (Request == null)
+            {
                 return StatusCode(StatusCodes.Status400BadRequest);
+            }
 
             try
             {
-                AuthLoginResponseDto r = _userService.Login(HttpContext.Connection.RemoteIpAddress?.ToString(), Request);
+                if (!_authService.TryLogin(HttpContext.Connection.RemoteIpAddress, Request, out AuthLoginResponseDto response))
+                {
+                    return StatusCode(StatusCodes.Status400BadRequest);
+                }
 
-                if (r == null)
-                    return StatusCode(StatusCodes.Status401Unauthorized);
-
-                return StatusCode(StatusCodes.Status200OK, r);
+                return StatusCode(StatusCodes.Status200OK, response);
             }
 
-            catch (Exception)
+            catch (Exception ex)
             {
+                _log.Error(ex, "Unhandled exception in '{controller}'.'{method}'", nameof(AuthController), nameof(Login));
+
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
         }
 
-        // Update
+        // reset password
+        // Update?  Shouldn't need it...
     }
 }

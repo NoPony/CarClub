@@ -16,20 +16,23 @@ namespace NoPony.CarClub.Api.EF
         public long HeatId { get; set; }
         public long? MemberId { get; set; }
         public long? VehicleId { get; set; }
-        public short? Position { get; set; }
-        public string CreatedIp { get; set; }
+        public int? Position { get; set; }
+        public byte[] CreatedIp { get; set; }
         public DateTimeOffset CreatedUtc { get; set; }
-        public string CreatedBy { get; set; }
+        public long CreatedUserId { get; set; }
         public bool Updated { get; set; }
-        public string UpdatedIp { get; set; }
+        public byte[] UpdatedIp { get; set; }
         public DateTimeOffset? UpdatedUtc { get; set; }
-        public string UpdatedBy { get; set; }
+        public long? UpdatedUserId { get; set; }
         public bool Deleted { get; set; }
-        public string DeletedIp { get; set; }
+        public byte[] DeletedIp { get; set; }
         public DateTimeOffset? DeletedUtc { get; set; }
-        public string DeletedBy { get; set; }
+        public long? DeletedUserId { get; set; }
 
+        public virtual User CreatedUser { get; set; }
+        public virtual User DeletedUser { get; set; }
         public virtual Heat Heat { get; set; }
+        public virtual User UpdatedUser { get; set; }
         public virtual ICollection<GridReaction> GridReaction { get; set; }
     }
 }

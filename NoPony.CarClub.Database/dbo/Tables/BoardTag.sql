@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[BoardTag]
+(
+	[Id] INT NOT NULL PRIMARY KEY
+)

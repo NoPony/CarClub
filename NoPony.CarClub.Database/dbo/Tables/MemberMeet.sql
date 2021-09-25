@@ -5,31 +5,31 @@
     [MeetId]                    BIGINT                      NOT NULL, 
 
     [Enter]                     BIT                         NOT NULL,
-    [EnterIp]                   NVARCHAR(32)                NULL,
+    [EnterIp]                   VARBINARY(16)               NULL,
     [EnterUtc]                  DATETIMEOFFSET              NULL,
     [EnterBy]                   NVARCHAR(128)               NULL,
 
     [Checkin]                   BIT                         NOT NULL,
-    [CheckinIp]                 NVARCHAR(32)                NOT NULL,
+    [CheckinIp]                 VARBINARY(16)               NOT NULL,
     [CheckinUtc]                DATETIMEOFFSET              NOT NULL,
     [CheckinBy]                 NVARCHAR(128)               NOT NULL,
 
     [Checkout]                  BIT                         NOT NULL,
-    [CheckoutIp]                NVARCHAR(32)                NOT NULL,
+    [CheckoutIp]                VARBINARY(16)               NOT NULL,
     [CheckoutUtc]               DATETIMEOFFSET              NOT NULL,
     [CheckoutBy]                NVARCHAR(128)               NOT NULL,
 
-    [CreatedIp]                 NVARCHAR(32)                NOT NULL,
+    [CreatedIp]                 VARBINARY(16)               NOT NULL,
     [CreatedUtc]                DATETIMEOFFSET              NOT NULL,
-    [CreatedBy]                 NVARCHAR(128)               NOT NULL,
+    [CreatedUserId]             BIGINT                      NOT NULL,
 
     [Updated]                   BIT                         NOT NULL        CONSTRAINT [DF_MemberMeet_Updated] DEFAULT (0),
-    [UpdatedIp]                 NVARCHAR(32)                NULL,
+    [UpdatedIp]                 VARBINARY(16)               NULL,
     [UpdatedUtc]                DATETIMEOFFSET              NULL,
-    [UpdatedBy]                 NVARCHAR(128)               NULL,
+    [UpdatedUserId]             BIGINT                      NULL,
 
     [Deleted]                   BIT                         NOT NULL        CONSTRAINT [DF_MemberMeet_Deleted] DEFAULT (0),
-    [DeletedIp]                 NVARCHAR(32)                NULL,
+    [DeletedIp]                 VARBINARY(16)               NULL,
     [DeletedUtc]                DATETIMEOFFSET              NULL,
     [DeletedBy]                 BIT                         NULL,
 
@@ -37,6 +37,11 @@
 
     CONSTRAINT [FK_MemberMeet_Member_MemberId] FOREIGN KEY ([MemberId]) REFERENCES [dbo].[Member] ([Id]),
     CONSTRAINT [FK_MemberMeet_Meet_MeetId] FOREIGN KEY ([MeetId]) REFERENCES [dbo].[Meet] ([Id]),
+
+    --CONSTRAINT [FK_XXX_User_CreatedUserId] FOREIGN KEY ([CreatedUserId]) REFERENCES [auth].[User] ([Id]),
+    --CONSTRAINT [FK_XXX_User_UpdatedUserId] FOREIGN KEY ([UpdatedUserId]) REFERENCES [auth].[User] ([Id]),
+    --CONSTRAINT [FK_XXX_User_DeletedUserId] FOREIGN KEY ([DeletedUserId]) REFERENCES [auth].[User] ([Id]),
+
 );
 
 GO
