@@ -1,0 +1,17 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.page-header {
+  flex: 0 0 auto;
+}
+
+.page-content {
+  flex: 1 1 auto;
+  position: relative;
+  overflow-y: auto;
+  padding-left: 8dp;
+  padding-right: 8dp;
+}

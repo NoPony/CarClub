@@ -5,7 +5,7 @@
     [HeatId]                    BIGINT                      NOT NULL,
     [MemberId]                  BIGINT                      NOT NULL,
 
-    [Emoji]                     NCHAR                       NOT NULL,
+    [Emoji]                     NVARCHAR(8)                 NOT NULL,
 
     [CreatedIp]                 VARBINARY(16)               NOT NULL,
     [CreatedUtc]                DATETIMEOFFSET              NOT NULL,

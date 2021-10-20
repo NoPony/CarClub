@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NoPony.CarClub.Api.Features.Auth;
+using NoPony.CarClub.Api.Features.Forum;
 using NoPony.CarClub.Api.Templates;
 using Serilog;
 using System;
@@ -70,11 +71,6 @@ namespace NoPony.CarClub.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "NoPony CarClub Api", Version = "1.0" });
             });
-
-            //services.AddScoped<ITemplateEngine, RazorTemplateEngine>();
-
-            //services.AddScoped<IAuthService, AuthService>();
-            //services.AddScoped<IAuthRepository, AuthRepository>();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -85,6 +81,9 @@ namespace NoPony.CarClub.Api
 
             builder.RegisterType<AuthService>().As<IAuthService>();
             builder.RegisterType<AuthRepository>().As<IAuthRepository>();
+
+            builder.RegisterType<ForumService>().As<IForumService>();
+            builder.RegisterType<ForumRepository>().As<IForumRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

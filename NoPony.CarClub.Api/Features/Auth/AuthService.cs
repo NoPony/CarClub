@@ -19,15 +19,12 @@ namespace NoPony.CarClub.Api.Features.Auth
 {
     public class AuthService : IAuthService
     {
-        private readonly ILogger _log;
         private readonly IConfiguration _config;
         private readonly IAuthRepository _authRepository;
         private readonly ITemplateEngine _templateEngine;
 
-        public AuthService(ILogger log, IConfiguration config, IAuthRepository authRepository, ITemplateEngine templateEngine)
+        public AuthService(IConfiguration config, IAuthRepository authRepository, ITemplateEngine templateEngine)
         {
-            _log = log ?? throw new ArgumentNullException(nameof(log));
-
             _config = config ?? throw new ArgumentNullException(nameof(config));
             _authRepository = authRepository ?? throw new ArgumentNullException(nameof(authRepository));
             _templateEngine = templateEngine ?? throw new ArgumentNullException(nameof(templateEngine));

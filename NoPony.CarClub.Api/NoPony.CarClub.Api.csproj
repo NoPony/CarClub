@@ -6,13 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Exceptions\**" />
     <Compile Remove="Features\Survey\**" />
-    <Content Remove="Exceptions\**" />
     <Content Remove="Features\Survey\**" />
-    <EmbeddedResource Remove="Exceptions\**" />
     <EmbeddedResource Remove="Features\Survey\**" />
-    <None Remove="Exceptions\**" />
     <None Remove="Features\Survey\**" />
   </ItemGroup>
 
@@ -27,6 +23,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="RazorEngine.NetCore" Version="3.1.0" />
     <PackageReference Include="SendGrid" Version="9.24.2" />
     <PackageReference Include="Serilog" Version="2.10.0" />

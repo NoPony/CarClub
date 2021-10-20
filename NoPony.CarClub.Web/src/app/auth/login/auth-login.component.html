@@ -1,0 +1,35 @@
+<h2 mat-dialog-title>Login</h2>
+
+<mat-dialog-content>
+  <div *ngIf="idle">
+    <p>Enter your Email and Password.</p>
+    <mat-form-field appearance="fill" class="text">
+      <mat-label>Email Address</mat-label>
+      <input matInput [formControl]="emailControl" placeholder="john.doe@example.com">
+      <mat-error *ngIf="emailControl.hasError('email') || emailControl.hasError('required')">
+        A valid email address is required.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="text">
+      <mat-label>Password</mat-label>
+      <input matInput [formControl]="passwordControl" [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password">
+      <button mat-icon-button matSuffix tabindex="-1" (click)="hidePassword = !hidePassword"
+        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+        <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="busy">
+    <p>Logging in</p>
+    <div class="container">
+      <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions *ngIf="idle">
+  <a routerLink="/home">Forgot password?</a>
+  <span class="spacer"></span>
+  <button mat-raised-button color="primary" (click)="login()">Login</button>
+</mat-dialog-actions>

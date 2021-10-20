@@ -1,0 +1,53 @@
+version: "3.9"
+services:
+    seq:
+        container_name: seq
+        image: datalust/seq
+        restart: unless-stopped
+        volumes:
+            - carclub-seq-data:/data
+        networks:
+            - private-net
+        expose:
+            - 80
+            - 5341
+        environment:
+            ACCEPT_EULA: Y 
+    mysql:
+        container_name: mysql
+        image: mysql/mysql-server:latest
+        command: --default-authentication-plugin=mysql_native_password
+        #restart: unless-stopped
+        volumes:
+            - carclub-mysql-data:/var/lib/mysql
+        networks:
+            - private-net
+        expose:
+            - 3306
+        environment:
+            MYSQL_ROOT_PASSWORD: DeliberatelyWeak
+    nginx:
+        container_name: nginx
+        build: ./nginx/
+        #restart: unless-stopped
+        networks:
+            - private-net
+        ports:
+            - 80:80
+            - 443:443
+    web:
+        container_name: web
+        build: ./NoPony.CarClub.Web/
+        #restart: unless-stopped
+        networks:
+            - private-net
+        expose:
+            - 80
+# api...
+networks:
+    private-net:
+        name: private-net
+        driver: bridge
+volumes:
+    carclub-mysql-data:
+    carclub-seq-data:

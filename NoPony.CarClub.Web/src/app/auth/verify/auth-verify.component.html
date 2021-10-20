@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Email Verify</h2>
+<mat-dialog-content>
+    <div *ngIf="busy">
+        <p>Verifying your account.</p>
+        <div class="container">
+            <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+        </div>
+    </div>
+    
+    <div *ngIf="success">
+        <p>Your account has been verified, and you may now log in.</p>
+    </div>
+
+    <div *ngIf="fail">
+        <p>Account verification failed.</p>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions *ngIf="!busy">
+    <span class="spacer"></span>
+    <button mat-raised-button color="primary" (click)="close()">Ok</button>
+</mat-dialog-actions>

@@ -3,9 +3,9 @@
     [Id]                        BIGINT IDENTITY(1, 1)       NOT NULL,
 
     [BoardId]                   BIGINT                      NOT NULL,
+    [CommentId]                 BIGINT                      NOT NULL,
     [SurveyId]                  BIGINT                      NULL,
     [PollId]                    BIGINT                      NULL,
-    [CommentId]                 BIGINT                      NULL,
 
     [Pinned]                    BIT                         NOT NULL        CONSTRAINT [DF_Post_Pinned] DEFAULT (0),
     [PinnedIp]                  VARBINARY(16)               NULL,

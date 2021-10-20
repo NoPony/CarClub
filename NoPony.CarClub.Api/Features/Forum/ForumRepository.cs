@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using NoPony.CarClub.Api.EF;
 using NoPony.CarClub.Api.Features.Forum.Dto;
 using System;
@@ -41,30 +42,227 @@ namespace NoPony.CarClub.Api.Features.Forum
                     Note = request.Note,
 
                     CreatedIp = clientIp.GetAddressBytes(),
-                    CreatedUtc=DateTime.UtcNow,
+                    CreatedUtc = DateTime.UtcNow,
                     CreatedUserId = context.User.Single(i => i.Key == clientKey).Id,
                 });
 
                 await context.SaveChangesAsync();
-
             }
-                return null;
+
+            return null;
         }
 
         public async Task<BoardDto> BoardRead(Guid? clientKey, Guid? key)
         {
-            return null;
+            using (CarClubContext context = new CarClubContext())
+            {
+                return await context.Board
+                    .Where(i => i.Key == key)
+                    .Select(i => new BoardDto
+                    {
+
+                    })
+                    .SingleAsync();
+            }
         }
 
-        public async Task<BoardDto> BoardUpdate(Guid? clientKey, IPAddress clientIp, BoardDto request)
+        public async Task<bool> BoardUpdate(Guid? clientKey, IPAddress clientIp, BoardDto request)
         {
-            return null;
+            using (CarClubContext context = new CarClubContext())
+            {
+                using (IDbContextTransaction transaction = context.Database.BeginTransaction())
+                {
+                    Board b = context.Board.Single(i => i.Key == request.Key);
+
+                    b.Title = request.Title;
+                    b.Note = request.Note;
+                }
+            }
         }
 
         public async Task BoardDelete(Guid? clientKey, IPAddress clientIp, Guid? key)
         {
+            using (CarClubContext context = new CarClubContext())
+            {
 
+            }
         }
 
+        public async Task<IEnumerable<PostDto>> BoardPostList(Guid? clientKey, Guid? boardKey)
+        {
+            using (CarClubContext context = new CarClubContext())
+            {
+                return context.Post
+                    .Where(i => i.Board.Key == boardKey)
+                    .OrderByDescending(i => i.CreatedUtc)
+                    .Select(i => new PostDto
+                    {
+
+                    });
+            }
+        }
+
+        //public async Task<PostDto> PostCreate(Guid? clientKey, IPAddress clientIp, PostDto request)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<PostDto> PostRead(Guid? clientKey, Guid? key)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<PostDto> PostUpdate(Guid? clientKey, IPAddress clientIp, PostDto request)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<bool> PostDelete(Guid? clientKey, IPAddress clientIp, Guid? key)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<bool> PostReaction(Guid? clientKey, IPAddress clientIp, Guid? postKey, string emoji)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<CommentAttachmentDto> PostAttachmentCreate(Guid? clientKey, IPAddress clientIp, CommentAttachmentDto request)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<bool> PostAttachmentDelete(Guid? clientKey, IPAddress clientIp)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<IEnumerable<PostDto>> PostCommentList(Guid? clientKey)
+        //{
+        //    return null;
+        //}
+
+
+        //public async Task<CommentDto> CommentCreate(Guid? clientKey, IPAddress clientIp, CommentDto request)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<CommentDto> CommentRead(Guid? clientKey, Guid? key)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<CommentDto> CommentUpdate(Guid? clientKey, IPAddress clientIp, CommentDto request)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<bool> CommentDelete(Guid? clientKey, IPAddress clientIp, Guid? key)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<bool> CommentReaction(Guid? clientKey, IPAddress clientIp, Guid? comentKey, string emoji)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<IEnumerable<CommentDto>> CommentChildList(Guid? clientKey)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<bool> CommentAttachmentCreate(Guid? clientKey, IPAddress clientIp, CommentAttachmentDto request)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<bool> CommentAttachmentDelete(Guid? clientKey, IPAddress clientIp, Guid? commentAttachmentKey)
+        //{
+        //    return null;
+        //}
+
+
+        //public async Task<PollDto> PollCreate(Guid? clientKey, IPAddress clientIp, PollDto request)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<PollDto> PollRead(Guid? clientKey, Guid? key)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<PollDto> PollUpdate(Guid? clientKey, IPAddress clientIp, PollDto request)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<bool> PollDelete(Guid? clientKey, IPAddress clientIp, Guid? key)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<bool> PollReaction(Guid? clientKey, IPAddress clientIp, Guid? PollKey, string emoji)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<CommentAttachmentDto> PollAttachmentCreate(Guid? clientKey, IPAddress clientIp, CommentAttachmentDto request)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<bool> PollAttachmentDelete(Guid? clientKey, IPAddress clientIp)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<IEnumerable<PollDto>> PollCommentList(Guid? clientKey, Guid? pollKey)
+        //{
+        //    return null;
+        //}
+
+
+        //public async Task<SurveyDto> SurveyCreate(Guid? clientKey, IPAddress clientIp, SurveyDto request)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<SurveyDto> SurveyRead(Guid? clientKey, Guid? key)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<SurveyDto> SurveyUpdate(Guid? clientKey, IPAddress clientIp, SurveyDto request)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<bool> SurveyDelete(Guid? clientKey, IPAddress clientIp, Guid? key)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<bool> SurveyReaction(Guid? clientKey, IPAddress clientIp, Guid? SurveyKey, string emoji)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<CommentAttachmentDto> SurveyAttachmentCreate(Guid? clientKey, IPAddress clientIp, CommentAttachmentDto request)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<bool> SurveyAttachmentDelete(Guid? clientKey, IPAddress clientIp)
+        //{
+        //    return null;
+        //}
+
+        //public async Task<IEnumerable<SurveyDto>> SurveyCommentList(Guid? clientKey, Guid? surveyKey)
+        //{
+        //    return null;
+        //}
     }
 }
