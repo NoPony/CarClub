@@ -9,11 +9,14 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./auth-verify.component.scss']
 })
 export class AuthVerifyComponent implements OnInit {
-  public busy: boolean = true;
-  public success: boolean = false;
-  public fail: boolean = false;
+  public busy = true;
+  public success = false;
+  public fail = false;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dialogRef: MatDialogRef<AuthVerifyComponent>, private authService: AuthService) { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<AuthVerifyComponent>,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.authService.verify(this.data.key)
@@ -26,7 +29,7 @@ export class AuthVerifyComponent implements OnInit {
           this.busy = false;
           this.fail = true;
         }
-      )
+      );
   }
 
   public close(): void {

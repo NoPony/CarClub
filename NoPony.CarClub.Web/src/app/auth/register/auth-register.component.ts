@@ -11,22 +11,16 @@ import { AuthRegisterRequestDto } from '../../common/dto/auth-register-request-d
   styleUrls: ['./auth-register.component.scss']
 })
 export class AuthRegisterComponent implements OnInit {
-  public hidePassword: boolean = true;
+  public hidePassword = true;
 
-  public stateIdle: number = 0;
-  public stateBusy: number = 1;
-  public stateSuccess: number = 2;
-  public stateError: number = 3;
+  public stateIdle = 0;
+  public stateBusy = 1;
+  public stateSuccess = 2;
+  public stateError = 3;
 
-  public state: number = this.stateIdle;
+  public state = this.stateIdle;
 
-  public email: string = '';
-
-  constructor(private dialogRef: MatDialogRef<AuthRegisterComponent>, private authService: AuthService) {
-  }
-
-  ngOnInit(): void {
-  }
+  public email = '';
 
   public emailControl = new FormControl('', [
     Validators.required,
@@ -43,15 +37,24 @@ export class AuthRegisterComponent implements OnInit {
     Validators.pattern(this.passwordControl.value),
   ]);
 
+  constructor(private dialogRef: MatDialogRef<AuthRegisterComponent>, private authService: AuthService) {
+  }
+
+  ngOnInit(): void {
+  }
+
   public join(): void {
-    if (!this.emailControl.valid)
+    if (!this.emailControl.valid) {
       return;
+    }
 
-    if (!this.passwordControl.valid)
+    if (!this.passwordControl.valid) {
       return;
+    }
 
-    if (!this.verifyControl.valid)
+    if (!this.verifyControl.valid) {
       return;
+    }
 
     this.state = this.stateBusy;
 

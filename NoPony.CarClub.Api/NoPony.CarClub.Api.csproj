@@ -6,9 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Forum\Model\**" />
     <Compile Remove="Features\Survey\**" />
+    <Content Remove="Features\Forum\Model\**" />
     <Content Remove="Features\Survey\**" />
+    <EmbeddedResource Remove="Features\Forum\Model\**" />
     <EmbeddedResource Remove="Features\Survey\**" />
+    <None Remove="Features\Forum\Model\**" />
     <None Remove="Features\Survey\**" />
   </ItemGroup>
 
@@ -39,10 +43,6 @@
     <Content Update="Templates\RegisterEmail\RegisterEmailTemplate.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\Forum\Model\" />
   </ItemGroup>
 
 </Project>

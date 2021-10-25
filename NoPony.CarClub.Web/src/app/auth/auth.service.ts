@@ -21,11 +21,13 @@ export class AuthService {
   constructor(private http: HttpClient) {
     const storedUser = localStorage.getItem('currentUser');
 
-    if (storedUser != null)
+    if (storedUser != null) {
       this.currentUserSubject = new BehaviorSubject<UserModel | null>(JSON.parse(storedUser));
+    }
 
-    else
+    else {
       this.currentUserSubject = new BehaviorSubject<UserModel | null>(null);
+    }
 
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -34,19 +36,17 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  public register(request: AuthRegisterRequestDto) {
+  public register(request: AuthRegisterRequestDto): Observable<object> {
     return this.http
       .post(`${this.baseUrl}Auth/Register`, request);
   }
 
-  public verify(key: string) {
+  public verify(key: string): Observable<object> {
     return this.http
       .get(`${this.baseUrl}Auth/EmailVerify/${key}`);
   }
 
   public login(request: AuthLoginRequestDto): Observable<AuthLoginResponseDto> {
-    console.log("Login()");
-
     return this.http
       .post<AuthLoginResponseDto>(`${this.baseUrl}Auth/Login`, JSON.stringify(request))
       .pipe(map(user => {
@@ -58,7 +58,7 @@ export class AuthService {
       }));
   }
 
-  public logout() {
+  public logout(): void {
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }

@@ -12,7 +12,7 @@ namespace NoPony.CarClub.Api.Features.Forum
 
         Task<BoardDto> BoardCreate(Guid? clientKey, IPAddress clientIp, BoardDto request);
         Task<BoardDto> BoardRead(Guid? clientKey, Guid? key);
-        Task<BoardDto> BoardUpdate(Guid? clientKey, IPAddress clientIp, BoardDto request);
+        Task<bool> BoardUpdate(Guid? clientKey, IPAddress clientIp, BoardDto request);
         Task<bool> BoardDelete(Guid? clientKey, IPAddress clientIp, Guid? boardKey);
         Task<IEnumerable<PostDto>> BoardPostList(Guid? clientKey, Guid? boardKey);
 

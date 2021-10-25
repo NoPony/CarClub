@@ -14,19 +14,15 @@ namespace NoPony.CarClub.Api.EF
         public string Title { get; set; }
         public string Note { get; set; }
         public byte[] CreatedIp { get; set; }
-        public DateTimeOffset CreatedUtc { get; set; }
+        public DateTime CreatedUtc { get; set; }
         public long CreatedUserId { get; set; }
         public bool Updated { get; set; }
         public byte[] UpdatedIp { get; set; }
-        public DateTimeOffset? UpdatedUtc { get; set; }
+        public DateTime? UpdatedUtc { get; set; }
         public long? UpdatedUserId { get; set; }
         public bool Deleted { get; set; }
         public byte[] DeletedIp { get; set; }
-        public DateTimeOffset? DeletedUtc { get; set; }
+        public DateTime? DeletedUtc { get; set; }
         public long? DeletedUserId { get; set; }
-
-        public virtual Member Creator { get; set; }
-        public virtual Member Owner { get; set; }
-        public virtual TagStatus Status { get; set; }
     }
 }

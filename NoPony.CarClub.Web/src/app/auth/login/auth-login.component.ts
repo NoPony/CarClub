@@ -20,12 +20,12 @@ export class AuthLoginComponent implements OnInit {
     Validators.required,
   ]);
 
-  public email: string = '';
-  public password: string = '';
-  public hidePassword: boolean = true;
+  public email = '';
+  public password = '';
+  public hidePassword = true;
 
-  public idle: boolean = true;
-  public busy: boolean = false;
+  public idle = true;
+  public busy = false;
 
   constructor(public dialogRef: MatDialogRef<AuthLoginComponent>, private authService: AuthService) {
   }
@@ -35,10 +35,13 @@ export class AuthLoginComponent implements OnInit {
 
   public login(): void {
     if (!this.emailControl.valid)
+    {
       return;
+    }
 
-    if (!this.passwordControl.valid)
+    if (!this.passwordControl.valid){
       return;
+    }
 
     this.idle = false;
     this.busy = true;

@@ -76,15 +76,36 @@ namespace NoPony.CarClub.Api.Features.Forum
 
                     b.Title = request.Title;
                     b.Note = request.Note;
+
+                    await context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+
+                    return true;
                 }
             }
         }
 
-        public async Task BoardDelete(Guid? clientKey, IPAddress clientIp, Guid? key)
+        public async Task<bool> BoardDelete(Guid? clientKey, IPAddress clientIp, Guid? key)
         {
             using (CarClubContext context = new CarClubContext())
             {
+                using (IDbContextTransaction transaction = context.Database.BeginTransaction())
+                {
+                    Board b = context.Board
+                        .Where(i => i.Key == key)
+                        .Where(i => i.Deleted == false)
+                        .Single();
 
+                    b.Deleted = true;
+                    b.DeletedIp = clientIp.GetAddressBytes();
+                    b.DeletedUserId = context.User.Single(i => i.Key == key).Id;
+                    b.DeletedUtc = DateTime.UtcNow;
+            
+                    await context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+
+                    return true;
+                }
             }
         }
 

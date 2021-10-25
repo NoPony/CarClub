@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
             key: this.emailVerify,
           }
         });
-    
+
         dialogRef.afterClosed().subscribe();
       }
     });

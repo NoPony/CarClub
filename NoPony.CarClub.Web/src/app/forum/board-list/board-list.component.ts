@@ -9,18 +9,18 @@ import { BoardListDto } from 'src/app/common/dto/board-list-dto.interface';
 export class BoardListComponent implements OnInit {
   public boardList: BoardListDto[] = [
     {
-      Key: "key1",
+      Key: 'key1',
       Ordinal: 1,
-      Title: "Board 1",
-      Note: "This is board 1.  Boardy, isn't it?",
+      Title: 'Board 1',
+      Note: 'This is board 1.  Boardy, isn\'t it?',
       Threads: 0,
       Messages: 0,
     },
     {
-      Key: "key2",
+      Key: 'key2',
       Ordinal: 2,
-      Title: "Board 2",
-      Note: "This is board 2.  Boardy, isn't it?",
+      Title: 'Board 2',
+      Note: 'This is board 2.  Boardy, isn\'t it?',
       Threads: 0,
       Messages: 0,
     },
@@ -30,5 +30,4 @@ export class BoardListComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

@@ -18,112 +18,121 @@ namespace NoPony.CarClub.Api.EF
         }
 
         public virtual DbSet<Board> Board { get; set; }
-        public virtual DbSet<BoardRolePermission> BoardRolePermission { get; set; }
-        public virtual DbSet<BoardTag> BoardTag { get; set; }
+        public virtual DbSet<Boardrolepermission> Boardrolepermission { get; set; }
+        public virtual DbSet<Boardtag> Boardtag { get; set; }
         public virtual DbSet<Comment> Comment { get; set; }
-        public virtual DbSet<CommentAttachment> CommentAttachment { get; set; }
-        public virtual DbSet<CommentReaction> CommentReaction { get; set; }
+        public virtual DbSet<Commentattachment> Commentattachment { get; set; }
+        public virtual DbSet<Commentreaction> Commentreaction { get; set; }
         public virtual DbSet<Event> Event { get; set; }
-        public virtual DbSet<EventAttachment> EventAttachment { get; set; }
-        public virtual DbSet<EventMemberRole> EventMemberRole { get; set; }
-        public virtual DbSet<EventReaction> EventReaction { get; set; }
-        public virtual DbSet<EventStatus> EventStatus { get; set; }
-        public virtual DbSet<EventTag> EventTag { get; set; }
+        public virtual DbSet<Eventattachment> Eventattachment { get; set; }
+        public virtual DbSet<Eventmemberrole> Eventmemberrole { get; set; }
+        public virtual DbSet<EventReaction> Eventreaction { get; set; }
+        public virtual DbSet<Eventstatus> Eventstatus { get; set; }
+        public virtual DbSet<Eventtag> Eventtag { get; set; }
         public virtual DbSet<Grid> Grid { get; set; }
-        public virtual DbSet<GridReaction> GridReaction { get; set; }
+        public virtual DbSet<GridReaction> Gridreaction { get; set; }
         public virtual DbSet<Heat> Heat { get; set; }
-        public virtual DbSet<HeatAttachment> HeatAttachment { get; set; }
-        public virtual DbSet<HeatPenaltyStatus> HeatPenaltyStatus { get; set; }
-        public virtual DbSet<HeatReaction> HeatReaction { get; set; }
-        public virtual DbSet<HeatStatus> HeatStatus { get; set; }
-        public virtual DbSet<HeatTag> HeatTag { get; set; }
+        public virtual DbSet<Heatattachment> Heatattachment { get; set; }
+        public virtual DbSet<Heatpenaltystatus> Heatpenaltystatus { get; set; }
+        public virtual DbSet<HeatReaction> Heatreaction { get; set; }
+        public virtual DbSet<Heatstatus> Heatstatus { get; set; }
+        public virtual DbSet<Heattag> Heattag { get; set; }
         public virtual DbSet<Invoice> Invoice { get; set; }
-        public virtual DbSet<InvoiceDetail> InvoiceDetail { get; set; }
-        public virtual DbSet<InvoiceStatus> InvoiceStatus { get; set; }
+        public virtual DbSet<Invoicedetail> Invoicedetail { get; set; }
+        public virtual DbSet<Invoicestatus> Invoicestatus { get; set; }
         public virtual DbSet<Lap> Lap { get; set; }
-        public virtual DbSet<LapReaction> LapReaction { get; set; }
-        public virtual DbSet<LapStatus> LapStatus { get; set; }
-        public virtual DbSet<LapTag> LapTag { get; set; }
+        public virtual DbSet<LapReaction> Lapreaction { get; set; }
+        public virtual DbSet<Lapstatus> Lapstatus { get; set; }
+        public virtual DbSet<Laptag> Laptag { get; set; }
         public virtual DbSet<Meet> Meet { get; set; }
-        public virtual DbSet<MeetAttachment> MeetAttachment { get; set; }
-        public virtual DbSet<MeetOfficial> MeetOfficial { get; set; }
-        public virtual DbSet<MeetReaction> MeetReaction { get; set; }
-        public virtual DbSet<MeetStatus> MeetStatus { get; set; }
-        public virtual DbSet<MeetTag> MeetTag { get; set; }
+        public virtual DbSet<Meetattachment> Meetattachment { get; set; }
+        public virtual DbSet<Meetofficial> Meetofficial { get; set; }
+        public virtual DbSet<MeetReaction> Meetreaction { get; set; }
+        public virtual DbSet<Meetstatus> Meetstatus { get; set; }
+        public virtual DbSet<Meettag> Meettag { get; set; }
         public virtual DbSet<Member> Member { get; set; }
-        public virtual DbSet<MemberEvent> MemberEvent { get; set; }
-        public virtual DbSet<MemberEventAttachment> MemberEventAttachment { get; set; }
-        public virtual DbSet<MemberEventStatus> MemberEventStatus { get; set; }
-        public virtual DbSet<MemberMeet> MemberMeet { get; set; }
-        public virtual DbSet<MemberMeetAttachment> MemberMeetAttachment { get; set; }
-        public virtual DbSet<MemberMeetStatus> MemberMeetStatus { get; set; }
-        public virtual DbSet<MemberOffice> MemberOffice { get; set; }
-        public virtual DbSet<MemberQualification> MemberQualification { get; set; }
-        public virtual DbSet<MemberTransaction> MemberTransaction { get; set; }
-        public virtual DbSet<MemberVehicle> MemberVehicle { get; set; }
+        public virtual DbSet<Memberevent> Memberevent { get; set; }
+        public virtual DbSet<Membereventattachment> Membereventattachment { get; set; }
+        public virtual DbSet<Membereventstatus> Membereventstatus { get; set; }
+        public virtual DbSet<Membermeet> Membermeet { get; set; }
+        public virtual DbSet<Membermeetattachment> Membermeetattachment { get; set; }
+        public virtual DbSet<Membermeetstatus> Membermeetstatus { get; set; }
+        public virtual DbSet<Memberoffice> Memberoffice { get; set; }
+        public virtual DbSet<Memberqualification> Memberqualification { get; set; }
+        public virtual DbSet<Membertransaction> Membertransaction { get; set; }
+        public virtual DbSet<Membervehicle> Membervehicle { get; set; }
         public virtual DbSet<Office> Office { get; set; }
         public virtual DbSet<Penalty> Penalty { get; set; }
-        public virtual DbSet<PenaltyAttachment> PenaltyAttachment { get; set; }
-        public virtual DbSet<PenaltyReaction> PenaltyReaction { get; set; }
+        public virtual DbSet<Penaltyattachment> Penaltyattachment { get; set; }
+        public virtual DbSet<PenaltyReaction> Penaltyreaction { get; set; }
         public virtual DbSet<Permission> Permission { get; set; }
         public virtual DbSet<Poll> Poll { get; set; }
-        public virtual DbSet<PollOption> PollOption { get; set; }
+        public virtual DbSet<Polloption> Polloption { get; set; }
         public virtual DbSet<Post> Post { get; set; }
         public virtual DbSet<Qualification> Qualification { get; set; }
         public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<Role1> Role1 { get; set; }
-        public virtual DbSet<RoleCategory> RoleCategory { get; set; }
-        public virtual DbSet<RolePermission> RolePermission { get; set; }
+        public virtual DbSet<Rolecategory> Rolecategory { get; set; }
+        public virtual DbSet<Rolepermission> Rolepermission { get; set; }
         public virtual DbSet<Season> Season { get; set; }
-        public virtual DbSet<SeasonAttachment> SeasonAttachment { get; set; }
-        public virtual DbSet<SeasonEvent> SeasonEvent { get; set; }
-        public virtual DbSet<SeasonEventReward> SeasonEventReward { get; set; }
-        public virtual DbSet<SeasonEventStatus> SeasonEventStatus { get; set; }
-        public virtual DbSet<SeasonStatus> SeasonStatus { get; set; }
+        public virtual DbSet<Seasonattachment> Seasonattachment { get; set; }
+        public virtual DbSet<Seasonevent> Seasonevent { get; set; }
+        public virtual DbSet<Seasoneventreward> Seasoneventreward { get; set; }
+        public virtual DbSet<Seasoneventstatus> Seasoneventstatus { get; set; }
+        public virtual DbSet<Seasonstatus> Seasonstatus { get; set; }
         public virtual DbSet<Survey> Survey { get; set; }
-        public virtual DbSet<SurveyOption> SurveyOption { get; set; }
-        public virtual DbSet<SurveyQuestion> SurveyQuestion { get; set; }
-        public virtual DbSet<SurveyResponse> SurveyResponse { get; set; }
-        public virtual DbSet<SurveyStatus> SurveyStatus { get; set; }
+        public virtual DbSet<Surveyoption> Surveyoption { get; set; }
+        public virtual DbSet<Surveyquestion> Surveyquestion { get; set; }
+        public virtual DbSet<Surveyresponse> Surveyresponse { get; set; }
+        public virtual DbSet<Surveystatus> Surveystatus { get; set; }
         public virtual DbSet<Tag> Tag { get; set; }
-        public virtual DbSet<TagStatus> TagStatus { get; set; }
+        public virtual DbSet<Tagstatus> Tagstatus { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<UserRole> UserRole { get; set; }
+        public virtual DbSet<Userrole> Userrole { get; set; }
         public virtual DbSet<Vehicle> Vehicle { get; set; }
-        public virtual DbSet<VehicleAttachment> VehicleAttachment { get; set; }
-        public virtual DbSet<VehicleMake> VehicleMake { get; set; }
-        public virtual DbSet<VehicleModel> VehicleModel { get; set; }
-        public virtual DbSet<VehicleOwner> VehicleOwner { get; set; }
-        public virtual DbSet<VehicleReaction> VehicleReaction { get; set; }
-        public virtual DbSet<VehicleStatus> VehicleStatus { get; set; }
-        public virtual DbSet<VehicleVariant> VehicleVariant { get; set; }
+        public virtual DbSet<Vehicleattachment> Vehicleattachment { get; set; }
+        public virtual DbSet<Vehiclemake> Vehiclemake { get; set; }
+        public virtual DbSet<Vehiclemodel> Vehiclemodel { get; set; }
+        public virtual DbSet<Vehicleowner> Vehicleowner { get; set; }
+        public virtual DbSet<VehicleReaction> Vehiclereaction { get; set; }
+        public virtual DbSet<Vehiclestatus> Vehiclestatus { get; set; }
+        public virtual DbSet<Vehiclevariant> Vehiclevariant { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseMySQL("Server=localhost;Database=CarClub;Uid=stumpy;Pwd=password;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
             modelBuilder.Entity<Board>(entity =>
             {
-                entity.HasIndex(e => e.Key, "IX_Composite");
+                entity.ToTable("board");
 
-                entity.HasIndex(e => e.CreatedUserId, "IX_CreatedUserId");
+                entity.HasIndex(e => e.CreatedUserId, "FK_Board_User_CreatedUserId_idx");
 
-                entity.HasIndex(e => e.DeletedUserId, "IX_DeletedUserId");
+                entity.HasIndex(e => e.DeletedUserId, "FK_Board_User_DeletedUserId_idx");
 
-                entity.HasIndex(e => e.UpdatedUserId, "IX_UpdatedUserId");
+                entity.HasIndex(e => e.UpdatedUserId, "FK_Board_User_UpdatedUserId_idx");
+
+                entity.HasIndex(e => new { e.Key, e.Deleted }, "IX_Composite");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.Key)
+                    .IsRequired()
+                    .HasMaxLength(64);
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -131,180 +140,256 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
                 entity.HasOne(d => d.CreatedUser)
                     .WithMany(p => p.BoardCreatedUser)
                     .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Board_User_CreatedUserId");
 
                 entity.HasOne(d => d.DeletedUser)
                     .WithMany(p => p.BoardDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
+                    .HasForeignKey(d => d.DeletedUserId)
+                    .HasConstraintName("FK_Board_User_DeletedUserId");
 
                 entity.HasOne(d => d.UpdatedUser)
                     .WithMany(p => p.BoardUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                    .HasForeignKey(d => d.UpdatedUserId)
+                    .HasConstraintName("FK_Board_User_UpdatedUserId");
             });
 
-            modelBuilder.Entity<BoardRolePermission>(entity =>
+            modelBuilder.Entity<Boardrolepermission>(entity =>
             {
-                entity.HasIndex(e => e.BoardId, "IX_BoardId");
+                entity.ToTable("boardrolepermission");
+
+                entity.HasIndex(e => e.BoardId, "FK_BoardRolePermission_Board_BoardId_idx");
+
+                entity.HasIndex(e => e.PermissionId, "FK_BoardRolePermission_Permission_PermissionId_idx");
+
+                entity.HasIndex(e => e.RoleId, "FK_BoardRolePermission_Role_RoleId_idx");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_BoardRolePermission_User_CreatedUserId_idx");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_BoardRolePermission_User_DeletedUserId_idx");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_BoardRolePermission_User_UpdatedUserId_idx");
 
                 entity.HasIndex(e => new { e.Deleted, e.BoardId, e.RoleId, e.PermissionId }, "IX_Composite");
-
-                entity.HasIndex(e => e.CreatedUserId, "IX_CreatedUserId");
-
-                entity.HasIndex(e => e.DeletedUserId, "IX_DeletedUserId");
-
-                entity.HasIndex(e => e.PermissionId, "IX_PermissionId");
-
-                entity.HasIndex(e => e.RoleId, "IX_RoleId");
-
-                entity.HasIndex(e => e.UpdatedUserId, "IX_UpdatedUserId");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
                 entity.HasOne(d => d.Board)
-                    .WithMany(p => p.BoardRolePermission)
+                    .WithMany(p => p.Boardrolepermission)
                     .HasForeignKey(d => d.BoardId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_BoardRolePermission_Board_BoardId");
 
                 entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.BoardRolePermissionCreatedUser)
+                    .WithMany(p => p.BoardrolepermissionCreatedUser)
                     .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_BoardRolePermission_User_CreatedUserId");
 
                 entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.BoardRolePermissionDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
+                    .WithMany(p => p.BoardrolepermissionDeletedUser)
+                    .HasForeignKey(d => d.DeletedUserId)
+                    .HasConstraintName("FK_BoardRolePermission_User_DeletedUserId");
 
                 entity.HasOne(d => d.Permission)
-                    .WithMany(p => p.BoardRolePermission)
+                    .WithMany(p => p.Boardrolepermission)
                     .HasForeignKey(d => d.PermissionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_BoardRolePermission_Permission_PermissionId");
 
                 entity.HasOne(d => d.Role)
-                    .WithMany(p => p.BoardRolePermission)
+                    .WithMany(p => p.Boardrolepermission)
                     .HasForeignKey(d => d.RoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_BoardRolePermission_Role_RoleId");
 
                 entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.BoardRolePermissionUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                    .WithMany(p => p.BoardrolepermissionUpdatedUser)
+                    .HasForeignKey(d => d.UpdatedUserId)
+                    .HasConstraintName("FK_BoardRolePermission_User_UpdatedUserId");
             });
 
-            modelBuilder.Entity<BoardTag>(entity =>
+            modelBuilder.Entity<Boardtag>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.ToTable("boardtag");
+
+                entity.HasIndex(e => e.BoardId, "FK_BoardTag_Board_BoardId_idx");
+
+                entity.Property(e => e.CreatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
+                entity.HasOne(d => d.Board)
+                    .WithMany(p => p.Boardtag)
+                    .HasForeignKey(d => d.BoardId)
+                    .HasConstraintName("FK_BoardTag_Board_BoardId");
             });
 
             modelBuilder.Entity<Comment>(entity =>
             {
+                entity.ToTable("comment");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_Comment_User_CreatedUserId_idx");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_Comment_User_DeletedUserId_idx");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_Comment_User_UpdatedUserId_idx");
+
                 entity.HasIndex(e => new { e.Deleted, e.ParentId }, "IX_Composite");
-
-                entity.HasIndex(e => e.CreatedUserId, "IX_CreatedUserId");
-
-                entity.HasIndex(e => e.DeletedUserId, "IX_DeletedUserId");
 
                 entity.HasIndex(e => e.Key, "IX_Key");
 
                 entity.HasIndex(e => e.ParentId, "IX_ParentId");
 
-                entity.HasIndex(e => e.UpdatedUserId, "IX_UpdatedUserId");
+                entity.Property(e => e.Content).HasMaxLength(0);
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.Key)
+                    .IsRequired()
+                    .HasMaxLength(64);
 
                 entity.Property(e => e.Title).HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
                 entity.HasOne(d => d.CreatedUser)
                     .WithMany(p => p.CommentCreatedUser)
                     .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Comment_User_CreatedUserId");
 
                 entity.HasOne(d => d.DeletedUser)
                     .WithMany(p => p.CommentDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
+                    .HasForeignKey(d => d.DeletedUserId)
+                    .HasConstraintName("FK_Comment_User_DeletedUserId");
 
                 entity.HasOne(d => d.Parent)
                     .WithMany(p => p.InverseParent)
-                    .HasForeignKey(d => d.ParentId);
+                    .HasForeignKey(d => d.ParentId)
+                    .HasConstraintName("FK_Comment_Comment_ParentId");
 
                 entity.HasOne(d => d.UpdatedUser)
                     .WithMany(p => p.CommentUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                    .HasForeignKey(d => d.UpdatedUserId)
+                    .HasConstraintName("FK_Comment_User_UpdatedUserId");
             });
 
-            modelBuilder.Entity<CommentAttachment>(entity =>
+            modelBuilder.Entity<Commentattachment>(entity =>
             {
-                entity.HasIndex(e => e.CommentId, "IX_CommentId");
+                entity.ToTable("commentattachment");
 
-                entity.HasIndex(e => new { e.Deleted, e.CommentId }, "IX_Composite");
+                entity.HasIndex(e => e.CommentId, "FK_CommentAttachment_Comment_CommentId_idx");
 
-                entity.HasIndex(e => e.CreatedUserId, "IX_CreatedUserId");
+                entity.HasIndex(e => e.CreatedUserId, "FK_CommentAttachment_User_CreatedUserId_idx");
 
-                entity.HasIndex(e => e.DeletedUserId, "IX_DeletedUserId");
+                entity.HasIndex(e => e.DeletedUserId, "FK_CommentAttachment_User_DeletedUserId_idx");
 
-                entity.HasIndex(e => e.UpdatedUserId, "IX_UpdatedUserId");
+                entity.HasIndex(e => e.UpdatedUserId, "FK_CommentAttachment_User_UpdatedUserId_idx");
+
+                entity.HasIndex(e => new { e.Deleted, e.CommentId, e.Filename, e.Url }, "IX_Composite");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Filename).HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.Url).HasMaxLength(256);
 
                 entity.HasOne(d => d.Comment)
-                    .WithMany(p => p.CommentAttachment)
+                    .WithMany(p => p.Commentattachment)
                     .HasForeignKey(d => d.CommentId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CommentAttachment_Comment_CommentId");
 
                 entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.CommentAttachmentCreatedUser)
+                    .WithMany(p => p.CommentattachmentCreatedUser)
                     .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CommentAttachment_User_CreatedUserId");
 
                 entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.CommentAttachmentDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
+                    .WithMany(p => p.CommentattachmentDeletedUser)
+                    .HasForeignKey(d => d.DeletedUserId)
+                    .HasConstraintName("FK_CommentAttachment_User_DeletedUserId");
 
                 entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.CommentAttachmentUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                    .WithMany(p => p.CommentattachmentUpdatedUser)
+                    .HasForeignKey(d => d.UpdatedUserId)
+                    .HasConstraintName("FK_CommentAttachment_User_UpdatedUserId");
             });
 
-            modelBuilder.Entity<CommentReaction>(entity =>
+            modelBuilder.Entity<Commentreaction>(entity =>
             {
-                entity.HasIndex(e => e.CommentId, "IX_CommentId");
+                entity.ToTable("commentreaction");
 
-                entity.HasIndex(e => new { e.Deleted, e.CommentId }, "IX_Composite");
+                entity.HasIndex(e => e.CommentId, "FK_CommentReaction_Comment_CommentId_idx");
 
-                entity.HasIndex(e => e.CreatedUserId, "IX_CreatedUserId");
+                entity.HasIndex(e => e.MemberId, "FK_CommentReaction_Member_idx");
 
-                entity.HasIndex(e => e.DeletedUserId, "IX_DeletedUserId");
+                entity.HasIndex(e => e.CreatedUserId, "FK_CommentReaction_User_CreatedUserId_idx");
 
-                entity.HasIndex(e => e.UpdatedUserId, "IX_UpdatedUserId");
+                entity.HasIndex(e => e.DeletedUserId, "FK_CommentReaction_User_DeletedUserId_idx");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_CommentReaction_User_UpdatedUserId");
+
+                entity.HasIndex(e => new { e.Deleted, e.CommentId, e.MemberId, e.Emoji }, "IX_Composite");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Emoji)
                     .IsRequired()
@@ -313,81 +398,87 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
                 entity.HasOne(d => d.Comment)
-                    .WithMany(p => p.CommentReaction)
+                    .WithMany(p => p.Commentreaction)
                     .HasForeignKey(d => d.CommentId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CommentReaction_Comment_CommentId");
 
                 entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.CommentReactionCreatedUser)
+                    .WithMany(p => p.CommentreactionCreatedUser)
                     .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CommentReaction_User_CreatedUserId");
 
                 entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.CommentReactionDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
+                    .WithMany(p => p.CommentreactionDeletedUser)
+                    .HasForeignKey(d => d.DeletedUserId)
+                    .HasConstraintName("FK_CommentReaction_User_DeletedUserId");
 
                 entity.HasOne(d => d.Member)
-                    .WithMany(p => p.CommentReaction)
+                    .WithMany(p => p.Commentreaction)
                     .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_CommentReaction_Member");
 
                 entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.CommentReactionUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                    .WithMany(p => p.CommentreactionUpdatedUser)
+                    .HasForeignKey(d => d.UpdatedUserId)
+                    .HasConstraintName("FK_CommentReaction_User_UpdatedUserId");
             });
 
             modelBuilder.Entity<Event>(entity =>
             {
-                entity.HasIndex(e => e.MeetId, "IX_MeetId");
+                entity.ToTable("event");
 
-                entity.HasIndex(e => e.StatusId, "IX_StatusId");
+                entity.HasIndex(e => e.CreatedUserId, "FK_Event_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_Event_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_Event_User_UpdatedUserId");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
 
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.Note).HasMaxLength(1024);
+
+                entity.Property(e => e.StartUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Title).HasMaxLength(256);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.EventCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.EventDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.Meet)
-                    .WithMany(p => p.Event)
-                    .HasForeignKey(d => d.MeetId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Status)
-                    .WithMany(p => p.Event)
-                    .HasForeignKey(d => d.StatusId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.EventUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<EventAttachment>(entity =>
+            modelBuilder.Entity<Eventattachment>(entity =>
             {
-                entity.HasIndex(e => e.EventId, "IX_EventId");
+                entity.ToTable("eventattachment");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_EventAttachment_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_EventAttachment_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_EventAttachment_User_UpdatedUserId");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Filename).HasMaxLength(128);
 
@@ -395,71 +486,45 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.Url).HasMaxLength(256);
-
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.EventAttachmentCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.EventAttachmentDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.Event)
-                    .WithMany(p => p.EventAttachment)
-                    .HasForeignKey(d => d.EventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.EventAttachmentUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
             });
 
-            modelBuilder.Entity<EventMemberRole>(entity =>
+            modelBuilder.Entity<Eventmemberrole>(entity =>
             {
+                entity.ToTable("eventmemberrole");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_EventMemberRole_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_EventMemberRole_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_EventMemberRole_User_UpdatedUserId");
+
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.EventMemberRoleCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.EventMemberRoleDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.Event)
-                    .WithMany(p => p.EventMemberRole)
-                    .HasForeignKey(d => d.EventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.EventMemberRole)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Role)
-                    .WithMany(p => p.EventMemberRole)
-                    .HasForeignKey(d => d.RoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.EventMemberRoleUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<EventReaction>(entity =>
             {
-                entity.HasIndex(e => e.EventId, "IX_EventId");
+                entity.ToTable("eventreaction");
 
-                entity.HasIndex(e => e.MemberId, "IX_MemberId");
+                entity.HasIndex(e => e.CreatedUserId, "FK_EventReaction_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_EventReaction_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_EventReaction_User_UpdatedUserId");
 
                 entity.HasIndex(e => e.ReactionId, "IX_Reaction");
 
@@ -467,7 +532,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Emoji)
                     .IsRequired()
@@ -476,32 +545,19 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.EventReactionCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.EventReactionDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.Event)
-                    .WithMany(p => p.EventReaction)
-                    .HasForeignKey(d => d.EventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.EventReaction)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.EventReactionUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<EventStatus>(entity =>
+            modelBuilder.Entity<Eventstatus>(entity =>
             {
+                entity.ToTable("eventstatus");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_EventStatus_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_EventStatus_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_EventStatus_User_UpdatedUserId");
+
                 entity.Property(e => e.Code)
                     .IsRequired()
                     .HasMaxLength(32);
@@ -510,7 +566,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -520,22 +580,19 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.EventStatusCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.EventStatusDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.EventStatusUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<EventTag>(entity =>
+            modelBuilder.Entity<Eventtag>(entity =>
             {
+                entity.ToTable("eventtag");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_EventTag_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_EventTag_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_EventTag_User_UpdatedUserId");
+
                 entity.Property(e => e.Code)
                     .IsRequired()
                     .HasMaxLength(32);
@@ -544,7 +601,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -554,25 +615,20 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.EventTagCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.EventTagDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.EventTagUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<Grid>(entity =>
             {
-                entity.HasIndex(e => e.MemberId, "IX_DriverId");
+                entity.ToTable("grid");
 
-                entity.HasIndex(e => e.HeatId, "IX_HeatId");
+                entity.HasIndex(e => e.CreatedUserId, "FK_Grid_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_Grid_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_Grid_User_UpdatedUserId");
+
+                entity.HasIndex(e => e.MemberId, "IX_DriverId");
 
                 entity.HasIndex(e => e.VehicleId, "IX_Vehicle");
 
@@ -580,40 +636,36 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.GridCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.GridDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.Heat)
-                    .WithMany(p => p.Grid)
-                    .HasForeignKey(d => d.HeatId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.GridUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<GridReaction>(entity =>
             {
-                entity.HasIndex(e => e.GridId, "IX_GridId");
+                entity.ToTable("gridreaction");
 
-                entity.HasIndex(e => e.MemberId, "IX_MemberId");
+                entity.HasIndex(e => e.CreatedUserId, "FK_GridReaction_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_GridReaction_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_GridReaction_User_UpdatedUserId");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Emoji)
                     .IsRequired()
@@ -622,33 +674,18 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.GridReactionCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.GridReactionDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.Grid)
-                    .WithMany(p => p.GridReaction)
-                    .HasForeignKey(d => d.GridId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.GridReaction)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.GridReactionUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<Heat>(entity =>
             {
-                entity.HasIndex(e => e.EventId, "IX_EventId");
+                entity.ToTable("heat");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_Heat_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_Heat_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_Heat_User_UpdatedUserId");
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -658,7 +695,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -668,34 +709,28 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.HeatCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.HeatDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.Event)
-                    .WithMany(p => p.Heat)
-                    .HasForeignKey(d => d.EventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.HeatUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<HeatAttachment>(entity =>
+            modelBuilder.Entity<Heatattachment>(entity =>
             {
-                entity.HasIndex(e => e.HeatId, "IX_HeatId");
+                entity.ToTable("heatattachment");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_HeatAttachment_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_HeatAttachment_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_HeatAttachment_User_UpdatedUserId");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Filename).HasMaxLength(128);
 
@@ -703,31 +738,19 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.UploadIp).HasMaxLength(16);
 
+                entity.Property(e => e.UploadUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.Url).HasMaxLength(256);
-
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.HeatAttachmentCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.HeatAttachmentDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.Heat)
-                    .WithMany(p => p.HeatAttachment)
-                    .HasForeignKey(d => d.HeatId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.HeatAttachmentUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
             });
 
-            modelBuilder.Entity<HeatPenaltyStatus>(entity =>
+            modelBuilder.Entity<Heatpenaltystatus>(entity =>
             {
+                entity.ToTable("heatpenaltystatus");
+
                 entity.Property(e => e.Code)
                     .IsRequired()
                     .HasMaxLength(32);
@@ -736,7 +759,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -745,19 +772,29 @@ namespace NoPony.CarClub.Api.EF
                     .HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<HeatReaction>(entity =>
             {
-                entity.HasIndex(e => e.HeatId, "IX_HeatId");
+                entity.ToTable("heatreaction");
 
-                entity.HasIndex(e => e.MemberId, "IX_MemberId");
+                entity.HasIndex(e => e.CreatedUserId, "FK_HeatReaction_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_HeatReaction_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_HeatReaction_User_UpdatedUserId");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Emoji)
                     .IsRequired()
@@ -766,33 +803,20 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.HeatReactionCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.HeatReactionDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.Heat)
-                    .WithMany(p => p.HeatReaction)
-                    .HasForeignKey(d => d.HeatId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.HeatReaction)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.HeatReactionUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<HeatStatus>(entity =>
+            modelBuilder.Entity<Heatstatus>(entity =>
             {
-                entity.HasIndex(e => new { e.Deleted, e.Code }, "IX_Composite");
+                entity.ToTable("heatstatus");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_HeatStatus_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_HeatStatus_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_HeatStatus_User_UpdatedUserId");
+
+                entity.HasIndex(e => new { e.Deleted, e.Code, e.Title, e.Updated }, "IX_Composite");
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -802,7 +826,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -812,103 +840,103 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.HeatStatusCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.HeatStatusDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.HeatStatusUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<HeatTag>(entity =>
+            modelBuilder.Entity<Heattag>(entity =>
             {
+                entity.ToTable("heattag");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_HeatTag_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_HeatTag_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_HeatTag_User_UpdatedUserId");
+
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.HeatTagCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.HeatTagDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.HeatTagUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<Invoice>(entity =>
             {
-                entity.Property(e => e.CreatedIp)
-                    .IsRequired()
-                    .HasMaxLength(16);
+                entity.ToTable("invoice");
 
-                entity.Property(e => e.DeletedIp).HasMaxLength(16);
+                entity.HasIndex(e => e.CreatedUserId, "FK_Invoice_User_CreatedUserId");
 
-                entity.Property(e => e.Note).HasMaxLength(1024);
+                entity.HasIndex(e => e.DeletedUserId, "FK_Invoice_User_DeletedUserId");
 
-                entity.Property(e => e.UpdatedIp).HasMaxLength(16);
-
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.InvoiceCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.InvoiceDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.InvoiceUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
-            });
-
-            modelBuilder.Entity<InvoiceDetail>(entity =>
-            {
-                entity.HasIndex(e => new { e.Deleted, e.StockId }, "IX_Composite");
+                entity.HasIndex(e => e.UpdatedUserId, "FK_Invoice_User_UpdatedUserId");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
-                entity.Property(e => e.Quantity).HasColumnType("decimal(18, 6)");
+                entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+            });
+
+            modelBuilder.Entity<Invoicedetail>(entity =>
+            {
+                entity.ToTable("invoicedetail");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_InvoiceDetail_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_InvoiceDetail_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_InvoiceDetail_User_UpdatedUserId");
+
+                entity.HasIndex(e => new { e.Deleted, e.StockId, e.Quantity, e.Updated }, "IX_Composite");
+
+                entity.Property(e => e.CreatedIp)
+                    .IsRequired()
+                    .HasMaxLength(16);
+
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.Note).HasMaxLength(1024);
+
+                entity.Property(e => e.Quantity).HasColumnType("decimal(18,6)");
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.InvoiceDetailCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.InvoiceDetailDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.InvoiceDetailUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<InvoiceStatus>(entity =>
+            modelBuilder.Entity<Invoicestatus>(entity =>
             {
-                entity.HasIndex(e => new { e.Deleted, e.Code }, "IX_Composite");
+                entity.ToTable("invoicestatus");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_InvoiceStatus_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_InvoiceStatus_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_InvoiceStatus_User_UpdatedUserId");
+
+                entity.HasIndex(e => new { e.Deleted, e.Code, e.Title, e.Updated }, "IX_Composite");
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -918,7 +946,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -928,29 +960,28 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.InvoiceStatusCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.InvoiceStatusDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.InvoiceStatusUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<Lap>(entity =>
             {
-                entity.HasIndex(e => e.HeatId, "IX_HeatId");
+                entity.ToTable("lap");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_Lap_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_Lap_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_Lap_User_UpdatedUserId");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.EndTimeBy)
                     .IsRequired()
@@ -960,7 +991,9 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
-                entity.Property(e => e.EndTimeMs).HasColumnType("decimal(18, 6)");
+                entity.Property(e => e.EndTimeMs).HasColumnType("decimal(18,6)");
+
+                entity.Property(e => e.EndTimeUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.PositionBy)
                     .IsRequired()
@@ -970,6 +1003,8 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.PositionUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.StartTimeBy)
                     .IsRequired()
                     .HasMaxLength(128);
@@ -978,7 +1013,9 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
-                entity.Property(e => e.StartTimeMs).HasColumnType("decimal(18, 6)");
+                entity.Property(e => e.StartTimeMs).HasColumnType("decimal(18,6)");
+
+                entity.Property(e => e.StartTimeUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.TimeBy)
                     .IsRequired()
@@ -988,41 +1025,34 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
-                entity.Property(e => e.TimeMs).HasColumnType("decimal(18, 6)");
+                entity.Property(e => e.TimeMs).HasColumnType("decimal(18,6)");
+
+                entity.Property(e => e.TimeUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.LapCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.LapDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.Heat)
-                    .WithMany(p => p.Lap)
-                    .HasForeignKey(d => d.HeatId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_HeatResultLap_HeatResult_ResultId");
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.LapUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<LapReaction>(entity =>
             {
-                entity.HasIndex(e => e.LapId, "IX_LapId");
+                entity.ToTable("lapreaction");
 
-                entity.HasIndex(e => e.MemberId, "IX_MemberId");
+                entity.HasIndex(e => e.CreatedUserId, "FK_LapReaction_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_LapReaction_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_LapReaction_User_UpdatedUserId");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Emoji)
                     .IsRequired()
@@ -1031,33 +1061,20 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.LapReactionCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.LapReactionDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.Lap)
-                    .WithMany(p => p.LapReaction)
-                    .HasForeignKey(d => d.LapId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.LapReaction)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.LapReactionUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<LapStatus>(entity =>
+            modelBuilder.Entity<Lapstatus>(entity =>
             {
-                entity.HasIndex(e => new { e.Deleted, e.Code }, "IX_Composite");
+                entity.ToTable("lapstatus");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_LapStatus_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_LapStatus_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_LapStatus_User_UpdatedUserId");
+
+                entity.HasIndex(e => new { e.Deleted, e.Code, e.Title, e.Updated }, "IX_Composite");
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -1067,7 +1084,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -1077,22 +1098,19 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.LapStatusCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.LapStatusDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.LapStatusUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<LapTag>(entity =>
+            modelBuilder.Entity<Laptag>(entity =>
             {
+                entity.ToTable("laptag");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_LapTag_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_LapTag_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_LapTag_User_UpdatedUserId");
+
                 entity.Property(e => e.Code)
                     .IsRequired()
                     .HasMaxLength(32);
@@ -1101,7 +1119,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -1111,29 +1133,32 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.LapTagCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.LapTagDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.LapTagUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<Meet>(entity =>
             {
+                entity.ToTable("meet");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_Meet_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_Meet_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_Meet_User_UpdatedUserId");
+
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
 
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.Note).HasMaxLength(1024);
+
+                entity.Property(e => e.StartUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Title)
                     .IsRequired()
@@ -1141,35 +1166,28 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.MeetCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.MeetDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.MeetStatus)
-                    .WithMany(p => p.Meet)
-                    .HasForeignKey(d => d.MeetStatusId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Meet_MeetStatusId");
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.MeetUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<MeetAttachment>(entity =>
+            modelBuilder.Entity<Meetattachment>(entity =>
             {
-                entity.HasIndex(e => e.MeetId, "IX_MeetId");
+                entity.ToTable("meetattachment");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_MeetAttachment_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_MeetAttachment_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_MeetAttachment_User_UpdatedUserId");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Filename).HasMaxLength(128);
 
@@ -1177,79 +1195,55 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.Url).HasMaxLength(256);
-
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.MeetAttachmentCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.MeetAttachmentDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.Meet)
-                    .WithMany(p => p.MeetAttachment)
-                    .HasForeignKey(d => d.MeetId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.MeetAttachmentUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
             });
 
-            modelBuilder.Entity<MeetOfficial>(entity =>
+            modelBuilder.Entity<Meetofficial>(entity =>
             {
-                entity.HasIndex(e => e.MeetId, "IX_MeetId");
+                entity.ToTable("meetofficial");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_MeetOfficial_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_MeetOfficial_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_MeetOfficial_User_UpdatedUserId");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.MeetOfficialCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.MeetOfficialDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.Meet)
-                    .WithMany(p => p.MeetOfficial)
-                    .HasForeignKey(d => d.MeetId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.MeetOfficial)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Office)
-                    .WithMany(p => p.MeetOfficial)
-                    .HasForeignKey(d => d.OfficeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.MeetOfficialUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<MeetReaction>(entity =>
             {
-                entity.HasIndex(e => e.MeetId, "IX_MeetId");
+                entity.ToTable("meetreaction");
 
-                entity.HasIndex(e => e.MemberId, "IX_MemberId");
+                entity.HasIndex(e => e.CreatedUserId, "FK_MeetReaction_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_MeetReaction_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_MeetReaction_User_UpdatedUserId");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Emoji)
                     .IsRequired()
@@ -1258,33 +1252,20 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.MeetReactionCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.MeetReactionDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.Meet)
-                    .WithMany(p => p.MeetReaction)
-                    .HasForeignKey(d => d.MeetId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.MeetReaction)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.MeetReactionUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<MeetStatus>(entity =>
+            modelBuilder.Entity<Meetstatus>(entity =>
             {
-                entity.HasIndex(e => new { e.Deleted, e.Code }, "IX_Composite");
+                entity.ToTable("meetstatus");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_MeetStatus_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_MeetStatus_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_MeetStatus_User_UpdatedUserId");
+
+                entity.HasIndex(e => new { e.Deleted, e.Code, e.Title, e.Updated }, "IX_Composite");
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -1294,7 +1275,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -1304,22 +1289,19 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.MeetStatusCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.MeetStatusDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.MeetStatusUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<MeetTag>(entity =>
+            modelBuilder.Entity<Meettag>(entity =>
             {
+                entity.ToTable("meettag");
+
+                entity.HasIndex(e => e.CreatedUserId, "FK_MeetTag_User_CreatedUserId");
+
+                entity.HasIndex(e => e.DeletedUserId, "FK_MeetTag_User_DeletedUserId");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_MeetTag_User_UpdatedUserId");
+
                 entity.Property(e => e.Code)
                     .IsRequired()
                     .HasMaxLength(32);
@@ -1328,7 +1310,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -1338,29 +1324,24 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.MeetTagCreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.MeetTagDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.MeetTagUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<Member>(entity =>
             {
+                entity.ToTable("member");
+
                 entity.HasIndex(e => e.UserKey, "IX_Key");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Email).HasMaxLength(128);
 
@@ -1377,11 +1358,11 @@ namespace NoPony.CarClub.Api.EF
                     .HasMaxLength(128);
 
                 entity.Property(e => e.PrimaryAddressLatitude)
-                    .HasColumnType("decimal(18, 6)")
+                    .HasColumnType("decimal(18,6)")
                     .HasColumnName("PrimaryAddress_Latitude");
 
                 entity.Property(e => e.PrimaryAddressLongitude)
-                    .HasColumnType("decimal(18, 6)")
+                    .HasColumnType("decimal(18,6)")
                     .HasColumnName("PrimaryAddress_Longitude");
 
                 entity.Property(e => e.PrimaryAddressPostcode)
@@ -1405,13 +1386,15 @@ namespace NoPony.CarClub.Api.EF
                     .HasColumnName("PrimaryAddress_Suburb");
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.UserKey).HasMaxLength(64);
             });
 
-            modelBuilder.Entity<MemberEvent>(entity =>
+            modelBuilder.Entity<Memberevent>(entity =>
             {
-                entity.HasIndex(e => e.EventId, "IX_EventId");
-
-                entity.HasIndex(e => e.MemberId, "IX_MemberId");
+                entity.ToTable("memberevent");
 
                 entity.Property(e => e.CheckinBy)
                     .IsRequired()
@@ -1419,17 +1402,25 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CheckinIp).HasMaxLength(16);
 
+                entity.Property(e => e.CheckinUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.CheckoutBy)
                     .IsRequired()
                     .HasMaxLength(128);
 
                 entity.Property(e => e.CheckoutIp).HasMaxLength(16);
 
+                entity.Property(e => e.CheckoutUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.OffTrackBy)
                     .IsRequired()
@@ -1437,11 +1428,15 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.OffTrackIp).HasMaxLength(16);
 
+                entity.Property(e => e.OffTrackUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.OnTrackBy)
                     .IsRequired()
                     .HasMaxLength(128);
 
                 entity.Property(e => e.OnTrackIp).HasMaxLength(16);
+
+                entity.Property(e => e.OnTrackUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.RegisterBy)
                     .IsRequired()
@@ -1449,30 +1444,26 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.RegisterIp).HasMaxLength(16);
 
+                entity.Property(e => e.RegisterUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Event)
-                    .WithMany(p => p.MemberEvent)
-                    .HasForeignKey(d => d.EventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EventEntry_Event_EventId");
-
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.MemberEvent)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_EventEntry_Member_MemberId");
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<MemberEventAttachment>(entity =>
+            modelBuilder.Entity<Membereventattachment>(entity =>
             {
-                entity.HasIndex(e => e.MemberEventId, "IX_MemberEventId");
+                entity.ToTable("membereventattachment");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Filename).HasMaxLength(128);
 
@@ -1480,20 +1471,18 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.Property(e => e.Url).HasMaxLength(256);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
 
-                entity.HasOne(d => d.MemberEvent)
-                    .WithMany(p => p.MemberEventAttachment)
-                    .HasForeignKey(d => d.MemberEventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_MemberEventAttachment_MemberEvent_MemberEntryId");
+                entity.Property(e => e.Url).HasMaxLength(256);
             });
 
-            modelBuilder.Entity<MemberEventStatus>(entity =>
+            modelBuilder.Entity<Membereventstatus>(entity =>
             {
-                entity.HasIndex(e => new { e.Deleted, e.Code }, "IX_Code");
+                entity.ToTable("membereventstatus");
 
-                entity.HasIndex(e => new { e.Deleted, e.Code }, "IX_Composite");
+                entity.HasIndex(e => new { e.Deleted, e.Code, e.Title, e.Updated }, "IX_Code");
+
+                entity.HasIndex(e => new { e.Deleted, e.Code, e.Title, e.Updated }, "IX_Composite");
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -1503,7 +1492,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -1512,13 +1505,13 @@ namespace NoPony.CarClub.Api.EF
                     .HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<MemberMeet>(entity =>
+            modelBuilder.Entity<Membermeet>(entity =>
             {
-                entity.HasIndex(e => e.MeetId, "IX_MeetId");
-
-                entity.HasIndex(e => e.MemberId, "IX_MemberId");
+                entity.ToTable("membermeet");
 
                 entity.Property(e => e.CheckinBy)
                     .IsRequired()
@@ -1528,6 +1521,8 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CheckinUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.CheckoutBy)
                     .IsRequired()
                     .HasMaxLength(128);
@@ -1536,51 +1531,56 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CheckoutUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.EnterBy).HasMaxLength(128);
 
                 entity.Property(e => e.EnterIp).HasMaxLength(16);
 
+                entity.Property(e => e.EnterUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Meet)
-                    .WithMany(p => p.MemberMeet)
-                    .HasForeignKey(d => d.MeetId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.MemberMeet)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<MemberMeetAttachment>(entity =>
+            modelBuilder.Entity<Membermeetattachment>(entity =>
             {
+                entity.ToTable("membermeetattachment");
+
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Filename).HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.Property(e => e.Url).HasMaxLength(256);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
 
-                entity.HasOne(d => d.MemberMeet)
-                    .WithMany(p => p.MemberMeetAttachment)
-                    .HasForeignKey(d => d.MemberMeetId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.Property(e => e.Url).HasMaxLength(256);
             });
 
-            modelBuilder.Entity<MemberMeetStatus>(entity =>
+            modelBuilder.Entity<Membermeetstatus>(entity =>
             {
+                entity.ToTable("membermeetstatus");
+
                 entity.Property(e => e.Code)
                     .IsRequired()
                     .HasMaxLength(32);
@@ -1589,7 +1589,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -1598,45 +1602,73 @@ namespace NoPony.CarClub.Api.EF
                     .HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<MemberOffice>(entity =>
+            modelBuilder.Entity<Memberoffice>(entity =>
             {
+                entity.ToTable("memberoffice");
+
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.EndUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.StartUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<MemberQualification>(entity =>
+            modelBuilder.Entity<Memberqualification>(entity =>
             {
+                entity.ToTable("memberqualification");
+
+                entity.HasIndex(e => e.QualificationId, "IX_QualificationId");
+
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<MemberTransaction>(entity =>
+            modelBuilder.Entity<Membertransaction>(entity =>
             {
-                entity.HasIndex(e => e.MemberId, "IX_MemberId");
+                entity.ToTable("membertransaction");
 
-                entity.Property(e => e.Balance).HasColumnType("money");
+                entity.Property(e => e.Balance).HasColumnType("decimal(19,4)");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
-                entity.Property(e => e.Credit).HasColumnType("money");
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
 
-                entity.Property(e => e.Debit).HasColumnType("money");
+                entity.Property(e => e.Credit).HasColumnType("decimal(19,4)");
+
+                entity.Property(e => e.Debit).HasColumnType("decimal(19,4)");
 
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Description)
                     .IsRequired()
@@ -1644,25 +1676,34 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.MemberTransaction)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.WhenUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<MemberVehicle>(entity =>
+            modelBuilder.Entity<Membervehicle>(entity =>
             {
+                entity.ToTable("membervehicle");
+
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
 
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<Office>(entity =>
             {
+                entity.ToTable("office");
+
                 entity.Property(e => e.Code)
                     .IsRequired()
                     .HasMaxLength(32);
@@ -1671,7 +1712,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -1680,17 +1725,25 @@ namespace NoPony.CarClub.Api.EF
                     .HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<Penalty>(entity =>
             {
+                entity.ToTable("penalty");
+
                 entity.Property(e => e.Code).HasMaxLength(32);
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Notes).HasMaxLength(1024);
 
@@ -1698,32 +1751,28 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Driver)
-                    .WithMany(p => p.Penalty)
-                    .HasForeignKey(d => d.DriverId);
-
-                entity.HasOne(d => d.Status)
-                    .WithMany(p => p.Penalty)
-                    .HasForeignKey(d => d.StatusId);
-
-                entity.HasOne(d => d.Vehicle)
-                    .WithMany(p => p.Penalty)
-                    .HasForeignKey(d => d.VehicleId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<PenaltyAttachment>(entity =>
+            modelBuilder.Entity<Penaltyattachment>(entity =>
             {
-                entity.HasIndex(e => e.PenaltyId, "IX_PenaltyId");
+                entity.ToTable("penaltyattachment");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Filename).HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.UploadBy)
                     .IsRequired()
@@ -1733,25 +1782,24 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(32);
 
-                entity.Property(e => e.Url).HasMaxLength(256);
+                entity.Property(e => e.UploadUtc).HasColumnType("datetime(6)");
 
-                entity.HasOne(d => d.Penalty)
-                    .WithMany(p => p.PenaltyAttachment)
-                    .HasForeignKey(d => d.PenaltyId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.Property(e => e.Url).HasMaxLength(256);
             });
 
             modelBuilder.Entity<PenaltyReaction>(entity =>
             {
-                entity.HasIndex(e => e.MemberId, "IX_MemberId");
-
-                entity.HasIndex(e => e.PenaltyId, "IX_PenaltyId");
+                entity.ToTable("penaltyreaction");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Emoji)
                     .IsRequired()
@@ -1760,30 +1808,22 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.PenaltyReaction)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Penalty)
-                    .WithMany(p => p.PenaltyReaction)
-                    .HasForeignKey(d => d.PenaltyId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<Permission>(entity =>
             {
-                entity.ToTable("Permission", "auth");
+                entity.ToTable("permission");
 
-                entity.HasIndex(e => e.Id, "IX_Composite");
+                entity.HasIndex(e => e.CreatedUserId, "FK_Permission_User_CreatedUserId_idx");
 
-                entity.HasIndex(e => e.Code, "IX_Composite_Code");
+                entity.HasIndex(e => e.DeletedUserId, "FK_Permission_User_DeletedUserId_idx");
 
-                entity.HasIndex(e => e.CreatedUserId, "IX_CreatedUserId");
+                entity.HasIndex(e => e.UpdatedUserId, "FK_Permission_User_UpdatedUserId");
 
-                entity.HasIndex(e => e.DeletedUserId, "IX_DeletedUserId");
+                entity.HasIndex(e => new { e.Id, e.Code, e.Title, e.Deleted }, "IX_Composite");
 
-                entity.HasIndex(e => e.UpdatedUserId, "IX_UpdatedUserId");
+                entity.HasIndex(e => new { e.Code, e.Title, e.Deleted }, "IX_Composite_Code");
 
                 entity.Property(e => e.Code).HasMaxLength(32);
 
@@ -1791,7 +1831,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -1799,31 +1843,44 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
                 entity.HasOne(d => d.CreatedUser)
                     .WithMany(p => p.PermissionCreatedUser)
                     .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Permission_User_CreatedUserId");
 
                 entity.HasOne(d => d.DeletedUser)
                     .WithMany(p => p.PermissionDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
+                    .HasForeignKey(d => d.DeletedUserId)
+                    .HasConstraintName("FK_Permission_User_DeletedUserId");
 
                 entity.HasOne(d => d.UpdatedUser)
                     .WithMany(p => p.PermissionUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                    .HasForeignKey(d => d.UpdatedUserId)
+                    .HasConstraintName("FK_Permission_User_UpdatedUserId");
             });
 
             modelBuilder.Entity<Poll>(entity =>
             {
+                entity.ToTable("poll");
+
                 entity.Property(e => e.ClosedBy).HasMaxLength(128);
 
                 entity.Property(e => e.ClosedIp).HasMaxLength(16);
+
+                entity.Property(e => e.ClosedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -1831,149 +1888,196 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.OpenIp).HasMaxLength(16);
 
+                entity.Property(e => e.OpenUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.Title)
                     .IsRequired()
                     .HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<PollOption>(entity =>
+            modelBuilder.Entity<Polloption>(entity =>
             {
-                entity.HasIndex(e => e.PollId, "IX_PollId");
+                entity.ToTable("polloption");
+
+                entity.HasIndex(e => e.PollId, "FK_PollOption_Poll_PollId_idx");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Title).HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
                 entity.HasOne(d => d.Poll)
-                    .WithMany(p => p.PollOption)
+                    .WithMany(p => p.Polloption)
                     .HasForeignKey(d => d.PollId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PollOption_Poll_PollOptionId");
+                    .HasConstraintName("FK_PollOption_Poll_PollId");
             });
 
             modelBuilder.Entity<Post>(entity =>
             {
-                entity.HasIndex(e => e.BoardId, "IX_BoardId");
+                entity.ToTable("post");
 
-                entity.HasIndex(e => e.CreatedUserId, "IX_CreatedUserId");
+                entity.HasIndex(e => e.BoardId, "FK_Post_Board_BoardId_idx");
 
-                entity.HasIndex(e => e.DeletedUserId, "IX_DeletedUserId");
+                entity.HasIndex(e => e.CommentId, "FK_Post_Comment_CommentId_idx");
 
-                entity.HasIndex(e => e.LockedUserId, "IX_LockedId");
+                entity.HasIndex(e => e.PollId, "FK_Post_Poll_PollId_idx");
 
-                entity.HasIndex(e => e.PinnedUserId, "IX_PinnedUserId");
+                entity.HasIndex(e => e.SurveyId, "FK_Post_Survey_SurveyId_idx");
 
-                entity.HasIndex(e => e.PollId, "IX_PollId");
+                entity.HasIndex(e => e.CreatedUserId, "FK_Post_User_CreatedUserId_idx");
 
-                entity.HasIndex(e => e.CommentId, "IX_PostId");
+                entity.HasIndex(e => e.DeletedUserId, "FK_Post_User_DeletedUserId_idx");
 
-                entity.HasIndex(e => e.SurveyId, "IX_SurveyId");
+                entity.HasIndex(e => e.LockedUserId, "FK_Post_User_LockedUserId_idx");
 
-                entity.HasIndex(e => e.UnlockedUserId, "IX_UnlockedId");
+                entity.HasIndex(e => e.PinnedUserId, "FK_Post_User_PinnedUserId_idx");
 
-                entity.HasIndex(e => e.UnpinnedUserId, "IX_UnpinnedId");
+                entity.HasIndex(e => e.UnlockedUserId, "FK_Post_User_UnlockedUserId_idx");
 
-                entity.HasIndex(e => e.UpdatedUserId, "IX_UpdatedUserId");
+                entity.HasIndex(e => e.UnpinnedUserId, "FK_Post_User_UnpinnedUserId_idx");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_Post_User_UpdatedUserId_idx");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.LockedIp).HasMaxLength(16);
 
                 entity.Property(e => e.LockedNote).HasMaxLength(1024);
 
+                entity.Property(e => e.LockedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.PinnedIp).HasMaxLength(16);
 
                 entity.Property(e => e.PinnedNote).HasMaxLength(1024);
+
+                entity.Property(e => e.PinnedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.UnlockedIp).HasMaxLength(16);
 
                 entity.Property(e => e.UnlockedNote).HasMaxLength(1024);
 
+                entity.Property(e => e.UnlockedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.UnpinnedIp).HasMaxLength(16);
 
                 entity.Property(e => e.UnpinnedNote).HasMaxLength(1024);
 
+                entity.Property(e => e.UnpinnedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
 
                 entity.HasOne(d => d.Board)
                     .WithMany(p => p.Post)
                     .HasForeignKey(d => d.BoardId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Post_Board_BoardId");
 
                 entity.HasOne(d => d.Comment)
                     .WithMany(p => p.Post)
                     .HasForeignKey(d => d.CommentId)
-                    .HasConstraintName("FK_Post_Comment_PostId");
+                    .HasConstraintName("FK_Post_Comment_CommentId");
 
                 entity.HasOne(d => d.CreatedUser)
                     .WithMany(p => p.PostCreatedUser)
                     .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Post_User_CreatedUserId");
 
                 entity.HasOne(d => d.DeletedUser)
                     .WithMany(p => p.PostDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
+                    .HasForeignKey(d => d.DeletedUserId)
+                    .HasConstraintName("FK_Post_User_DeletedUserId");
 
                 entity.HasOne(d => d.LockedUser)
                     .WithMany(p => p.PostLockedUser)
                     .HasForeignKey(d => d.LockedUserId)
-                    .HasConstraintName("FK_Post_User_LockedId");
+                    .HasConstraintName("FK_Post_User_LockedUserId");
 
                 entity.HasOne(d => d.PinnedUser)
                     .WithMany(p => p.PostPinnedUser)
-                    .HasForeignKey(d => d.PinnedUserId);
+                    .HasForeignKey(d => d.PinnedUserId)
+                    .HasConstraintName("FK_Post_User_PinnedUserId");
 
                 entity.HasOne(d => d.Poll)
                     .WithMany(p => p.Post)
-                    .HasForeignKey(d => d.PollId);
+                    .HasForeignKey(d => d.PollId)
+                    .HasConstraintName("FK_Post_Poll_PollId");
 
                 entity.HasOne(d => d.Survey)
                     .WithMany(p => p.Post)
-                    .HasForeignKey(d => d.SurveyId);
+                    .HasForeignKey(d => d.SurveyId)
+                    .HasConstraintName("FK_Post_Survey_SurveyId");
 
                 entity.HasOne(d => d.UnlockedUser)
                     .WithMany(p => p.PostUnlockedUser)
                     .HasForeignKey(d => d.UnlockedUserId)
-                    .HasConstraintName("FK_Post_User_UnlockedId");
+                    .HasConstraintName("FK_Post_User_UnlockedUserId");
 
                 entity.HasOne(d => d.UnpinnedUser)
                     .WithMany(p => p.PostUnpinnedUser)
                     .HasForeignKey(d => d.UnpinnedUserId)
-                    .HasConstraintName("FK_Post_User_UnpinnedId");
+                    .HasConstraintName("FK_Post_User_UnpinnedUserId");
 
                 entity.HasOne(d => d.UpdatedUser)
                     .WithMany(p => p.PostUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                    .HasForeignKey(d => d.UpdatedUserId)
+                    .HasConstraintName("FK_Post_User_UpdatedUserId");
             });
 
             modelBuilder.Entity<Qualification>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.ToTable("qualification");
+
+                entity.Property(e => e.CreatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<Role>(entity =>
             {
-                entity.ToTable("Role", "auth");
+                entity.ToTable("role");
 
-                entity.HasIndex(e => e.Id, "IX_Composite");
+                entity.HasIndex(e => e.CreatedUserId, "FK_Role_User_CreatedUserId_idx");
 
-                entity.HasIndex(e => e.CreatedUserId, "IX_CreatedUserId");
+                entity.HasIndex(e => e.DeletedUserId, "FK_Role_User_DeletedUserId_idx");
 
-                entity.HasIndex(e => e.DeletedUserId, "IX_DeletedUserId");
+                entity.HasIndex(e => e.UpdatedUserId, "FK_Role_User_UpdatedUserId_idx");
 
-                entity.HasIndex(e => e.UpdatedUserId, "IX_UpdatedUserId");
+                entity.HasIndex(e => new { e.Id, e.Code, e.Deleted }, "IX_Composite");
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -1983,231 +2087,204 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
                 entity.Property(e => e.Title).HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
 
                 entity.HasOne(d => d.CreatedUser)
                     .WithMany(p => p.RoleCreatedUser)
                     .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Role_User_CreatedUserId");
 
                 entity.HasOne(d => d.DeletedUser)
                     .WithMany(p => p.RoleDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
+                    .HasForeignKey(d => d.DeletedUserId)
+                    .HasConstraintName("FK_Role_User_DeletedUserId");
 
                 entity.HasOne(d => d.UpdatedUser)
                     .WithMany(p => p.RoleUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                    .HasForeignKey(d => d.UpdatedUserId)
+                    .HasConstraintName("FK_Role_User_UpdatedUserId");
             });
 
-            modelBuilder.Entity<Role1>(entity =>
+            modelBuilder.Entity<Rolecategory>(entity =>
             {
-                entity.ToTable("Role");
+                entity.ToTable("rolecategory");
 
-                entity.HasIndex(e => e.EventId, "IX_EventId");
+                entity.Property(e => e.CreatedIp).HasMaxLength(16);
 
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasMaxLength(32);
-
-                entity.Property(e => e.CreatedIp)
-                    .IsRequired()
-                    .HasMaxLength(16);
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
 
-                entity.Property(e => e.Note).HasMaxLength(1024);
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(128);
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.Role1CreatedUser)
-                    .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.Role1DeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
-
-                entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.Role1UpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<RoleCategory>(entity =>
+            modelBuilder.Entity<Rolepermission>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-            });
+                entity.ToTable("rolepermission");
 
-            modelBuilder.Entity<RolePermission>(entity =>
-            {
-                entity.ToTable("RolePermission", "auth");
+                entity.HasIndex(e => e.PermissionId, "FK_RolePermission_Permission_PermissionId_idx");
 
-                entity.HasIndex(e => new { e.RoleId, e.PermissionId }, "IX_Composite");
+                entity.HasIndex(e => e.CreatedUserId, "FK_RolePermission_User_CreatedUserId_idx");
 
-                entity.HasIndex(e => e.CreatedUserId, "IX_CreatedUserId");
+                entity.HasIndex(e => e.DeletedUserId, "FK_RolePermission_User_DeletedUserId_idx");
 
-                entity.HasIndex(e => e.DeletedUserId, "IX_DeletedUserId");
-
-                entity.HasIndex(e => e.PermissionId, "IX_PermissionId");
+                entity.HasIndex(e => e.UpdatedUserId, "FK_RolePermission_User_UpdatedUserId_idx");
 
                 entity.HasIndex(e => e.RoleId, "IX_RoleId");
 
-                entity.HasIndex(e => e.UpdatedUserId, "IX_UpdatedUserId");
-
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
                 entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.RolePermissionCreatedUser)
+                    .WithMany(p => p.RolepermissionCreatedUser)
                     .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_RolePermission_User_CreatedUserId");
 
                 entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.RolePermissionDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
+                    .WithMany(p => p.RolepermissionDeletedUser)
+                    .HasForeignKey(d => d.DeletedUserId)
+                    .HasConstraintName("FK_RolePermission_User_DeletedUserId");
 
                 entity.HasOne(d => d.Permission)
-                    .WithMany(p => p.RolePermission)
+                    .WithMany(p => p.Rolepermission)
                     .HasForeignKey(d => d.PermissionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_RolePermission_Permission_PermissionId");
 
                 entity.HasOne(d => d.Role)
-                    .WithMany(p => p.RolePermission)
+                    .WithMany(p => p.Rolepermission)
                     .HasForeignKey(d => d.RoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_RolePermission_Role_RoleId");
 
                 entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.RolePermissionUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                    .WithMany(p => p.RolepermissionUpdatedUser)
+                    .HasForeignKey(d => d.UpdatedUserId)
+                    .HasConstraintName("FK_RolePermission_User_UpdatedUserId");
             });
 
             modelBuilder.Entity<Season>(entity =>
             {
-                entity.HasIndex(e => e.StatusId, "IX_StatusId");
+                entity.ToTable("season");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
 
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.EndUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.Note).HasMaxLength(1024);
+
+                entity.Property(e => e.StartUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Title).HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Status)
-                    .WithMany(p => p.Season)
-                    .HasForeignKey(d => d.StatusId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<SeasonAttachment>(entity =>
+            modelBuilder.Entity<Seasonattachment>(entity =>
             {
-                entity.HasIndex(e => e.SeasonId, "IX_SeasonId");
+                entity.ToTable("seasonattachment");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Filename).HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.Url).HasMaxLength(256);
-
-                entity.HasOne(d => d.Season)
-                    .WithMany(p => p.SeasonAttachment)
-                    .HasForeignKey(d => d.SeasonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
-            modelBuilder.Entity<SeasonEvent>(entity =>
+            modelBuilder.Entity<Seasonevent>(entity =>
             {
-                entity.HasIndex(e => e.SeasonId, "IX_SeasonId");
+                entity.ToTable("seasonevent");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Event)
-                    .WithMany(p => p.SeasonEvent)
-                    .HasForeignKey(d => d.EventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Season)
-                    .WithMany(p => p.SeasonEvent)
-                    .HasForeignKey(d => d.SeasonId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<SeasonEventReward>(entity =>
+            modelBuilder.Entity<Seasoneventreward>(entity =>
             {
-                entity.HasIndex(e => e.SeasonEventId, "IX_StatusId");
+                entity.ToTable("seasoneventreward");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.SeasonEvent)
-                    .WithMany(p => p.SeasonEventReward)
-                    .HasForeignKey(d => d.SeasonEventId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SeasonEventPoint_SeasonEvent_SeasonEventId");
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<SeasonEventStatus>(entity =>
+            modelBuilder.Entity<Seasoneventstatus>(entity =>
             {
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasMaxLength(32);
-
-                entity.Property(e => e.CreatedIp)
-                    .IsRequired()
-                    .HasMaxLength(16);
-
-                entity.Property(e => e.DeletedIp).HasMaxLength(16);
-
-                entity.Property(e => e.Note).HasMaxLength(1024);
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(128);
-
-                entity.Property(e => e.UpdatedIp).HasMaxLength(16);
-            });
-
-            modelBuilder.Entity<SeasonStatus>(entity =>
-            {
-                entity.HasIndex(e => new { e.Deleted, e.Code }, "IX_Composite");
+                entity.ToTable("seasoneventstatus");
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -2217,7 +2294,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -2226,21 +2307,60 @@ namespace NoPony.CarClub.Api.EF
                     .HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+            });
+
+            modelBuilder.Entity<Seasonstatus>(entity =>
+            {
+                entity.ToTable("seasonstatus");
+
+                entity.HasIndex(e => new { e.Deleted, e.Code, e.Title, e.Updated }, "IX_Composite");
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasMaxLength(32);
+
+                entity.Property(e => e.CreatedIp)
+                    .IsRequired()
+                    .HasMaxLength(16);
+
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.Note).HasMaxLength(1024);
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<Survey>(entity =>
             {
-                entity.HasIndex(e => e.CreatorId, "IX_CreatorId");
+                entity.ToTable("survey");
 
-                entity.HasIndex(e => e.OwnerId, "IX_OwnerId");
+                entity.HasIndex(e => e.CreatedUserId, "FK_Survey_User_CreatedUserId_idx");
 
-                entity.HasIndex(e => e.StatusId, "IX_StatusId");
+                entity.HasIndex(e => e.DeletedUserId, "FK_Survey_User_DeletedUserId_idx");
+
+                entity.HasIndex(e => e.UpdatedUserId, "FK_Survey_User_UpdatedUserId_idx");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -2248,31 +2368,38 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Creator)
-                    .WithMany(p => p.SurveyCreator)
-                    .HasForeignKey(d => d.CreatorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
 
-                entity.HasOne(d => d.Owner)
-                    .WithMany(p => p.SurveyOwner)
-                    .HasForeignKey(d => d.OwnerId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.HasOne(d => d.CreatedUser)
+                    .WithMany(p => p.SurveyCreatedUser)
+                    .HasForeignKey(d => d.CreatedUserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Survey_User_CreatedUserId");
 
-                entity.HasOne(d => d.Status)
-                    .WithMany(p => p.Survey)
-                    .HasForeignKey(d => d.StatusId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.HasOne(d => d.DeletedUser)
+                    .WithMany(p => p.SurveyDeletedUser)
+                    .HasForeignKey(d => d.DeletedUserId)
+                    .HasConstraintName("FK_Survey_User_DeletedUserId");
+
+                entity.HasOne(d => d.UpdatedUser)
+                    .WithMany(p => p.SurveyUpdatedUser)
+                    .HasForeignKey(d => d.UpdatedUserId)
+                    .HasConstraintName("FK_Survey_User_UpdatedUserId");
             });
 
-            modelBuilder.Entity<SurveyOption>(entity =>
+            modelBuilder.Entity<Surveyoption>(entity =>
             {
-                entity.HasIndex(e => e.QuestionId, "IX_QuestionId");
+                entity.ToTable("surveyoption");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -2282,22 +2409,22 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Question)
-                    .WithMany(p => p.SurveyOption)
-                    .HasForeignKey(d => d.QuestionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_ServeyOption_SurveyQuestion_QuestionId");
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<SurveyQuestion>(entity =>
+            modelBuilder.Entity<Surveyquestion>(entity =>
             {
-                entity.HasIndex(e => e.SurveyId, "IX_ServeyId");
+                entity.ToTable("surveyquestion");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -2305,44 +2432,36 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Survey)
-                    .WithMany(p => p.SurveyQuestion)
-                    .HasForeignKey(d => d.SurveyId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_SurveyQuestion_Servey_ServeyId");
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<SurveyResponse>(entity =>
+            modelBuilder.Entity<Surveyresponse>(entity =>
             {
-                entity.HasIndex(e => e.MemberId, "IX_MemberId");
+                entity.ToTable("surveyresponse");
 
                 entity.HasIndex(e => e.SurveyQuestionId, "IX_QuestionId");
-
-                entity.HasIndex(e => e.SurveyQuestionId, "IX_SurveyQuestionId");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.SurveyResponse)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.SurveyQuestion)
-                    .WithMany(p => p.SurveyResponse)
-                    .HasForeignKey(d => d.SurveyQuestionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<SurveyStatus>(entity =>
+            modelBuilder.Entity<Surveystatus>(entity =>
             {
+                entity.ToTable("surveystatus");
+
                 entity.Property(e => e.Code)
                     .IsRequired()
                     .HasMaxLength(32);
@@ -2351,7 +2470,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -2360,21 +2483,23 @@ namespace NoPony.CarClub.Api.EF
                     .HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<Tag>(entity =>
             {
-                entity.HasIndex(e => e.CreatorId, "IX_CreatorId");
-
-                entity.HasIndex(e => e.OwnerId, "IX_OwnerId");
-
-                entity.HasIndex(e => e.StatusId, "IX_StatusId");
+                entity.ToTable("tag");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -2382,25 +2507,14 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Creator)
-                    .WithMany(p => p.TagCreator)
-                    .HasForeignKey(d => d.CreatorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Owner)
-                    .WithMany(p => p.TagOwner)
-                    .HasForeignKey(d => d.OwnerId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Status)
-                    .WithMany(p => p.Tag)
-                    .HasForeignKey(d => d.StatusId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<TagStatus>(entity =>
+            modelBuilder.Entity<Tagstatus>(entity =>
             {
-                entity.HasIndex(e => new { e.Deleted, e.Code }, "IX_Composite");
+                entity.ToTable("tagstatus");
+
+                entity.HasIndex(e => new { e.Deleted, e.Code, e.Title, e.Updated }, "IX_Composite");
 
                 entity.Property(e => e.Code)
                     .IsRequired()
@@ -2410,7 +2524,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -2419,16 +2537,18 @@ namespace NoPony.CarClub.Api.EF
                     .HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.ToTable("User", "auth");
+                entity.ToTable("user");
 
-                entity.HasIndex(e => e.Email, "IX_Composite_DeletedLogin")
+                entity.HasIndex(e => new { e.Email, e.Password, e.EmailVerified, e.ForgotPassword, e.Deleted, e.FailedLoginCount }, "IX_Composite_DeletedLogin")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Key, "IX_Composite_Key")
+                entity.HasIndex(e => new { e.Key, e.Password, e.EmailVerified, e.ForgotPassword, e.Deleted, e.FailedLoginCount }, "IX_Composite_Key")
                     .IsUnique();
 
                 entity.HasIndex(e => e.DeletedUserId, "IX_DeletedUserId");
@@ -2445,7 +2565,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -2453,17 +2577,37 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.EmailVerifiedIp).HasMaxLength(16);
 
+                entity.Property(e => e.EmailVerifiedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.EmailVerifyKey).HasMaxLength(64);
+
                 entity.Property(e => e.FailedLoginIp).HasMaxLength(16);
+
+                entity.Property(e => e.FailedLoginUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.ForgotPasswordExpiryUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.ForgotPasswordIp).HasMaxLength(16);
 
+                entity.Property(e => e.ForgotPasswordKey).HasMaxLength(64);
+
+                entity.Property(e => e.ForgotPasswordUtc).HasMaxLength(64);
+
                 entity.Property(e => e.ForgotResetIp).HasMaxLength(16);
+
+                entity.Property(e => e.ForgotResetUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.Key)
+                    .IsRequired()
+                    .HasMaxLength(64);
 
                 entity.Property(e => e.LastLoginIp).HasMaxLength(16);
 
+                entity.Property(e => e.LastLoginUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.MfaEnabledIp).HasMaxLength(16);
 
-                entity.Property(e => e.MfaEnabledUtc).HasColumnType("datetime");
+                entity.Property(e => e.MfaEnabledUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.MfaKey).HasMaxLength(128);
 
@@ -2472,6 +2616,8 @@ namespace NoPony.CarClub.Api.EF
                     .HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
 
                 entity.HasOne(d => d.DeletedUser)
                     .WithMany(p => p.InverseDeletedUser)
@@ -2484,61 +2630,78 @@ namespace NoPony.CarClub.Api.EF
                     .HasConstraintName("FK_Login_User_UpdatedUserId");
             });
 
-            modelBuilder.Entity<UserRole>(entity =>
+            modelBuilder.Entity<Userrole>(entity =>
             {
-                entity.ToTable("UserRole", "auth");
+                entity.ToTable("userrole");
 
-                entity.HasIndex(e => new { e.UserId, e.RoleId }, "IX_Composite");
+                entity.HasIndex(e => new { e.UserId, e.RoleId, e.Deleted }, "IX_Composite");
 
-                entity.HasIndex(e => e.CreatedUserId, "IX_CreatedUserId");
+                entity.HasIndex(e => e.CreatedUserId, "IX_CreatedUsedId");
 
                 entity.HasIndex(e => e.DeletedUserId, "IX_DeletedUserId");
-
-                entity.HasIndex(e => e.UserId, "IX_MemberId");
 
                 entity.HasIndex(e => e.RoleId, "IX_RoleId");
 
                 entity.HasIndex(e => e.UpdatedUserId, "IX_UpdatedUserId");
 
+                entity.HasIndex(e => e.UserId, "IX_UserId");
+
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
                 entity.HasOne(d => d.CreatedUser)
-                    .WithMany(p => p.UserRoleCreatedUser)
+                    .WithMany(p => p.UserroleCreatedUser)
                     .HasForeignKey(d => d.CreatedUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserRole_User_CreatedUserId");
 
                 entity.HasOne(d => d.DeletedUser)
-                    .WithMany(p => p.UserRoleDeletedUser)
-                    .HasForeignKey(d => d.DeletedUserId);
+                    .WithMany(p => p.UserroleDeletedUser)
+                    .HasForeignKey(d => d.DeletedUserId)
+                    .HasConstraintName("FK_UserRole_User_DeletedUserId");
 
                 entity.HasOne(d => d.Role)
-                    .WithMany(p => p.UserRole)
+                    .WithMany(p => p.Userrole)
                     .HasForeignKey(d => d.RoleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserRole_Role_RoleId");
 
                 entity.HasOne(d => d.UpdatedUser)
-                    .WithMany(p => p.UserRoleUpdatedUser)
-                    .HasForeignKey(d => d.UpdatedUserId);
+                    .WithMany(p => p.UserroleUpdatedUser)
+                    .HasForeignKey(d => d.UpdatedUserId)
+                    .HasConstraintName("FK_UserRole_User_UpdatedUserId");
 
                 entity.HasOne(d => d.User)
-                    .WithMany(p => p.UserRoleUser)
+                    .WithMany(p => p.UserroleUser)
                     .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserRole_User_UserId");
             });
 
             modelBuilder.Entity<Vehicle>(entity =>
             {
+                entity.ToTable("vehicle");
+
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -2546,48 +2709,36 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Make)
-                    .WithMany(p => p.Vehicle)
-                    .HasForeignKey(d => d.MakeId);
-
-                entity.HasOne(d => d.Model)
-                    .WithMany(p => p.Vehicle)
-                    .HasForeignKey(d => d.ModelId);
-
-                entity.HasOne(d => d.Status)
-                    .WithMany(p => p.Vehicle)
-                    .HasForeignKey(d => d.StatusId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Variant)
-                    .WithMany(p => p.Vehicle)
-                    .HasForeignKey(d => d.VariantId);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<VehicleAttachment>(entity =>
+            modelBuilder.Entity<Vehicleattachment>(entity =>
             {
-                entity.HasIndex(e => e.VehicleId, "IX_VehicleId");
+                entity.ToTable("vehicleattachment");
 
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Filename).HasMaxLength(128);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.Url).HasMaxLength(256);
-
-                entity.HasOne(d => d.Vehicle)
-                    .WithMany(p => p.VehicleAttachment)
-                    .HasForeignKey(d => d.VehicleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
             });
 
-            modelBuilder.Entity<VehicleMake>(entity =>
+            modelBuilder.Entity<Vehiclemake>(entity =>
             {
+                entity.ToTable("vehiclemake");
+
                 entity.Property(e => e.Code)
                     .IsRequired()
                     .HasMaxLength(32);
@@ -2596,28 +2747,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
-                entity.Property(e => e.DeletedIp).HasMaxLength(16);
-
-                entity.Property(e => e.Note).HasMaxLength(1024);
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(128);
-
-                entity.Property(e => e.UpdatedIp).HasMaxLength(16);
-            });
-
-            modelBuilder.Entity<VehicleModel>(entity =>
-            {
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasMaxLength(32);
-
-                entity.Property(e => e.CreatedIp)
-                    .IsRequired()
-                    .HasMaxLength(16);
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -2627,32 +2761,72 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Make)
-                    .WithMany(p => p.VehicleModel)
-                    .HasForeignKey(d => d.MakeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<VehicleOwner>(entity =>
+            modelBuilder.Entity<Vehiclemodel>(entity =>
             {
+                entity.ToTable("vehiclemodel");
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasMaxLength(32);
+
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.Note).HasMaxLength(1024);
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+            });
+
+            modelBuilder.Entity<Vehicleowner>(entity =>
+            {
+                entity.ToTable("vehicleowner");
+
+                entity.Property(e => e.CreatedIp)
+                    .IsRequired()
+                    .HasMaxLength(16);
+
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             modelBuilder.Entity<VehicleReaction>(entity =>
             {
+                entity.ToTable("vehiclereaction");
+
                 entity.Property(e => e.CreatedIp)
                     .IsRequired()
                     .HasMaxLength(16);
 
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Emoji)
                     .IsRequired()
@@ -2661,19 +2835,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Member)
-                    .WithMany(p => p.VehicleReaction)
-                    .HasForeignKey(d => d.MemberId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-
-                entity.HasOne(d => d.Vehicle)
-                    .WithMany(p => p.VehicleReaction)
-                    .HasForeignKey(d => d.VehicleId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
-            modelBuilder.Entity<VehicleStatus>(entity =>
+            modelBuilder.Entity<Vehiclestatus>(entity =>
             {
+                entity.ToTable("vehiclestatus");
+
                 entity.Property(e => e.Code)
                     .IsRequired()
                     .HasMaxLength(32);
@@ -2682,28 +2850,11 @@ namespace NoPony.CarClub.Api.EF
                     .IsRequired()
                     .HasMaxLength(16);
 
-                entity.Property(e => e.DeletedIp).HasMaxLength(16);
-
-                entity.Property(e => e.Note).HasMaxLength(1024);
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(128);
-
-                entity.Property(e => e.UpdatedIp).HasMaxLength(16);
-            });
-
-            modelBuilder.Entity<VehicleVariant>(entity =>
-            {
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasMaxLength(32);
-
-                entity.Property(e => e.CreatedIp)
-                    .IsRequired()
-                    .HasMaxLength(16);
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
 
                 entity.Property(e => e.Note).HasMaxLength(1024);
 
@@ -2713,10 +2864,36 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.UpdatedIp).HasMaxLength(16);
 
-                entity.HasOne(d => d.Model)
-                    .WithMany(p => p.VehicleVariant)
-                    .HasForeignKey(d => d.ModelId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
+            });
+
+            modelBuilder.Entity<Vehiclevariant>(entity =>
+            {
+                entity.ToTable("vehiclevariant");
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasMaxLength(32);
+
+                entity.Property(e => e.CreatedIp)
+                    .IsRequired()
+                    .HasMaxLength(16);
+
+                entity.Property(e => e.CreatedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.DeletedIp).HasMaxLength(16);
+
+                entity.Property(e => e.DeletedUtc).HasColumnType("datetime(6)");
+
+                entity.Property(e => e.Note).HasMaxLength(1024);
+
+                entity.Property(e => e.Title)
+                    .IsRequired()
+                    .HasMaxLength(128);
+
+                entity.Property(e => e.UpdatedIp).HasMaxLength(16);
+
+                entity.Property(e => e.UpdatedUtc).HasColumnType("datetime(6)");
             });
 
             OnModelCreatingPartial(modelBuilder);

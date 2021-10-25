@@ -15,7 +15,7 @@ import { AuthRegisterComponent } from 'src/app/auth/register/auth-register.compo
 export class MenuLargeComponent implements OnInit {
   currentUser: UserModel | null = null;
 
-  constructor(private router: Router, private dialog: MatDialog, private authService: AuthService) { 
+  constructor(private router: Router, private dialog: MatDialog, private authService: AuthService) {
     this.authService.currentUser.subscribe(x => this.currentUser = x);
   }
 
@@ -38,7 +38,7 @@ export class MenuLargeComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout();
     this.router.navigate(['/home']);
   }

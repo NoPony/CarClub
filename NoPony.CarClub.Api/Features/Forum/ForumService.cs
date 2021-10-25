@@ -31,7 +31,7 @@ namespace NoPony.CarClub.Api.Features.Forum
             return await _repository.BoardRead(clientKey, key);
         }
 
-        public async Task<BoardDto> BoardUpdate(Guid? clientKey, IPAddress clientIp, BoardDto request)
+        public async Task<bool> BoardUpdate(Guid? clientKey, IPAddress clientIp, BoardDto request)
         {
             return await _repository.BoardUpdate(clientKey, clientIp, request);
         }
