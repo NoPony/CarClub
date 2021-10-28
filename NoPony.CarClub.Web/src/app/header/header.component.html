@@ -1,6 +1,17 @@
 <mat-toolbar class="mat-elevation-z6" color="primary">
-  <app-logo></app-logo>
-  <span class="spacer"></span>
-  <app-menu-small fxShow="false" fxShow.lt-md="true"></app-menu-small>
-  <app-menu-large fxShow="false" fxShow.gt-sm="true"></app-menu-large>
+  <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxHide.gt-sm>
+      <button mat-icon-button (click)="toggleSidenav()">
+          <mat-icon>menu</mat-icon>
+      </button>
+      <a routerLink="/home">
+          WRX Owners Club of Western Australia
+      </a>
+  </div>
+
+  <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxHide.sm>
+      <a routerLink="/home">
+          WRX Owners Club of Western Australia
+      </a>
+      <app-topnav></app-topnav>
+  </div>
 </mat-toolbar>

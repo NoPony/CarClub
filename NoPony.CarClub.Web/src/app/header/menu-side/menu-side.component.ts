@@ -8,14 +8,14 @@ import { AuthLoginComponent } from 'src/app/auth/login/auth-login.component';
 import { AuthRegisterComponent } from 'src/app/auth/register/auth-register.component';
 
 @Component({
-  selector: 'app-menu-large',
-  templateUrl: './menu-large.component.html',
-  styleUrls: ['./menu-large.component.scss']
+  selector: 'app-menu-side',
+  templateUrl: './menu-side.component.html',
+  styleUrls: ['./menu-side.component.scss']
 })
-export class MenuLargeComponent implements OnInit {
+export class MenuSideComponent implements OnInit {
   currentUser: UserModel | null = null;
 
-  constructor(private router: Router, private dialog: MatDialog, private authService: AuthService) {
+  constructor(private router: Router, private dialog: MatDialog, private authService: AuthService) { 
     this.authService.currentUser.subscribe(x => this.currentUser = x);
   }
 

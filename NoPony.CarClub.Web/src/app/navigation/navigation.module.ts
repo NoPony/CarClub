@@ -8,36 +8,33 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
 
-import { NavigationModule } from '../navigation/navigation.module';
-import { LogoComponent } from './logo/logo.component';
-import { HeaderComponent } from './header.component';
-import { MenuTopComponent } from './menu-top/menu-top.component';
-import { MenuSideComponent } from './menu-side/menu-side.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { TopnavComponent } from './topnav/topnav.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-
-    LogoComponent,
-    MenuTopComponent,
-    MenuSideComponent,
+    SidenavComponent,
+    TopnavComponent,
+    MenuComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
-
+    
     FlexLayoutModule,
     MatToolbarModule,
     MatMenuModule,
     MatButtonModule,
     MatIconModule,
     MatDialogModule,
-
-    NavigationModule,
+    MatListModule,
   ],
   exports: [
-    HeaderComponent,
+    SidenavComponent,
+    TopnavComponent,
   ]
 })
-export class HeaderModule { }
+export class NavigationModule { }

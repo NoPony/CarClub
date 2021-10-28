@@ -20,7 +20,7 @@ namespace NoPony.CarClub.Api.Features.Forum
                     .Where(i => i.Deleted == false)
                     .Select(i => new BoardListDto
                     {
-                        Key = i.Key,
+                        Key = new Guid(i.Key),
                         Ordinal = i.Ordinal,
                         Title = i.Title,
                         Note = i.Note,
@@ -33,17 +33,22 @@ namespace NoPony.CarClub.Api.Features.Forum
 
         public async Task<BoardDto> BoardCreate(Guid? clientKey, IPAddress clientIp, BoardDto request)
         {
+            byte[] k = clientKey?.ToByteArray();
+
+            if (k == null)
+                return null;
+
             using (CarClubContext context = new CarClubContext())
             {
                 context.Board.Add(new Board
                 {
-                    Key = Guid.NewGuid(),
+                    Key = Guid.NewGuid().ToByteArray(),
                     Title = request.Title,
                     Note = request.Note,
 
                     CreatedIp = clientIp.GetAddressBytes(),
                     CreatedUtc = DateTime.UtcNow,
-                    CreatedUserId = context.User.Single(i => i.Key == clientKey).Id,
+                    CreatedUserId = context.User.Single(i => i.Key == k).Id,
                 });
 
                 await context.SaveChangesAsync();
@@ -56,8 +61,10 @@ namespace NoPony.CarClub.Api.Features.Forum
         {
             using (CarClubContext context = new CarClubContext())
             {
+                byte[] k = key.Value.ToByteArray();
+
                 return await context.Board
-                    .Where(i => i.Key == key)
+                    .Where(i => i.Key == k)
                     .Select(i => new BoardDto
                     {
 
@@ -68,11 +75,16 @@ namespace NoPony.CarClub.Api.Features.Forum
 
         public async Task<bool> BoardUpdate(Guid? clientKey, IPAddress clientIp, BoardDto request)
         {
+            byte[] k = request.Key?.ToByteArray();
+
+            if (k == null)
+                return false;
+
             using (CarClubContext context = new CarClubContext())
             {
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
-                    Board b = context.Board.Single(i => i.Key == request.Key);
+                    Board b = context.Board.Single(i => i.Key == k);
 
                     b.Title = request.Title;
                     b.Note = request.Note;
@@ -87,20 +99,25 @@ namespace NoPony.CarClub.Api.Features.Forum
 
         public async Task<bool> BoardDelete(Guid? clientKey, IPAddress clientIp, Guid? key)
         {
+            byte[] k = key?.ToByteArray();
+
+            if (k == null)
+                return false;
+
             using (CarClubContext context = new CarClubContext())
             {
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
                     Board b = context.Board
-                        .Where(i => i.Key == key)
+                        .Where(i => i.Key == k)
                         .Where(i => i.Deleted == false)
                         .Single();
 
                     b.Deleted = true;
                     b.DeletedIp = clientIp.GetAddressBytes();
-                    b.DeletedUserId = context.User.Single(i => i.Key == key).Id;
+                    b.DeletedUserId = context.User.Single(i => i.Key == k).Id;
                     b.DeletedUtc = DateTime.UtcNow;
-            
+
                     await context.SaveChangesAsync();
                     await transaction.CommitAsync();
 
@@ -111,10 +128,15 @@ namespace NoPony.CarClub.Api.Features.Forum
 
         public async Task<IEnumerable<PostDto>> BoardPostList(Guid? clientKey, Guid? boardKey)
         {
+            byte[] k = boardKey?.ToByteArray();
+
+            if (k == null)
+                return null;
+
             using (CarClubContext context = new CarClubContext())
             {
                 return context.Post
-                    .Where(i => i.Board.Key == boardKey)
+                    .Where(i => i.Board.Key == k)
                     .OrderByDescending(i => i.CreatedUtc)
                     .Select(i => new PostDto
                     {

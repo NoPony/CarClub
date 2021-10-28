@@ -52,7 +52,7 @@ namespace NoPony.CarClub.Api.EF
         }
 
         public long Id { get; set; }
-        public string Key { get; set; }
+        public byte[] Key { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public bool MfaEnabled { get; set; }

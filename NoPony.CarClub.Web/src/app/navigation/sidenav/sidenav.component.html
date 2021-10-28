@@ -1,0 +1,19 @@
+<mat-nav-list>
+    <span *ngFor="let i of menuList">
+        <span *ngIf="i.RouterLink != null">
+            <a mat-list-item [routerLink]="i.RouterLink" (click)="handleClick(i)">
+                <mat-icon>{{ i.Icon }}</mat-icon>
+                &nbsp;
+                <span class="nav-caption">{{ i.Label }}</span>
+            </a>
+        </span>
+
+        <span *ngIf="i.RouterLink == null">
+            <a mat-list-item (click)="handleClick(i)">
+                <mat-icon>{{ i.Icon }}</mat-icon>
+                &nbsp;
+                <span class="nav-caption">{{ i.Label }}</span>
+            </a>
+        </span>
+    </span>
+</mat-nav-list>

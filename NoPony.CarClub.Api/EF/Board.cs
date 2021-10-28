@@ -15,7 +15,7 @@ namespace NoPony.CarClub.Api.EF
         }
 
         public long Id { get; set; }
-        public string Key { get; set; }
+        public byte[] Key { get; set; }
         public int Ordinal { get; set; }
         public string Title { get; set; }
         public string Note { get; set; }
