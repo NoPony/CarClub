@@ -27,10 +27,10 @@ namespace NoPony.CarClub.Api.Features.Auth
 
                 context.User.Add(new User
                 {
-                    Key = loginKey,
+                    Key = loginKey.ToByteArray(),
                     Email = email,
                     Password = password,
-                    EmailVerifyKey = verifyKey,
+                    EmailVerifyKey = verifyKey.ToByteArray(),
 
                     CreatedIp = clientIp.GetAddressBytes(),
                     CreatedUtc = DateTime.UtcNow,
@@ -50,6 +50,11 @@ namespace NoPony.CarClub.Api.Features.Auth
 
         public bool TryVerify(IPAddress clientIp, Guid? key)
         {
+            byte[] k = key?.ToByteArray();
+
+            if (k == null)
+                return false;
+
             using (CarClubContext context = new CarClubContext())
             {
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
@@ -57,7 +62,7 @@ namespace NoPony.CarClub.Api.Features.Auth
                     User record = context.User
                         .Where(i => i.Deleted == false)
                         .Where(i => i.EmailVerified == false)
-                        .Where(i => i.EmailVerifyKey == key)
+                        .Where(i => i.EmailVerifyKey == k)
                         .SingleOrDefault();
 
                     if (record == null)
@@ -95,7 +100,7 @@ namespace NoPony.CarClub.Api.Features.Auth
                     .Where(i => i.FailedLoginCount < 5)
                     .Select(i => new AuthLoginModel
                     {
-                        Key = i.Key,
+                        Key = new Guid(i.Key),
                         Password = i.Password,
                     })
                     .SingleOrDefault();
@@ -111,6 +116,11 @@ namespace NoPony.CarClub.Api.Features.Auth
 
         public bool TryLoginSuccess(IPAddress clientIp, Guid? key)
         {
+            byte[] k = key?.ToByteArray();
+
+            if (k == null)
+                return false;
+
             using (CarClubContext context = new CarClubContext())
             {
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
@@ -118,7 +128,7 @@ namespace NoPony.CarClub.Api.Features.Auth
                     User record = context.User
                         .Where(i => i.Deleted == false)
                         .Where(i => i.EmailVerified == true)
-                        .Where(i => i.Key == key)
+                        .Where(i => i.Key == k)
                         .SingleOrDefault();
 
                     if (record == null)
@@ -153,12 +163,17 @@ namespace NoPony.CarClub.Api.Features.Auth
 
         public bool TryLoginFailure(IPAddress clientIp, Guid? key)
         {
+            byte[] k = key?.ToByteArray();
+
+            if (k == null)
+                return false;
+
             using (CarClubContext context = new CarClubContext())
             {
                 using (IDbContextTransaction transaction = context.Database.BeginTransaction())
                 {
                     User record = context.User
-                        .Where(i => i.Key == key)
+                        .Where(i => i.Key == k)
                         .SingleOrDefault();
 
                     if (record == null)
@@ -186,15 +201,23 @@ namespace NoPony.CarClub.Api.Features.Auth
 
         public bool TryGetPermissions(Guid? key, out IEnumerable<string> result)
         {
+            byte[] k = key?.ToByteArray();
+
+            if (k == null)
+            {
+                result = null;
+                return false;
+            }
+
             using (CarClubContext context = new CarClubContext())
             {
                 result = context.User
-                    .Where(i => i.Key == key)
+                    .Where(i => i.Key == k)
                     .Where(i => i.Deleted == false)
                     .Where(i => i.FailedLoginCount < 5)
-                    .SelectMany(u => u.UserRoleUser/*.UserRole*/)
+                    .SelectMany(u => u.UserroleUser/*.UserRole*/)
                     .Select(i => i.Role)
-                    .SelectMany(rp => rp.RolePermission)
+                    .SelectMany(rp => rp.Rolepermission)
                     .Select(i => i.Permission)
                     .Select(i => i.Code)
                     .ToList();

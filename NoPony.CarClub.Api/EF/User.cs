@@ -62,7 +62,7 @@ namespace NoPony.CarClub.Api.EF
         public bool EmailVerified { get; set; }
         public byte[] EmailVerifiedIp { get; set; }
         public DateTime? EmailVerifiedUtc { get; set; }
-        public string EmailVerifyKey { get; set; }
+        public byte[] EmailVerifyKey { get; set; }
         public bool ForgotPassword { get; set; }
         public byte[] ForgotPasswordIp { get; set; }
         public string ForgotPasswordUtc { get; set; }
