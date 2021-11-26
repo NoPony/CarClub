@@ -3,9 +3,9 @@ using Microsoft.Extensions.Logging;
 
 namespace NoPony.CarClub.Api.EF
 {
-    // Scaffold-DbContext -Connection 'Host=localhost;Database=car_club;Uid=car_club_deploy;Pwd=password;' Npgsql.EntityFrameworkCore.PostgreSQL -OutputDir EF -Context CarClubContext -NoPluralize -Force
+    // Scaffold-DbContext -Connection 'Host=localhost;Database=car_club;Uid=car_club_service;Pwd=password;' Npgsql.EntityFrameworkCore.PostgreSQL -OutputDir EF -Context CarClubContext -NoPluralize -Force
 
-    public class Context : car_clubContext
+    public class Context : CarClubContext
     {
         private readonly ILoggerFactory _loggerFactory;
 

@@ -1,18 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-#nullable disable
-
 namespace NoPony.CarClub.Api.EF
 {
-    public partial class car_clubContext : DbContext
+    public partial class CarClubContext : DbContext
     {
-        public car_clubContext()
+        public CarClubContext()
         {
         }
 
-        public car_clubContext(DbContextOptions<car_clubContext> options)
+        public CarClubContext(DbContextOptions<CarClubContext> options)
             : base(options)
         {
         }
@@ -104,14 +103,13 @@ namespace NoPony.CarClub.Api.EF
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Host=localhost;Database=car_club;Uid=car_club_api;Pwd=password;");
+                optionsBuilder.UseNpgsql("Host=localhost;Database=car_club;Uid=car_club_service;Pwd=password;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasPostgresExtension("uuid-ossp")
-                .HasAnnotation("Relational:Collation", "English_Australia.1252");
+            modelBuilder.HasPostgresExtension("uuid-ossp");
 
             modelBuilder.Entity<Board>(entity =>
             {
@@ -131,13 +129,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.PinnedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.PinnedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.CreatedUser)
                     .WithMany(p => p.BoardCreatedUser)
@@ -183,11 +181,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.Board)
                     .WithMany(p => p.BoardRolePermission)
@@ -232,11 +230,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.Id).UseIdentityAlwaysColumn();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.Board)
                     .WithMany(p => p.BoardTag)
@@ -266,11 +264,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.CreatedUser)
                     .WithMany(p => p.CommentCreatedUser)
@@ -313,11 +311,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.Comment)
                     .WithMany(p => p.CommentAttachment)
@@ -360,13 +358,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Emoji).HasMaxLength(1);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.Comment)
                     .WithMany(p => p.CommentReaction)
@@ -411,13 +409,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.StartUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.StartUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<EventAttachment>(entity =>
@@ -434,11 +432,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<EventMemberRole>(entity =>
@@ -455,11 +453,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<EventReaction>(entity =>
@@ -478,13 +476,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Emoji).HasMaxLength(1);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<EventStatus>(entity =>
@@ -503,13 +501,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<EventTag>(entity =>
@@ -528,13 +526,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<Grid>(entity =>
@@ -555,11 +553,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<GridReaction>(entity =>
@@ -576,13 +574,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Emoji).HasMaxLength(1);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<Heat>(entity =>
@@ -601,13 +599,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<HeatAttachment>(entity =>
@@ -624,13 +622,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UploadUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UploadUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<HeatPenaltyStatus>(entity =>
@@ -643,13 +641,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<HeatReaction>(entity =>
@@ -666,13 +664,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Emoji).HasMaxLength(1);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<HeatStatus>(entity =>
@@ -693,13 +691,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<HeatTag>(entity =>
@@ -716,11 +714,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<Invoice>(entity =>
@@ -737,11 +735,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<InvoiceDetail>(entity =>
@@ -758,13 +756,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Quantity).HasPrecision(18, 6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<InvoiceStatus>(entity =>
@@ -783,13 +781,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<Lap>(entity =>
@@ -806,9 +804,9 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.EndTimeBy).IsRequired();
 
@@ -816,13 +814,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.EndTimeMs).HasPrecision(18, 6);
 
-                entity.Property(e => e.EndTimeUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.EndTimeUtc).HasPrecision(6);
 
                 entity.Property(e => e.PositionBy).IsRequired();
 
                 entity.Property(e => e.PositionIp).IsRequired();
 
-                entity.Property(e => e.PositionUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.PositionUtc).HasPrecision(6);
 
                 entity.Property(e => e.StartTimeBy).IsRequired();
 
@@ -830,7 +828,7 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.StartTimeMs).HasPrecision(18, 6);
 
-                entity.Property(e => e.StartTimeUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.StartTimeUtc).HasPrecision(6);
 
                 entity.Property(e => e.TimeBy).IsRequired();
 
@@ -838,9 +836,9 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.TimeMs).HasPrecision(18, 6);
 
-                entity.Property(e => e.TimeUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.TimeUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<LapReaction>(entity =>
@@ -857,13 +855,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Emoji).HasMaxLength(1);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<LapStatus>(entity =>
@@ -882,13 +880,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<LapTag>(entity =>
@@ -907,13 +905,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<Meet>(entity =>
@@ -930,15 +928,15 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.StartUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.StartUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MeetAttachment>(entity =>
@@ -955,11 +953,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MeetOfficial>(entity =>
@@ -976,11 +974,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MeetReaction>(entity =>
@@ -997,13 +995,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Emoji).HasMaxLength(1);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MeetStatus>(entity =>
@@ -1022,13 +1020,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MeetTag>(entity =>
@@ -1047,13 +1045,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<Member>(entity =>
@@ -1066,9 +1064,9 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.FullName).IsRequired();
 
@@ -1092,7 +1090,7 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.PrimaryAddressSuburb).HasColumnName("PrimaryAddress_Suburb");
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MemberEvent>(entity =>
@@ -1103,31 +1101,31 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CheckinBy).IsRequired();
 
-                entity.Property(e => e.CheckinUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CheckinUtc).HasPrecision(6);
 
                 entity.Property(e => e.CheckoutBy).IsRequired();
 
-                entity.Property(e => e.CheckoutUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CheckoutUtc).HasPrecision(6);
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.OffTrackBy).IsRequired();
 
-                entity.Property(e => e.OffTrackUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.OffTrackUtc).HasPrecision(6);
 
                 entity.Property(e => e.OnTrackBy).IsRequired();
 
-                entity.Property(e => e.OnTrackUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.OnTrackUtc).HasPrecision(6);
 
                 entity.Property(e => e.RegisterBy).IsRequired();
 
-                entity.Property(e => e.RegisterUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.RegisterUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MemberEventAttachment>(entity =>
@@ -1138,11 +1136,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MemberEventStatus>(entity =>
@@ -1159,13 +1157,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MemberMeet>(entity =>
@@ -1178,23 +1176,23 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CheckinIp).IsRequired();
 
-                entity.Property(e => e.CheckinUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CheckinUtc).HasPrecision(6);
 
                 entity.Property(e => e.CheckoutBy).IsRequired();
 
                 entity.Property(e => e.CheckoutIp).IsRequired();
 
-                entity.Property(e => e.CheckoutUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CheckoutUtc).HasPrecision(6);
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.EnterUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.EnterUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MemberMeetAttachment>(entity =>
@@ -1205,11 +1203,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MemberMeetStatus>(entity =>
@@ -1222,13 +1220,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MemberOffice>(entity =>
@@ -1239,15 +1237,15 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.EndUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.EndUtc).HasPrecision(6);
 
-                entity.Property(e => e.StartUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.StartUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MemberQualification>(entity =>
@@ -1260,11 +1258,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MemberTransaction>(entity =>
@@ -1277,19 +1275,19 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Credit).HasPrecision(19, 4);
 
                 entity.Property(e => e.Debit).HasPrecision(19, 4);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Description).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.WhenUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.WhenUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<MemberVehicle>(entity =>
@@ -1300,11 +1298,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<Office>(entity =>
@@ -1317,13 +1315,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<Penalty>(entity =>
@@ -1334,11 +1332,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<PenaltyAttachment>(entity =>
@@ -1349,17 +1347,17 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.Property(e => e.UploadBy).IsRequired();
 
                 entity.Property(e => e.UploadIp).IsRequired();
 
-                entity.Property(e => e.UploadUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UploadUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<PenaltyReaction>(entity =>
@@ -1370,13 +1368,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Emoji).HasMaxLength(1);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<Permission>(entity =>
@@ -1395,11 +1393,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.CreatedUser)
                     .WithMany(p => p.PermissionCreatedUser)
@@ -1434,19 +1432,19 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.Id).UseIdentityAlwaysColumn();
 
-                entity.Property(e => e.ClosedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.ClosedUtc).HasPrecision(6);
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.OpenUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.OpenUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.Board)
                     .WithMany(p => p.Poll)
@@ -1487,11 +1485,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.Poll)
                     .WithMany(p => p.PollOption)
@@ -1528,21 +1526,21 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.LockedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.LockedUtc).HasPrecision(6);
 
-                entity.Property(e => e.PinnedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.PinnedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UnlockedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UnlockedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UnpinnedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UnpinnedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.Board)
                     .WithMany(p => p.Post)
@@ -1599,11 +1597,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.Id).UseIdentityAlwaysColumn();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -1624,11 +1622,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.CreatedUser)
                     .WithMany(p => p.RoleCreatedUser)
@@ -1667,11 +1665,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.CreatedUser)
                     .WithMany(p => p.RolePermissionSecurableCreatedUser)
@@ -1716,15 +1714,15 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.EndUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.EndUtc).HasPrecision(6);
 
-                entity.Property(e => e.StartUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.StartUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<SeasonAttachment>(entity =>
@@ -1735,11 +1733,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<SeasonEvent>(entity =>
@@ -1750,11 +1748,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<SeasonEventReward>(entity =>
@@ -1765,11 +1763,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<SeasonEventStatus>(entity =>
@@ -1782,13 +1780,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<SeasonStatus>(entity =>
@@ -1803,13 +1801,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<Securable>(entity =>
@@ -1830,11 +1828,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.CreatedUser)
                     .WithMany(p => p.SecurableCreatedUser)
@@ -1876,11 +1874,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.Code).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.CreatedUser)
                     .WithMany(p => p.SecurableCategoryCreatedUser)
@@ -1917,11 +1915,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.Board)
                     .WithMany(p => p.Survey)
@@ -1960,13 +1958,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<SurveyQuestion>(entity =>
@@ -1977,11 +1975,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<SurveyResponse>(entity =>
@@ -1994,11 +1992,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<SurveyStatus>(entity =>
@@ -2011,13 +2009,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<Tag>(entity =>
@@ -2028,11 +2026,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<TagStatus>(entity =>
@@ -2047,13 +2045,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<Thread>(entity =>
@@ -2068,9 +2066,9 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.CreatedUser)
                     .WithMany(p => p.ThreadCreatedUser)
@@ -2103,35 +2101,35 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasMaxLength(128);
 
-                entity.Property(e => e.EmailVerifiedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.EmailVerifiedUtc).HasPrecision(6);
 
-                entity.Property(e => e.FailedLoginUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.FailedLoginUtc).HasPrecision(6);
 
-                entity.Property(e => e.ForgotPasswordExpiryUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.ForgotPasswordExpiryUtc).HasPrecision(6);
 
                 entity.Property(e => e.ForgotPasswordKey).HasMaxLength(64);
 
                 entity.Property(e => e.ForgotPasswordUtc).HasMaxLength(64);
 
-                entity.Property(e => e.ForgotResetUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.ForgotResetUtc).HasPrecision(6);
 
-                entity.Property(e => e.LastLoginUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.LastLoginUtc).HasPrecision(6);
 
-                entity.Property(e => e.MfaEnabledUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.MfaEnabledUtc).HasPrecision(6);
 
                 entity.Property(e => e.Password)
                     .IsRequired()
                     .HasMaxLength(128);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.DeletedUser)
                     .WithMany(p => p.InverseDeletedUser)
@@ -2164,11 +2162,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
 
                 entity.HasOne(d => d.CreatedUser)
                     .WithMany(p => p.UserRoleCreatedUser)
@@ -2207,11 +2205,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<VehicleAttachment>(entity =>
@@ -2222,11 +2220,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<VehicleMake>(entity =>
@@ -2239,13 +2237,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<VehicleModel>(entity =>
@@ -2258,13 +2256,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<VehicleOwner>(entity =>
@@ -2275,11 +2273,11 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<VehicleReaction>(entity =>
@@ -2290,13 +2288,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Emoji).HasMaxLength(1);
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<VehicleStatus>(entity =>
@@ -2309,13 +2307,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             modelBuilder.Entity<VehicleVariant>(entity =>
@@ -2328,13 +2326,13 @@ namespace NoPony.CarClub.Api.EF
 
                 entity.Property(e => e.CreatedIp).IsRequired();
 
-                entity.Property(e => e.CreatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.CreatedUtc).HasPrecision(6);
 
-                entity.Property(e => e.DeletedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.DeletedUtc).HasPrecision(6);
 
                 entity.Property(e => e.Title).IsRequired();
 
-                entity.Property(e => e.UpdatedUtc).HasColumnType("timestamp(6) with time zone");
+                entity.Property(e => e.UpdatedUtc).HasPrecision(6);
             });
 
             OnModelCreatingPartial(modelBuilder);

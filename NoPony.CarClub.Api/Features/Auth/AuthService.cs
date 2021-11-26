@@ -32,7 +32,10 @@ namespace NoPony.CarClub.Api.Features.Auth
 
         public bool TryRegister(IPAddress clientIp, AuthRegisterRequestDto request)
         {
-            if (!_authRepository.TryRegister(clientIp, request.Email, PasswordHash.ArgonHashString(request.Password), out AuthRegisterModel record))
+            string h = PasswordHash.ArgonHashString(request.Password)
+                .Replace("\0", "");
+
+            if (!_authRepository.TryRegister(clientIp, request.Email, h, out AuthRegisterModel record))
                 return false;
 
             string bodyPlain = "Yes";

@@ -25,6 +25,8 @@ namespace NoPony.CarClub.Api.Features.Auth
             Guid loginKey = Guid.NewGuid();
             Guid verifyKey = Guid.NewGuid();
 
+            var u = _context.User.ToList();
+
             _context.User.Add(new User
             {
                 Key = loginKey/*.ToByteArray()*/,
@@ -32,7 +34,7 @@ namespace NoPony.CarClub.Api.Features.Auth
                 Password = password,
                 EmailVerifyKey = verifyKey/*.ToByteArray()*/,
 
-                CreatedIp = clientIp/*.GetAddressBytes()*/,
+                CreatedIp = clientIp,
                 CreatedUtc = DateTime.UtcNow,
             });
 
