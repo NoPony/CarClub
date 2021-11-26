@@ -10,18 +10,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { NavigationModule } from '../navigation/navigation.module';
-import { LogoComponent } from './logo/logo.component';
 import { HeaderComponent } from './header.component';
-import { MenuTopComponent } from './menu-top/menu-top.component';
-import { MenuSideComponent } from './menu-side/menu-side.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-
-    LogoComponent,
-    MenuTopComponent,
-    MenuSideComponent,
   ],
   imports: [
     CommonModule,

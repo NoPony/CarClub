@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { AuthService } from '../auth.service';
@@ -34,12 +35,11 @@ export class AuthLoginComponent implements OnInit {
   }
 
   public login(): void {
-    if (!this.emailControl.valid)
-    {
+    if (!this.emailControl.valid) {
       return;
     }
 
-    if (!this.passwordControl.valid){
+    if (!this.passwordControl.valid) {
       return;
     }
 

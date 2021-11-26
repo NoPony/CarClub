@@ -1,12 +1,16 @@
-<mat-sidenav-container autosize>
-  <mat-sidenav #sidenav role="navigation">
-    <app-sidenav (SidenavClose)="sidenav.close()"></app-sidenav>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <app-header (SidenavToggle)="sidenav.toggle()"></app-header>
-    <main>
-      <router-outlet></router-outlet>
-      <app-footer></app-footer>
-    </main>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="page">
+  <app-header (SidenavToggle)="sidenav.toggle()"></app-header>
+  <mat-sidenav-container autosize class="container">
+    <mat-sidenav #sidenav role="navigation">
+      <app-sidenav (SidenavClose)="sidenav.close()"></app-sidenav>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="page-content">
+        <main>
+          <router-outlet></router-outlet>
+          <app-footer></app-footer>
+        </main>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

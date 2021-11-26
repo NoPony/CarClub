@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
+
 import { UserModel } from '../common/model/user-model.interface';
 import { AuthRegisterRequestDto } from '../common/dto/auth-register-request-dto.interface';
 import { AuthLoginRequestDto } from '../common/dto/auth-login-request-dto.interface';

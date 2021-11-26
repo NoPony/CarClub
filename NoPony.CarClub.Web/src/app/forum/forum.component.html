@@ -1,4 +1,7 @@
 <div class="container">
-    <h2>Member Forum</h2>
+    <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
+        <div><h1>Member Forum</h1></div>
+        <div><button mat-button (click)="createBoard()">New</button></div>
+    </div>
     <app-board-list></app-board-list>
 </div>

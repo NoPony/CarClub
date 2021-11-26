@@ -1,19 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace NoPony.CarClub.Api.EF
 {
-    public class Context : CarClubContext
+    // Scaffold-DbContext -Connection 'Host=localhost;Database=car_club;Uid=car_club_deploy;Pwd=password;' Npgsql.EntityFrameworkCore.PostgreSQL -OutputDir EF -Context CarClubContext -NoPluralize -Force
+
+    public class Context : car_clubContext
     {
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    optionsBuilder.UseMySQL("server=localhost;database=CarClub;user=stumpy;password=password");
-        //}
+        private readonly ILoggerFactory _loggerFactory;
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
+        public Context(ILoggerFactory loggerFactory)
+        {
+            _loggerFactory = loggerFactory;
+        }
 
-        //    { }
-        //}
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLoggerFactory(_loggerFactory);
+            optionsBuilder.UseNpgsql("Host=localhost;Database=car_club;Uid=car_club_api;Pwd=password;");
+        }
     }
 }

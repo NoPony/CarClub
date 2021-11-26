@@ -1,4 +1,4 @@
-<mat-toolbar class="mat-elevation-z6" color="primary">
+<mat-toolbar color="primary">
   <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxHide.gt-sm>
       <button mat-icon-button (click)="toggleSidenav()">
           <mat-icon>menu</mat-icon>
@@ -8,7 +8,7 @@
       </a>
   </div>
 
-  <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxHide.sm>
+  <div fxFill fxLayout="row" fxLayoutAlign="space-between center" fxHide.lt-md>
       <a routerLink="/home">
           WRX Owners Club of Western Australia
       </a>

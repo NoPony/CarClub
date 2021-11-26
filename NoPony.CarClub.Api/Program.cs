@@ -22,9 +22,9 @@ namespace NoPony.CarClub.Api
                 .MinimumLevel.Information()
                 .WriteTo.Seq("http://localhost:5341")
 #endif
-                .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-                .MinimumLevel.Override("Microsoft.Extensions.Hosting.Internal.Host", LogEventLevel.Warning)
-                .MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Warning)
+                //.MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+                //.MinimumLevel.Override("Microsoft.Extensions.Hosting.Internal.Host", LogEventLevel.Warning)
+                //.MinimumLevel.Override("Microsoft.Hosting.Lifetime", LogEventLevel.Warning)
 
                 .CreateLogger();
 
@@ -59,10 +59,10 @@ namespace NoPony.CarClub.Api
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .UseSerilog()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                })
+                .UseSerilog();
     }
 }

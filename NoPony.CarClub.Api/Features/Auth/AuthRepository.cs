@@ -12,218 +12,179 @@ namespace NoPony.CarClub.Api.Features.Auth
     public class AuthRepository : IAuthRepository
     {
         private readonly ILogger _log;
+        private readonly EF.Context _context;
 
-        public AuthRepository(ILogger log)
+        public AuthRepository(ILogger log, EF.Context context)
         {
             _log = log ?? throw new ArgumentNullException(nameof(log));
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public bool TryRegister(IPAddress clientIp, string email, string password, out AuthRegisterModel result)
         {
-            using (CarClubContext context = new CarClubContext())
+            Guid loginKey = Guid.NewGuid();
+            Guid verifyKey = Guid.NewGuid();
+
+            _context.User.Add(new User
             {
-                Guid loginKey = Guid.NewGuid();
-                Guid verifyKey = Guid.NewGuid();
+                Key = loginKey/*.ToByteArray()*/,
+                Email = email,
+                Password = password,
+                EmailVerifyKey = verifyKey/*.ToByteArray()*/,
 
-                context.User.Add(new User
-                {
-                    Key = loginKey.ToByteArray(),
-                    Email = email,
-                    Password = password,
-                    EmailVerifyKey = verifyKey.ToByteArray(),
+                CreatedIp = clientIp/*.GetAddressBytes()*/,
+                CreatedUtc = DateTime.UtcNow,
+            });
 
-                    CreatedIp = clientIp.GetAddressBytes(),
-                    CreatedUtc = DateTime.UtcNow,
-                });
+            _context.SaveChanges();
 
-                context.SaveChanges();
+            result = new AuthRegisterModel
+            {
+                Email = email,
+                EmailVerifyKey = verifyKey,
+            };
 
-                result = new AuthRegisterModel
-                {
-                    Email = email,
-                    EmailVerifyKey = verifyKey,
-                };
-
-                return true;
-            }
+            return true;
         }
 
         public bool TryVerify(IPAddress clientIp, Guid? key)
         {
-            byte[] k = key?.ToByteArray();
-
-            if (k == null)
-                return false;
-
-            using (CarClubContext context = new CarClubContext())
+            using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
-                using (IDbContextTransaction transaction = context.Database.BeginTransaction())
+                User record = _context.User
+                    .Where(i => i.Deleted == false)
+                    .Where(i => i.EmailVerified == false)
+                    .Where(i => i.EmailVerifyKey == key)
+                    .SingleOrDefault();
+
+                if (record == null)
                 {
-                    User record = context.User
-                        .Where(i => i.Deleted == false)
-                        .Where(i => i.EmailVerified == false)
-                        .Where(i => i.EmailVerifyKey == k)
-                        .SingleOrDefault();
-
-                    if (record == null)
-                    {
-                        return false;
-                    }
-
-                    record.EmailVerified = true;
-                    record.EmailVerifiedIp = clientIp.GetAddressBytes();
-                    record.EmailVerifiedUtc = DateTime.UtcNow;
-                    record.EmailVerifyKey = null;
-
-                    record.Updated = true;
-                    record.UpdatedIp = clientIp.GetAddressBytes();
-                    record.UpdatedUtc = DateTime.UtcNow;
-                    record.UpdatedUserId = record.Id;
-
-                    context.SaveChanges();
-
-                    transaction.Commit();
-
-                    return true;
+                    return false;
                 }
+
+                record.EmailVerified = true;
+                record.EmailVerifiedIp = clientIp;
+                record.EmailVerifiedUtc = DateTime.UtcNow;
+                record.EmailVerifyKey = null;
+
+                record.Updated = true;
+                record.UpdatedIp = clientIp;
+                record.UpdatedUtc = DateTime.UtcNow;
+                record.UpdatedUserId = record.Id;
+
+                _context.SaveChanges();
+
+                transaction.Commit();
+
+                return true;
             }
         }
 
         public bool TryLogin(IPAddress clientIp, string email, out AuthLoginModel result)
         {
-            using (CarClubContext context = new CarClubContext())
-            {
-                result = context.User
-                    .Where(i => i.Deleted == false)
-                    .Where(i => i.EmailVerified == true)
-                    .Where(i => i.Email == email)
-                    .Where(i => i.FailedLoginCount < 5)
-                    .Select(i => new AuthLoginModel
-                    {
-                        Key = new Guid(i.Key),
-                        Password = i.Password,
-                    })
-                    .SingleOrDefault();
-
-                if (result == null)
+            result = _context.User
+                .Where(i => i.Deleted == false)
+                .Where(i => i.EmailVerified == true)
+                .Where(i => i.Email == email)
+                .Where(i => i.FailedLoginCount < 5)
+                .Select(i => new AuthLoginModel
                 {
-                    return false;
-                }
+                    Key = i.Key,
+                    Password = i.Password,
+                })
+                .SingleOrDefault();
 
-                return true;
+            if (result == null)
+            {
+                return false;
             }
+
+            return true;
         }
 
         public bool TryLoginSuccess(IPAddress clientIp, Guid? key)
         {
-            byte[] k = key?.ToByteArray();
-
-            if (k == null)
-                return false;
-
-            using (CarClubContext context = new CarClubContext())
+            using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
-                using (IDbContextTransaction transaction = context.Database.BeginTransaction())
+                User record = _context.User
+                    .Where(i => i.Deleted == false)
+                    .Where(i => i.EmailVerified == true)
+                    .Where(i => i.Key == key)
+                    .SingleOrDefault();
+
+                if (record == null)
                 {
-                    User record = context.User
-                        .Where(i => i.Deleted == false)
-                        .Where(i => i.EmailVerified == true)
-                        .Where(i => i.Key == k)
-                        .SingleOrDefault();
-
-                    if (record == null)
-                    {
-                        return false;
-                    }
-
-                    if (record.FailedLogin)
-                    {
-                        record.FailedLogin = false;
-                        record.FailedLoginCount = 0;
-                        record.FailedLoginIp = null;
-                        record.FailedLoginUtc = null;
-                    }
-
-                    record.LastLoginIp = clientIp.GetAddressBytes();
-                    record.LastLoginUtc = DateTime.UtcNow;
-
-                    record.Updated = true;
-                    record.UpdatedIp = clientIp.GetAddressBytes();
-                    record.UpdatedUtc = DateTime.UtcNow;
-                    record.UpdatedUserId = record.Id;
-
-                    context.SaveChanges();
-
-                    transaction.Commit();
+                    return false;
                 }
 
-                return true;
+                if (record.FailedLogin)
+                {
+                    record.FailedLogin = false;
+                    record.FailedLoginCount = 0;
+                    record.FailedLoginIp = null;
+                    record.FailedLoginUtc = null;
+                }
+
+                record.LastLoginIp = clientIp;
+                record.LastLoginUtc = DateTime.UtcNow;
+
+                record.Updated = true;
+                record.UpdatedIp = clientIp;
+                record.UpdatedUtc = DateTime.UtcNow;
+                record.UpdatedUserId = record.Id;
+
+                _context.SaveChanges();
+
+                transaction.Commit();
             }
+
+            return true;
         }
 
         public bool TryLoginFailure(IPAddress clientIp, Guid? key)
         {
-            byte[] k = key?.ToByteArray();
-
-            if (k == null)
-                return false;
-
-            using (CarClubContext context = new CarClubContext())
+            using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
-                using (IDbContextTransaction transaction = context.Database.BeginTransaction())
+                User record = _context.User
+                    .Where(i => i.Key == key)
+                    .SingleOrDefault();
+
+                if (record == null)
                 {
-                    User record = context.User
-                        .Where(i => i.Key == k)
-                        .SingleOrDefault();
-
-                    if (record == null)
-                    {
-                        return false;
-                    }
-
-                    record.FailedLogin = true;
-                    record.FailedLoginIp = clientIp.GetAddressBytes();
-                    record.FailedLoginUtc = DateTime.UtcNow;
-                    record.FailedLoginCount++;
-
-                    record.Updated = true;
-                    record.UpdatedIp = clientIp.GetAddressBytes();
-                    record.UpdatedUtc = DateTime.UtcNow;
-                    record.UpdatedUserId = record.Id;
-
-                    context.SaveChanges();
-                    transaction.Commit();
-
-                    return true;
+                    return false;
                 }
+
+                record.FailedLogin = true;
+                record.FailedLoginIp = clientIp;
+                record.FailedLoginUtc = DateTime.UtcNow;
+                record.FailedLoginCount++;
+
+                record.Updated = true;
+                record.UpdatedIp = clientIp;
+                record.UpdatedUtc = DateTime.UtcNow;
+                record.UpdatedUserId = record.Id;
+
+                _context.SaveChanges();
+                transaction.Commit();
+
+                return true;
             }
         }
 
         public bool TryGetPermissions(Guid? key, out IEnumerable<string> result)
         {
-            byte[] k = key?.ToByteArray();
+            result = _context.User
+                .Where(i => i.Key == key)
+                .Where(i => i.Deleted == false)
+                .Where(i => i.FailedLoginCount < 5)
+                .SelectMany(u => u.UserRoleUser/*.UserRole*/)
+                .Select(i => i.Role)
+                .SelectMany(rp => rp.RolePermissionSecurable)
+                .Select(i => i.Permission)
+                .Select(i => i.Code)
+                .ToList();
 
-            if (k == null)
-            {
-                result = null;
-                return false;
-            }
-
-            using (CarClubContext context = new CarClubContext())
-            {
-                result = context.User
-                    .Where(i => i.Key == k)
-                    .Where(i => i.Deleted == false)
-                    .Where(i => i.FailedLoginCount < 5)
-                    .SelectMany(u => u.UserroleUser/*.UserRole*/)
-                    .Select(i => i.Role)
-                    .SelectMany(rp => rp.Rolepermission)
-                    .Select(i => i.Permission)
-                    .Select(i => i.Code)
-                    .ToList();
-
-                return true;
-            }
+            return true;
         }
     }
 }

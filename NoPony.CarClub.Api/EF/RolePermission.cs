@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace NoPony.CarClub.Api.EF
 {
-    public partial class Rolepermission
+    public partial class RolePermission
     {
         public long Id { get; set; }
         public long RoleId { get; set; }

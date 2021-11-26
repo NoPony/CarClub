@@ -12,13 +12,11 @@ import { MatListModule } from '@angular/material/list';
 
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { TopnavComponent } from './topnav/topnav.component';
-import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     SidenavComponent,
     TopnavComponent,
-    MenuComponent
   ],
   imports: [
     CommonModule,

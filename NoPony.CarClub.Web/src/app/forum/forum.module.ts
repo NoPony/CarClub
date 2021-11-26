@@ -1,21 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MatCardModule } from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { BoardModule } from '../board/board.module';
 
 import { ForumComponent } from './forum.component';
-import { BoardListComponent } from './board-list/board-list.component';
-import { BoardListRowComponent } from './board-list-row/board-list-row.component';
 
 @NgModule({
   declarations: [
     ForumComponent,
-    BoardListComponent,
-    BoardListRowComponent
   ],
   imports: [
     CommonModule,
-    MatCardModule
+
+    FlexLayoutModule,
+    MatButtonModule,
+    MatDialogModule,
+
+    BoardModule,
+  ],
+  exports: [
+    ForumComponent,
   ]
 })
 export class ForumModule { }

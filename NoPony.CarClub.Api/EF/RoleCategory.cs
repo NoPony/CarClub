@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace NoPony.CarClub.Api.EF
 {
-    public partial class Rolecategory
+    public partial class RoleCategory
     {
         public int Id { get; set; }
         public byte[] CreatedIp { get; set; }

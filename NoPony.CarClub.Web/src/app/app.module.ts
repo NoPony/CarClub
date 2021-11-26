@@ -22,8 +22,11 @@ import { HeaderModule } from './header/header.module';
 import { FooterModule } from './footer/footer.module';
 import { HomeModule } from './home/home.module';
 import { AuthModule } from './auth/auth.module';
-import { EventsModule } from './events/events.module';
 import { ForumModule } from './forum/forum.module';
+import { BoardModule } from './board/board.module';
+import { PostModule } from './post/post.module';
+import { EventsModule } from './events/events.module';
+
 
 @NgModule({
   declarations: [
@@ -47,6 +50,8 @@ import { ForumModule } from './forum/forum.module';
     HomeModule,
     AuthModule,
     ForumModule,
+    BoardModule,
+    PostModule,
     EventsModule,
   ],
   providers: [

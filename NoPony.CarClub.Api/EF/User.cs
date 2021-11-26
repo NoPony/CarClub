@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 
 #nullable disable
 
@@ -11,24 +12,28 @@ namespace NoPony.CarClub.Api.EF
         {
             BoardCreatedUser = new HashSet<Board>();
             BoardDeletedUser = new HashSet<Board>();
+            BoardPinnedUser = new HashSet<Board>();
+            BoardRolePermissionCreatedUser = new HashSet<BoardRolePermission>();
+            BoardRolePermissionDeletedUser = new HashSet<BoardRolePermission>();
+            BoardRolePermissionUpdatedUser = new HashSet<BoardRolePermission>();
             BoardUpdatedUser = new HashSet<Board>();
-            BoardrolepermissionCreatedUser = new HashSet<Boardrolepermission>();
-            BoardrolepermissionDeletedUser = new HashSet<Boardrolepermission>();
-            BoardrolepermissionUpdatedUser = new HashSet<Boardrolepermission>();
+            CommentAttachmentCreatedUser = new HashSet<CommentAttachment>();
+            CommentAttachmentDeletedUser = new HashSet<CommentAttachment>();
+            CommentAttachmentUpdatedUser = new HashSet<CommentAttachment>();
             CommentCreatedUser = new HashSet<Comment>();
             CommentDeletedUser = new HashSet<Comment>();
+            CommentReactionCreatedUser = new HashSet<CommentReaction>();
+            CommentReactionDeletedUser = new HashSet<CommentReaction>();
+            CommentReactionUpdatedUser = new HashSet<CommentReaction>();
             CommentUpdatedUser = new HashSet<Comment>();
-            CommentattachmentCreatedUser = new HashSet<Commentattachment>();
-            CommentattachmentDeletedUser = new HashSet<Commentattachment>();
-            CommentattachmentUpdatedUser = new HashSet<Commentattachment>();
-            CommentreactionCreatedUser = new HashSet<Commentreaction>();
-            CommentreactionDeletedUser = new HashSet<Commentreaction>();
-            CommentreactionUpdatedUser = new HashSet<Commentreaction>();
             InverseDeletedUser = new HashSet<User>();
             InverseUpdatedUser = new HashSet<User>();
             PermissionCreatedUser = new HashSet<Permission>();
             PermissionDeletedUser = new HashSet<Permission>();
             PermissionUpdatedUser = new HashSet<Permission>();
+            PollCreatedUser = new HashSet<Poll>();
+            PollDeletedUser = new HashSet<Poll>();
+            PollUpdatedUser = new HashSet<Poll>();
             PostCreatedUser = new HashSet<Post>();
             PostDeletedUser = new HashSet<Post>();
             PostLockedUser = new HashSet<Post>();
@@ -38,78 +43,89 @@ namespace NoPony.CarClub.Api.EF
             PostUpdatedUser = new HashSet<Post>();
             RoleCreatedUser = new HashSet<Role>();
             RoleDeletedUser = new HashSet<Role>();
+            RolePermissionSecurableCreatedUser = new HashSet<RolePermissionSecurable>();
+            RolePermissionSecurableDeletedUser = new HashSet<RolePermissionSecurable>();
+            RolePermissionSecurableUpdatedUser = new HashSet<RolePermissionSecurable>();
             RoleUpdatedUser = new HashSet<Role>();
-            RolepermissionCreatedUser = new HashSet<Rolepermission>();
-            RolepermissionDeletedUser = new HashSet<Rolepermission>();
-            RolepermissionUpdatedUser = new HashSet<Rolepermission>();
+            SecurableCategoryCreatedUser = new HashSet<SecurableCategory>();
+            SecurableCategoryDeletedUser = new HashSet<SecurableCategory>();
+            SecurableCategoryUpdatedUser = new HashSet<SecurableCategory>();
+            SecurableCreatedUser = new HashSet<Securable>();
+            SecurableDeletedUser = new HashSet<Securable>();
+            SecurableUpdatedUser = new HashSet<Securable>();
             SurveyCreatedUser = new HashSet<Survey>();
             SurveyDeletedUser = new HashSet<Survey>();
             SurveyUpdatedUser = new HashSet<Survey>();
-            UserroleCreatedUser = new HashSet<Userrole>();
-            UserroleDeletedUser = new HashSet<Userrole>();
-            UserroleUpdatedUser = new HashSet<Userrole>();
-            UserroleUser = new HashSet<Userrole>();
+            ThreadCreatedUser = new HashSet<Thread>();
+            ThreadDeletedUser = new HashSet<Thread>();
+            UserRoleCreatedUser = new HashSet<UserRole>();
+            UserRoleDeletedUser = new HashSet<UserRole>();
+            UserRoleUpdatedUser = new HashSet<UserRole>();
+            UserRoleUser = new HashSet<UserRole>();
         }
 
         public long Id { get; set; }
-        public byte[] Key { get; set; }
+        public Guid Key { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public bool MfaEnabled { get; set; }
-        public byte[] MfaEnabledIp { get; set; }
+        public IPAddress MfaEnabledIp { get; set; }
         public DateTime? MfaEnabledUtc { get; set; }
-        public string MfaKey { get; set; }
+        public Guid? MfaKey { get; set; }
         public bool EmailVerified { get; set; }
-        public byte[] EmailVerifiedIp { get; set; }
+        public IPAddress EmailVerifiedIp { get; set; }
         public DateTime? EmailVerifiedUtc { get; set; }
-        public byte[] EmailVerifyKey { get; set; }
+        public Guid? EmailVerifyKey { get; set; }
         public bool ForgotPassword { get; set; }
-        public byte[] ForgotPasswordIp { get; set; }
+        public IPAddress ForgotPasswordIp { get; set; }
         public string ForgotPasswordUtc { get; set; }
         public string ForgotPasswordKey { get; set; }
         public DateTime? ForgotPasswordExpiryUtc { get; set; }
-        public byte[] ForgotResetIp { get; set; }
+        public IPAddress ForgotResetIp { get; set; }
         public DateTime? ForgotResetUtc { get; set; }
-        public byte[] LastLoginIp { get; set; }
+        public IPAddress LastLoginIp { get; set; }
         public DateTime? LastLoginUtc { get; set; }
         public bool FailedLogin { get; set; }
-        public byte[] FailedLoginIp { get; set; }
+        public IPAddress FailedLoginIp { get; set; }
         public DateTime? FailedLoginUtc { get; set; }
-        public byte FailedLoginCount { get; set; }
-        public byte[] CreatedIp { get; set; }
+        public short FailedLoginCount { get; set; }
+        public IPAddress CreatedIp { get; set; }
         public DateTime CreatedUtc { get; set; }
         public bool Updated { get; set; }
-        public byte[] UpdatedIp { get; set; }
+        public IPAddress UpdatedIp { get; set; }
         public DateTime? UpdatedUtc { get; set; }
         public long? UpdatedUserId { get; set; }
         public bool Deleted { get; set; }
-        public byte[] DeletedIp { get; set; }
+        public IPAddress DeletedIp { get; set; }
         public DateTime? DeletedUtc { get; set; }
         public long? DeletedUserId { get; set; }
-        public long CreatedUserId { get; set; }
 
         public virtual User DeletedUser { get; set; }
         public virtual User UpdatedUser { get; set; }
         public virtual ICollection<Board> BoardCreatedUser { get; set; }
         public virtual ICollection<Board> BoardDeletedUser { get; set; }
+        public virtual ICollection<Board> BoardPinnedUser { get; set; }
+        public virtual ICollection<BoardRolePermission> BoardRolePermissionCreatedUser { get; set; }
+        public virtual ICollection<BoardRolePermission> BoardRolePermissionDeletedUser { get; set; }
+        public virtual ICollection<BoardRolePermission> BoardRolePermissionUpdatedUser { get; set; }
         public virtual ICollection<Board> BoardUpdatedUser { get; set; }
-        public virtual ICollection<Boardrolepermission> BoardrolepermissionCreatedUser { get; set; }
-        public virtual ICollection<Boardrolepermission> BoardrolepermissionDeletedUser { get; set; }
-        public virtual ICollection<Boardrolepermission> BoardrolepermissionUpdatedUser { get; set; }
+        public virtual ICollection<CommentAttachment> CommentAttachmentCreatedUser { get; set; }
+        public virtual ICollection<CommentAttachment> CommentAttachmentDeletedUser { get; set; }
+        public virtual ICollection<CommentAttachment> CommentAttachmentUpdatedUser { get; set; }
         public virtual ICollection<Comment> CommentCreatedUser { get; set; }
         public virtual ICollection<Comment> CommentDeletedUser { get; set; }
+        public virtual ICollection<CommentReaction> CommentReactionCreatedUser { get; set; }
+        public virtual ICollection<CommentReaction> CommentReactionDeletedUser { get; set; }
+        public virtual ICollection<CommentReaction> CommentReactionUpdatedUser { get; set; }
         public virtual ICollection<Comment> CommentUpdatedUser { get; set; }
-        public virtual ICollection<Commentattachment> CommentattachmentCreatedUser { get; set; }
-        public virtual ICollection<Commentattachment> CommentattachmentDeletedUser { get; set; }
-        public virtual ICollection<Commentattachment> CommentattachmentUpdatedUser { get; set; }
-        public virtual ICollection<Commentreaction> CommentreactionCreatedUser { get; set; }
-        public virtual ICollection<Commentreaction> CommentreactionDeletedUser { get; set; }
-        public virtual ICollection<Commentreaction> CommentreactionUpdatedUser { get; set; }
         public virtual ICollection<User> InverseDeletedUser { get; set; }
         public virtual ICollection<User> InverseUpdatedUser { get; set; }
         public virtual ICollection<Permission> PermissionCreatedUser { get; set; }
         public virtual ICollection<Permission> PermissionDeletedUser { get; set; }
         public virtual ICollection<Permission> PermissionUpdatedUser { get; set; }
+        public virtual ICollection<Poll> PollCreatedUser { get; set; }
+        public virtual ICollection<Poll> PollDeletedUser { get; set; }
+        public virtual ICollection<Poll> PollUpdatedUser { get; set; }
         public virtual ICollection<Post> PostCreatedUser { get; set; }
         public virtual ICollection<Post> PostDeletedUser { get; set; }
         public virtual ICollection<Post> PostLockedUser { get; set; }
@@ -119,16 +135,24 @@ namespace NoPony.CarClub.Api.EF
         public virtual ICollection<Post> PostUpdatedUser { get; set; }
         public virtual ICollection<Role> RoleCreatedUser { get; set; }
         public virtual ICollection<Role> RoleDeletedUser { get; set; }
+        public virtual ICollection<RolePermissionSecurable> RolePermissionSecurableCreatedUser { get; set; }
+        public virtual ICollection<RolePermissionSecurable> RolePermissionSecurableDeletedUser { get; set; }
+        public virtual ICollection<RolePermissionSecurable> RolePermissionSecurableUpdatedUser { get; set; }
         public virtual ICollection<Role> RoleUpdatedUser { get; set; }
-        public virtual ICollection<Rolepermission> RolepermissionCreatedUser { get; set; }
-        public virtual ICollection<Rolepermission> RolepermissionDeletedUser { get; set; }
-        public virtual ICollection<Rolepermission> RolepermissionUpdatedUser { get; set; }
+        public virtual ICollection<SecurableCategory> SecurableCategoryCreatedUser { get; set; }
+        public virtual ICollection<SecurableCategory> SecurableCategoryDeletedUser { get; set; }
+        public virtual ICollection<SecurableCategory> SecurableCategoryUpdatedUser { get; set; }
+        public virtual ICollection<Securable> SecurableCreatedUser { get; set; }
+        public virtual ICollection<Securable> SecurableDeletedUser { get; set; }
+        public virtual ICollection<Securable> SecurableUpdatedUser { get; set; }
         public virtual ICollection<Survey> SurveyCreatedUser { get; set; }
         public virtual ICollection<Survey> SurveyDeletedUser { get; set; }
         public virtual ICollection<Survey> SurveyUpdatedUser { get; set; }
-        public virtual ICollection<Userrole> UserroleCreatedUser { get; set; }
-        public virtual ICollection<Userrole> UserroleDeletedUser { get; set; }
-        public virtual ICollection<Userrole> UserroleUpdatedUser { get; set; }
-        public virtual ICollection<Userrole> UserroleUser { get; set; }
+        public virtual ICollection<Thread> ThreadCreatedUser { get; set; }
+        public virtual ICollection<Thread> ThreadDeletedUser { get; set; }
+        public virtual ICollection<UserRole> UserRoleCreatedUser { get; set; }
+        public virtual ICollection<UserRole> UserRoleDeletedUser { get; set; }
+        public virtual ICollection<UserRole> UserRoleUpdatedUser { get; set; }
+        public virtual ICollection<UserRole> UserRoleUser { get; set; }
     }
 }

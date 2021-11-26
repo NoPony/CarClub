@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NoPony.CarClub.Api.Features.Auth;
-using NoPony.CarClub.Api.Features.Forum;
+using NoPony.CarClub.Api.Features.Board;
+using NoPony.CarClub.Api.Features.Post;
 using NoPony.CarClub.Api.Templates;
 using Serilog;
 using System;
@@ -28,6 +30,8 @@ namespace NoPony.CarClub.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLogging();
+
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
@@ -77,17 +81,28 @@ namespace NoPony.CarClub.Api
         {
             builder.RegisterLogger();
 
-            builder.RegisterType<RazorTemplateEngine>().As<ITemplateEngine>();
+            builder.RegisterType<EF.Context>().InstancePerLifetimeScope();
+
+
+            builder.RegisterType<RazorTemplateEngine>().As<ITemplateEngine>().SingleInstance();
 
             builder.RegisterType<AuthService>().As<IAuthService>();
             builder.RegisterType<AuthRepository>().As<IAuthRepository>();
 
-            builder.RegisterType<ForumService>().As<IForumService>();
-            builder.RegisterType<ForumRepository>().As<IForumRepository>();
+            builder.RegisterType<BoardService>().As<IBoardService>();
+            builder.RegisterType<BoardRepository>().As<IBoardRepository>();
+
+            builder.RegisterType<PostService>().As<IPostService>();
+            builder.RegisterType<PostRepository>().As<IPostRepository>();
+
+            //builder.RegisterType<BoardService>().As<IBoardService>();
+            //builder.RegisterType<BoardRepository>().As<IBoardRepository>();
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory log)
         {
+            log.AddSerilog();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -98,6 +113,7 @@ namespace NoPony.CarClub.Api
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseCors();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSerilogRequestLogging();
 

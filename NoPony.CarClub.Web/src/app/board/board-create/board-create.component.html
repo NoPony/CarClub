@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Create new board</h2>
+
+<mat-dialog-content>
+  <div *ngIf="idle">
+    <p>Enter a Title and Description for the new Board.</p>
+    <mat-form-field appearance="fill" class="text">
+      <mat-label>Title</mat-label>
+      <input matInput [formControl]="titleControl">
+      <mat-error *ngIf="titleControl.hasError('required')">
+        A Title is required.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="text">
+      <mat-label>Description</mat-label>
+      <input matInput [formControl]="descriptionControl">
+      <mat-error *ngIf="descriptionControl.hasError('required')">
+        A Description is required.
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="busy">
+    <p>Creating board</p>
+    <div class="container">
+      <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <span class="spacer"></span>
+  <button mat-raised-button color="primary" (click)="create()">Create</button>
+</mat-dialog-actions>
