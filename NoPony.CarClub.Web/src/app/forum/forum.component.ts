@@ -6,14 +6,14 @@ import { BoardCreateComponent } from '../board/board-create/board-create.compone
 @Component({
   selector: 'app-forum',
   templateUrl: './forum.component.html',
-  styleUrls: ['./forum.component.scss']
+  styleUrls: ['./forum.component.scss'],
 })
-export class ForumComponent implements OnInit {
-  constructor(private dialog: MatDialog) {
-  }
+// export class ForumComponent implements OnInit {
+export class ForumComponent {
+  constructor(private dialog: MatDialog) {}
 
-  ngOnInit(): void {
-  }
+  // ngOnInit(): void {
+  // }
 
   public createBoard(): void {
     const dialogRef = this.dialog.open(BoardCreateComponent, {

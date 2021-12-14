@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NoPony.CarClub.Api.Exceptions;
 using NoPony.CarClub.Api.Features.Post.Dto;
+using NoPony.CarClub.Api.Utility;
 using NoPony.CarClub.Api.Utility.PagedList;
 using Serilog;
 using System;
@@ -12,16 +14,15 @@ namespace NoPony.CarClub.Api.Features.Post
 {
     [ApiController]
     [Route("[controller]")]
-    public class PostController : ControllerBase
+    public class PostController : CustomControllerBase
     {
         private readonly ILogger _log;
         private readonly IPostService _service;
 
-        public PostController(ILogger log, IPostService userService)
+        public PostController(ILogger log, IPostService postService)
         {
             _log = log ?? throw new ArgumentNullException(nameof(log));
-
-            _service = userService ?? throw new ArgumentNullException(nameof(userService));
+            _service = postService ?? throw new ArgumentNullException(nameof(postService));
         }
 
         [HttpPost]
@@ -29,15 +30,14 @@ namespace NoPony.CarClub.Api.Features.Post
         {
             try
             {
-                if (!Guid.TryParse(User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub).Value, out Guid clientKey))
-                    return StatusCode(StatusCodes.Status400BadRequest);
+                await _service.PostCreate(GetUserKey(), GetUserIp(), request);
 
-                var response = await _service.PostCreate(clientKey, HttpContext.Connection.RemoteIpAddress, request);
+                return StatusCode(StatusCodes.Status200OK);
+            }
 
-                if (response == null)
-                    return StatusCode(StatusCodes.Status400BadRequest);
-
-                return StatusCode(StatusCodes.Status200OK, response);
+            catch (InvalidRequestException)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest);
             }
 
             catch (Exception ex)
@@ -54,15 +54,12 @@ namespace NoPony.CarClub.Api.Features.Post
         {
             try
             {
-                if (!Guid.TryParse(User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub).Value, out Guid clientKey))
-                    return StatusCode(StatusCodes.Status400BadRequest);
+                return StatusCode(StatusCodes.Status200OK, await _service.PostRead(GetUserKey(), key));
+            }
 
-                var response = await _service.PostRead(clientKey, key);
-
-                if (response == null)
-                    return StatusCode(StatusCodes.Status400BadRequest);
-
-                return StatusCode(StatusCodes.Status200OK, response);
+            catch (InvalidRequestException)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest);
             }
 
             catch (Exception ex)
@@ -79,15 +76,14 @@ namespace NoPony.CarClub.Api.Features.Post
         {
             try
             {
-                if (!Guid.TryParse(User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub).Value, out Guid clientKey))
-                    return StatusCode(StatusCodes.Status400BadRequest);
+                await _service.PostUpdate(GetUserKey(), GetUserIp(), request);
 
-                var response = await _service.PostUpdate(clientKey, HttpContext.Connection.RemoteIpAddress, request);
+                return StatusCode(StatusCodes.Status200OK);
+            }
 
-                if (response == null)
-                    return StatusCode(StatusCodes.Status400BadRequest);
-
-                return StatusCode(StatusCodes.Status200OK, response);
+            catch (InvalidRequestException)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest);
             }
 
             catch (Exception ex)
@@ -104,12 +100,14 @@ namespace NoPony.CarClub.Api.Features.Post
         {
             try
             {
-                if (!Guid.TryParse(User.Claims.FirstOrDefault(c => c.Type == JwtRegisteredClaimNames.Sub).Value, out Guid clientKey))
-                    return StatusCode(StatusCodes.Status400BadRequest);
-
-                await _service.PostDelete(clientKey, HttpContext.Connection.RemoteIpAddress, key);
+                await _service.PostDelete(GetUserKey(), GetUserIp(), key);
 
                 return StatusCode(StatusCodes.Status200OK);
+            }
+
+            catch (InvalidRequestException)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest);
             }
 
             catch (Exception ex)
@@ -126,15 +124,12 @@ namespace NoPony.CarClub.Api.Features.Post
         {
             try
             {
-                if (!Guid.TryParse(User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value, out Guid clientKey))
-                    return StatusCode(StatusCodes.Status400BadRequest);
+                return base.StatusCode(StatusCodes.Status200OK, await _service.PostSearch(GetUserKey(), request));
+            }
 
-                PageResponseDto<PostSearchDto> response = await _service.PostSearch(clientKey, request);
-
-                if (response == null)
-                    return StatusCode(StatusCodes.Status400BadRequest);
-
-                return StatusCode(StatusCodes.Status200OK, response);
+            catch (InvalidRequestException)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest);
             }
 
             catch (Exception ex)

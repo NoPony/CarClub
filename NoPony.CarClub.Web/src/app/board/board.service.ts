@@ -11,35 +11,39 @@ import { BoardSearchDto } from './dto/board-search-dto.interface';
 import { BoardReadDto } from './dto/board-read-dto.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BoardService {
   private baseUrl: string = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   public create(request: BoardCreateDto): Observable<object> {
-    return this.http
-      .post(`${this.baseUrl}Board`, request);
+    return this.http.post(`${this.baseUrl}Board`, request);
   }
 
   public read(request: string): Observable<BoardReadDto> {
-    return this.http
-      .get<BoardReadDto>(`${this.baseUrl}Board/${request}`)
+    return this.http.get<BoardReadDto>(`${this.baseUrl}Board/${request}`);
   }
-  
-  public search(request: PageRequestDto): Observable<PageResponseDto<BoardSearchDto>> {
-    const params = new HttpParams()
+
+  public search(
+    request: PageRequestDto
+  ): Observable<PageResponseDto<BoardSearchDto>> {
+    const requestParams = new HttpParams()
       .append('page', request.page)
       .append('size', request.size);
 
-    if (!!request.query)
-      params.append('query', request.query)
+    if (!!request.query) {
+      requestParams.append('query', request.query);
+    }
 
-    if (!!request.filter)
-      params.append('filter', request.filter)
+    if (!!request.filter) {
+      requestParams.append('filter', request.filter);
+    }
 
-    return this.http
-      .get<PageResponseDto<BoardSearchDto>>(`${this.baseUrl}Board/Search`, { params: params });
+    return this.http.get<PageResponseDto<BoardSearchDto>>(
+      `${this.baseUrl}Board/Search`,
+      { params: requestParams }
+    );
   }
 }

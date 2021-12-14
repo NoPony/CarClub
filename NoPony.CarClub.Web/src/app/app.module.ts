@@ -37,7 +37,7 @@ import { EventsModule } from './events/events.module';
     BrowserAnimationsModule,
     FlexLayoutModule,
     HttpClientModule,
-    
+
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,

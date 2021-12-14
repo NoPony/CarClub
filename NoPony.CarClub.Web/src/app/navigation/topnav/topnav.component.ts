@@ -8,19 +8,23 @@ import { AuthService } from 'src/app/auth/auth.service';
 @Component({
   selector: 'app-topnav',
   templateUrl: './topnav.component.html',
-  styleUrls: ['./topnav.component.scss']
+  styleUrls: ['./topnav.component.scss'],
 })
-export class TopnavComponent implements OnInit {
+// export class TopnavComponent implements OnInit {
+export class TopnavComponent {
   public menuList: NavigationModel[] = [];
-  private currentUser: UserModel | null = null;
-  
-  constructor(private navService: NavigationService, private authService: AuthService) {
-    this.navService.Menus.subscribe(x => this.menuList = x);
-    this.authService.currentUser.subscribe(x => this.currentUser = x);
+  public authenticated = false;
+
+  constructor(
+    private navService: NavigationService,
+    private authService: AuthService
+  ) {
+    this.navService.Menus.subscribe((x) => (this.menuList = x));
+    this.authService.Authenticated.subscribe((x) => (this.authenticated = x));
   }
 
-  ngOnInit(): void {
-  }
+  // ngOnInit(): void {
+  // }
 
   public handleClick(m: NavigationModel): void {
     if (!!m.Click) {

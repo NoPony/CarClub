@@ -1,11 +1,10 @@
 export interface NavigationModel {
-    Icon?: string;
-    Label: string;
-    
-    Show(): boolean;
+  Icon?: string;
+  Label: string;
+  RouterLink?: string;
 
-    RouterLink?: string;
-    Click?(): void;
-    
-    // Children?: MenuModel[];
+  Show(): boolean;
+  Click?(): void;
+
+  // Children?: MenuModel[];
 }

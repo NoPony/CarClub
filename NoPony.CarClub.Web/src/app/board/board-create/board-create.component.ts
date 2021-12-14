@@ -9,12 +9,11 @@ import { BoardCreateDto } from '../dto/board-create-dto.interface';
 @Component({
   selector: 'app-board-create',
   templateUrl: './board-create.component.html',
-  styleUrls: ['./board-create.component.scss']
+  styleUrls: ['./board-create.component.scss'],
 })
-export class BoardCreateComponent implements OnInit {
-  public titleControl: FormControl = new FormControl('', [
-    Validators.required,
-  ]);
+// export class BoardCreateComponent implements OnInit {
+export class BoardCreateComponent {
+  public titleControl: FormControl = new FormControl('', [Validators.required]);
 
   public descriptionControl: FormControl = new FormControl('', [
     Validators.required,
@@ -23,10 +22,13 @@ export class BoardCreateComponent implements OnInit {
   public idle = true;
   public busy = false;
 
-  constructor(public dialogRef: MatDialogRef<BoardCreateComponent>, private boardService: BoardService) { }
+  constructor(
+    public dialogRef: MatDialogRef<BoardCreateComponent>,
+    private boardService: BoardService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  // ngOnInit(): void {
+  // }
 
   public create(): void {
     this.idle = false;
@@ -37,14 +39,13 @@ export class BoardCreateComponent implements OnInit {
       note: this.descriptionControl.value,
     };
 
-    this.boardService.create(request)
-      .subscribe(
-        () => {
-          this.dialogRef.close();
-        },
-        (e) => {
-          console.log(`Error ${e}`);
-        }
-      );
+    this.boardService.create(request).subscribe(
+      () => {
+        this.dialogRef.close();
+      },
+      (e) => {
+        console.log(`Error ${e}`);
+      }
+    );
   }
 }

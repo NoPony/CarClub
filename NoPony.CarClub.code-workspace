@@ -1,0 +1,27 @@
+{
+	"folders": [
+		{
+			"path": "NoPony.CarClub.Api"
+		},
+		{
+			"path": "NoPony.CarClub.Test"
+		},
+		{
+			"path": "NoPony.CarClub.Web"
+		}
+	],
+	"settings": {
+		"sqltools.connections": [
+			{
+				"previewLimit": 50,
+				"server": "localhost",
+				"port": 5432,
+				"driver": "PostgreSQL",
+				"name": "Localhost",
+				"database": "car_club",
+				"username": "postgres",
+				"password": "postgres"
+			}
+		]
+	}
+}

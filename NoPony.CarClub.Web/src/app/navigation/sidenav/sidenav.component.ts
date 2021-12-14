@@ -8,21 +8,25 @@ import { AuthService } from 'src/app/auth/auth.service';
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.scss']
+  styleUrls: ['./sidenav.component.scss'],
 })
-export class SidenavComponent implements OnInit {
+// export class SidenavComponent implements OnInit {
+export class SidenavComponent {
   @Output() SidenavClose = new EventEmitter();
 
   public menuList: NavigationModel[] = [];
-  private currentUser: UserModel | null = null;
+  private authenticated = false;
 
-  constructor(private navService: NavigationService, private authService: AuthService) {
-    this.navService.Menus.subscribe(x => this.menuList = x);
-    this.authService.currentUser.subscribe(x => this.currentUser = x);
+  constructor(
+    private navService: NavigationService,
+    private authService: AuthService
+  ) {
+    this.navService.Menus.subscribe((x) => (this.menuList = x));
+    this.authService.Authenticated.subscribe((x) => (this.authenticated = x));
   }
 
-  ngOnInit(): void {
-  }
+  // ngOnInit(): void {
+  // }
 
   public handleClick(m: NavigationModel): void {
     this.closeSidenav();

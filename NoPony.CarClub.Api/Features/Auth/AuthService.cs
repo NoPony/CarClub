@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using NoPony.CarClub.Api.Exceptions;
 using NoPony.CarClub.Api.Features.Auth.Dto;
+using NoPony.CarClub.Api.Features.Auth.Model;
 using NoPony.CarClub.Api.Features.Auth.Record;
 using NoPony.CarClub.Api.Templates;
 using NoPony.CarClub.Api.Templates.RegisterEmail;
@@ -14,6 +16,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace NoPony.CarClub.Api.Features.Auth
 {
@@ -30,20 +33,21 @@ namespace NoPony.CarClub.Api.Features.Auth
             _templateEngine = templateEngine ?? throw new ArgumentNullException(nameof(templateEngine));
         }
 
-        public bool TryRegister(IPAddress clientIp, AuthRegisterRequestDto request)
+        public async Task Register(IPAddress clientIp, AuthRegisterRequestDto request)
         {
-            string h = PasswordHash.ArgonHashString(request.Password)
+            // Need to fix trailing null ('\0') chars that LibSodium puts on the hash
+            // While MySql and SQL Server handle these trailing nulls with no issue PostgreSql explodes.
+            string passwordHash = PasswordHash.ArgonHashString(request.Password)
                 .Replace("\0", "");
 
-            if (!_authRepository.TryRegister(clientIp, request.Email, h, out AuthRegisterModel record))
-                return false;
+            AuthRegisterResponseModel responseModel = await _authRepository.Register(clientIp, request.Email, passwordHash);
 
             string bodyPlain = "Yes";
 
             string bodyHtml = _templateEngine.Process("RegisterEmail",
                 new RegisterEmailModel
                 {
-                    VerifyUrl = $"http://localhost:4200/verify/{record.EmailVerifyKey}"
+                    VerifyUrl = $"http://localhost:4200/verify/{responseModel.EmailVerifyKey}"
                 });
 
             Response sendgridResponse = new SendGridClient(_config.GetValue<string>("Email:SendgridKey"))
@@ -56,63 +60,85 @@ namespace NoPony.CarClub.Api.Features.Auth
                 .Result;
 
             if (!sendgridResponse.IsSuccessStatusCode)
-            {
                 throw new Exception("Failed to send email");
-            }
-
-            return true;
         }
 
-        public bool TryVerify(IPAddress clientIp, Guid? key)
+        public async Task Verify(IPAddress clientIp, Guid? key)
         {
-            if (!_authRepository.TryVerify(clientIp, key))
-                return false;
-
-            return true;
+            await _authRepository.Verify(clientIp, key);
         }
 
-        public bool TryLogin(IPAddress clientIp, AuthLoginRequestDto request, out AuthLoginResponseDto response)
+        public async Task<AuthLoginResponseModel> Login(IPAddress clientIp, AuthLoginRequestDto request)
         {
-            if (!_authRepository.TryLogin(clientIp, request.Email, out AuthLoginModel record))
-            {
-                response = null;
-
-                return false;
-            }
+            AuthUserModel record = await _authRepository.Login(clientIp, request.Email);
 
             if (!PasswordHash.ArgonHashStringVerify(record.Password, request.Password))
             {
-                _authRepository.TryLoginFailure(clientIp, record.Key);
+                await _authRepository.LoginFailure(clientIp, record.Key);
 
-                response = null;
-
-                return false;
+                throw new LoginFailedException();
             }
 
-            _authRepository.TryLoginSuccess(clientIp, record.Key);
-            _authRepository.TryGetPermissions(record.Key, out IEnumerable<string> permissions);
+            await _authRepository.LoginSuccess(clientIp, record.Key);
+            //IEnumerable<string> permissions = await _authRepository.GetPermissions(record.Key);
 
-            response = new AuthLoginResponseDto
+            return new AuthLoginResponseModel
             {
-                Token = token(record.Key.ToString(), TimeSpan.FromDays(2)),
-                Permissions = permissions,
+                RefreshToken = buildRefreshToken(record.Key.ToString()),
+                AccessToken = buildAccessToken(record.Key.ToString()),
+                //Permissions = permissions,
             };
-
-            return true;
         }
 
-        private string token(string key, TimeSpan duration)
+        public async Task<AuthLoginResponseModel> Refresh(Guid clientKey, IPAddress clientIp)
+        {
+            return await Task.Run(() => new AuthLoginResponseModel
+            {
+                RefreshToken = buildRefreshToken(clientKey.ToString()),
+                AccessToken = buildAccessToken(clientKey.ToString()),
+                //Permissions = permissions,
+            });
+        }
+
+        private string buildRefreshToken(string userKey)
         {
             SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetValue<string>("Jwt:Key")));
 
             SigningCredentials credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
+            string issuer = _config.GetValue<string>("Jwt:Issuer");
+            string audience = _config.GetValue<string>("Jwt:Audience");
+            DateTime notBefore = DateTime.UtcNow;
+            DateTime expires = notBefore.Add(TimeSpan.FromDays(14));
+
             Claim[] claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, key),
+                new Claim(JwtRegisteredClaimNames.Sub, userKey),
             };
 
-            JwtSecurityToken token = new JwtSecurityToken(_config.GetValue<string>("Jwt:Issuer"), _config.GetValue<string>("Jwt:Audience"), claims, DateTime.UtcNow, DateTime.UtcNow.Add(duration), credentials);
+            JwtSecurityToken token = new JwtSecurityToken(issuer, audience, claims, notBefore, expires, credentials);
+
+            return new JwtSecurityTokenHandler()
+                .WriteToken(token);
+        }
+
+        private string buildAccessToken(string userKey)
+        {
+            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetValue<string>("Jwt:Key")));
+
+            SigningCredentials credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            string issuer = _config.GetValue<string>("Jwt:Issuer");
+            string audience = _config.GetValue<string>("Jwt:Audience");
+            DateTime notBefore = DateTime.UtcNow;
+            DateTime expires = notBefore.Add(TimeSpan.FromMinutes(2));
+
+            Claim[] claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, userKey),
+            };
+
+            JwtSecurityToken token = new JwtSecurityToken(issuer, audience, claims, notBefore, expires, credentials);
 
             return new JwtSecurityTokenHandler()
                 .WriteToken(token);

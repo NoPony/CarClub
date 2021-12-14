@@ -1,66 +1,118 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, interval } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 
-import { UserModel } from '../common/model/user-model.interface';
 import { AuthRegisterRequestDto } from '../common/dto/auth-register-request-dto.interface';
 import { AuthLoginRequestDto } from '../common/dto/auth-login-request-dto.interface';
 import { AuthLoginResponseDto } from '../common/dto/auth-login-response-dto.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private baseUrl: string = environment.apiUrl;
 
-  private currentUserSubject: BehaviorSubject<UserModel | null>;
-  public currentUser: Observable<UserModel | null>;
+  private authenticatedSubject: BehaviorSubject<boolean>;
+  public Authenticated: Observable<boolean>;
+
+  public AccessToken: string | null;
+
+  // private refreshTokenTimeout: NodeJS.Timeout | undefined;
 
   constructor(private http: HttpClient) {
-    const storedUser = localStorage.getItem('currentUser');
+    const refreshToken = localStorage.getItem('refreshToken');
 
-    if (storedUser != null) {
-      this.currentUserSubject = new BehaviorSubject<UserModel | null>(JSON.parse(storedUser));
+    if (refreshToken != null) {
+      this.AccessToken = JSON.parse(refreshToken);
+      this.authenticatedSubject = new BehaviorSubject<boolean>(true);
+    } else {
+      this.AccessToken = null;
+      this.authenticatedSubject = new BehaviorSubject<boolean>(false);
     }
 
-    else {
-      this.currentUserSubject = new BehaviorSubject<UserModel | null>(null);
-    }
-
-    this.currentUser = this.currentUserSubject.asObservable();
+    this.Authenticated = this.authenticatedSubject.asObservable();
   }
 
-  public get currentUserValue(): UserModel | null {
-    return this.currentUserSubject.value;
+  public get AuthenticatedCurrent(): boolean {
+    return this.authenticatedSubject.value;
   }
 
   public register(request: AuthRegisterRequestDto): Observable<object> {
-    return this.http
-      .post(`${this.baseUrl}Auth/Register`, request);
+    return this.http.post(`${this.baseUrl}Auth/Register`, request);
   }
 
   public verify(key: string): Observable<object> {
-    return this.http
-      .get(`${this.baseUrl}Auth/EmailVerify/${key}`);
+    return this.http.get(`${this.baseUrl}Auth/EmailVerify/${key}`);
   }
 
   public login(request: AuthLoginRequestDto): Observable<AuthLoginResponseDto> {
     return this.http
-      .post<AuthLoginResponseDto>(`${this.baseUrl}Auth/Login`, JSON.stringify(request))
-      .pipe(map(user => {
-        localStorage.setItem('currentUser', JSON.stringify(user));
+      .post<AuthLoginResponseDto>(
+        `${this.baseUrl}Auth/Login`,
+        JSON.stringify(request)
+      )
+      .pipe(
+        map((response) => {
+          localStorage.setItem(
+            'refreshToken',
+            JSON.stringify(response.refreshToken)
+          );
 
-        this.currentUserSubject.next(user);
+          this.AccessToken = response.accessToken;
+          this.authenticatedSubject.next(true);
 
-        return user;
-      }));
+          this.startRefreshTimer();
+
+          return response;
+        })
+      );
   }
 
   public logout(): void {
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
+    localStorage.removeItem('refreshToken');
+
+    this.AccessToken = null;
+    this.authenticatedSubject.next(false);
   }
+
+  public refresh(): void {
+    this.http
+      .get<AuthLoginResponseDto>(`${this.baseUrl}Auth/Refresh`)
+      .subscribe((response) => {
+        localStorage.setItem(
+          'refreshToken',
+          JSON.stringify(response.refreshToken)
+        );
+
+        this.AccessToken = response.accessToken;
+        this.authenticatedSubject.next(true);
+
+        this.startRefreshTimer();
+      });
+  }
+
+  private startRefreshTimer(): void {
+    if (this.AccessToken) {
+      const tokenBody = JSON.parse(atob(this.AccessToken.split('.')[1]));
+
+      const tokenExpires = new Date(tokenBody.exp * 1000);
+      const timeout = tokenExpires.getTime() - Date.now() - 60 * 1000;
+
+      interval(timeout).subscribe(() => {
+        if (this.AuthenticatedCurrent) {
+          console.log('Refreshing token');
+
+          this.refresh();
+        }
+      });
+    }
+  }
+
+  // private stopRefreshTimer() {
+  //   if (!!this.refreshTokenTimeout)
+  //     clearTimeout(this.refreshTokenTimeout);
+  // }
 }

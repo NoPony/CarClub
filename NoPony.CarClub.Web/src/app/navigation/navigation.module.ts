@@ -14,14 +14,11 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { TopnavComponent } from './topnav/topnav.component';
 
 @NgModule({
-  declarations: [
-    SidenavComponent,
-    TopnavComponent,
-  ],
+  declarations: [SidenavComponent, TopnavComponent],
   imports: [
     CommonModule,
     RouterModule,
-    
+
     FlexLayoutModule,
     MatToolbarModule,
     MatMenuModule,
@@ -30,9 +27,6 @@ import { TopnavComponent } from './topnav/topnav.component';
     MatDialogModule,
     MatListModule,
   ],
-  exports: [
-    SidenavComponent,
-    TopnavComponent,
-  ]
+  exports: [SidenavComponent, TopnavComponent],
 })
-export class NavigationModule { }
+export class NavigationModule {}

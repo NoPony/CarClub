@@ -1,15 +1,19 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NoPony.CarClub.Api.Exceptions;
 using NoPony.CarClub.Api.Features.Auth.Dto;
+using NoPony.CarClub.Api.Utility;
 using Serilog;
 using System;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace NoPony.CarClub.Api.Features.Auth
 {
     [ApiController]
     [Route("[controller]")]
-    public class AuthController : ControllerBase
+    public class AuthController : CustomControllerBase
     {
         private readonly ILogger _log;
         private readonly IAuthService _authService;
@@ -24,21 +28,23 @@ namespace NoPony.CarClub.Api.Features.Auth
         [AllowAnonymous]
         [HttpPost]
         [Route("Register")]
-        public ActionResult Register([FromBody] AuthRegisterRequestDto request)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> Register([FromBody] AuthRegisterRequestDto request)
         {
-            if (request == null)
-            {
-                return StatusCode(StatusCodes.Status400BadRequest);
-            }
-
             try
             {
-                if (!_authService.TryRegister(HttpContext.Connection.RemoteIpAddress, request))
-                {
-                    return StatusCode(StatusCodes.Status409Conflict);
-                }
+                IPAddress ip = GetUserIp();
+
+                await _authService.Register(ip, request);
 
                 return StatusCode(StatusCodes.Status200OK);
+            }
+
+            catch (InvalidKeyException)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest);
             }
 
             catch (Exception ex)
@@ -52,14 +58,13 @@ namespace NoPony.CarClub.Api.Features.Auth
         [AllowAnonymous]
         [HttpGet]
         [Route("EmailVerify/{key:Guid}")]
-        public ActionResult VerifyEmail([FromRoute] Guid key)
+        public async Task<IActionResult> VerifyEmail([FromRoute] Guid key)
         {
             try
             {
-                if (!_authService.TryVerify(HttpContext.Connection.RemoteIpAddress, key))
-                {
-                    return StatusCode(StatusCodes.Status400BadRequest);
-                }
+                IPAddress ip = GetUserIp();
+
+                await _authService.Verify(ip, key);
 
                 return StatusCode(StatusCodes.Status200OK);
             }
@@ -75,21 +80,19 @@ namespace NoPony.CarClub.Api.Features.Auth
         [AllowAnonymous]
         [HttpPost]
         [Route("Login")]
-        public ActionResult<AuthLoginResponseDto> Login([FromBody] AuthLoginRequestDto Request)
+        public async Task<IActionResult> Login([FromBody] AuthLoginRequestDto Request)
         {
-            if (Request == null)
-            {
-                return StatusCode(StatusCodes.Status400BadRequest);
-            }
-
             try
             {
-                if (!_authService.TryLogin(HttpContext.Connection.RemoteIpAddress, Request, out AuthLoginResponseDto response))
-                {
-                    return StatusCode(StatusCodes.Status400BadRequest);
-                }
+                IPAddress ip = GetUserIp();
 
-                return StatusCode(StatusCodes.Status200OK, response);
+                Model.AuthLoginResponseModel responseModel = await _authService.Login(ip, Request);
+
+                return StatusCode(StatusCodes.Status200OK, new AuthLoginResponseDto
+                {
+                    RefreshToken = responseModel.RefreshToken,
+                    AccessToken = responseModel.AccessToken,
+                });
             }
 
             catch (Exception ex)
@@ -100,6 +103,31 @@ namespace NoPony.CarClub.Api.Features.Auth
             }
         }
 
+        [HttpGet]
+        [Route("Refresh")]
+        public async Task<IActionResult> Refresh()
+        {
+            try
+            {
+                Guid clientKey = GetUserKey();
+                IPAddress clientIp = GetUserIp();
+
+                Model.AuthLoginResponseModel responseModel = await _authService.Refresh(clientKey, clientIp);
+
+                return StatusCode(StatusCodes.Status200OK, new AuthLoginResponseDto
+                {
+                    RefreshToken = responseModel.RefreshToken,
+                    AccessToken = responseModel.AccessToken,
+                });
+            }
+
+            catch (Exception ex)
+            {
+                _log.Error(ex, "Unhandled exception in '{controller}'.'{method}'", nameof(AuthController), nameof(Refresh));
+
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
         // reset password
         // Update?  Shouldn't need it...
     }

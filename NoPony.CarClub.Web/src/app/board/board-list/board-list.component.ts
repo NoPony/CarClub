@@ -11,23 +11,28 @@ import { BoardSearchDto } from '../dto/board-search-dto.interface';
 @Component({
   selector: 'app-board-list',
   templateUrl: './board-list.component.html',
-  styleUrls: ['./board-list.component.scss']
+  styleUrls: ['./board-list.component.scss'],
 })
-export class BoardListComponent implements OnInit {
+// export class BoardListComponent implements OnInit {
+export class BoardListComponent {
   @ViewChild('paginatorTop', { static: false }) paginatorTop!: MatPaginator;
-  @ViewChild('paginatorBottom', { static: false }) paginatorBottom!: MatPaginator;
+  @ViewChild('paginatorBottom', { static: false })
+  paginatorBottom!: MatPaginator;
 
   public pageSizeOptions: number[] = [5, 10, 25, 100];
-  public pageSize: number = 10;
-  public pageNumber: number = 1;
+  public pageSize = 10;
+  public pageNumber = 1;
   public model: PageResponseDto<BoardSearchDto> | null = null;
 
-  constructor(private router: Router, private dialog: MatDialog, private boardService: BoardService) { 
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+    private boardService: BoardService
+  ) {
     this.fetchPage();
   }
 
-  ngOnInit(): void {
-  }
+  // ngOnInit(): void {}
 
   public showPageTop(event: PageEvent): void {
     this.pageNumber = event.pageIndex + 1;
@@ -49,14 +54,17 @@ export class BoardListComponent implements OnInit {
     this.fetchPage();
   }
 
-  private fetchPage() {
-    this.boardService.search({ page: this.pageNumber, size: this.pageSize }).subscribe(
-      (x) => {
-        this.model = x;
-      },
-      (e) => {
-        console.log(`Error ${e}`);
-      });
+  private fetchPage(): void {
+    this.boardService
+      .search({ page: this.pageNumber, size: this.pageSize })
+      .subscribe(
+        (x) => {
+          this.model = x;
+        },
+        (e) => {
+          console.log(`Error ${e}`);
+        }
+      );
   }
 
   public showBoard(board: BoardSearchDto): void {

@@ -44,10 +44,10 @@ namespace NoPony.CarClub.Api.Features.Board
             await _context.SaveChangesAsync();
         }
 
-        public async Task<BoardDto> BoardRead(Guid? clientKey, Guid? key)
+        public async Task<BoardDto> BoardRead(Guid? clientKey, Guid? boardKey)
         {
             return await _context.Board
-                .Where(i => i.Key == clientKey)
+                .Where(i => i.Key == boardKey)
                 .Select(i => new BoardDto
                 {
                     Title = i.Title,
@@ -60,10 +60,10 @@ namespace NoPony.CarClub.Api.Features.Board
         {
             using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
-                EF.Board b = _context.Board.Single(i => i.Key == clientKey);
+                EF.Board board = _context.Board.Single(i => i.Key == request.Key);
 
-                b.Title = request.Title;
-                b.Note = request.Note;
+                board.Title = request.Title;
+                board.Note = request.Note;
 
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
@@ -72,7 +72,7 @@ namespace NoPony.CarClub.Api.Features.Board
             }
         }
 
-        public async Task<bool> BoardDelete(Guid? clientKey, IPAddress clientIp, Guid? key)
+        public async Task<bool> BoardDelete(Guid? clientKey, IPAddress clientIp, Guid? boardKey)
         {
             using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
@@ -82,15 +82,15 @@ namespace NoPony.CarClub.Api.Features.Board
                     .Select(i => i.Id)
                     .SingleAsync();
 
-                EF.Board b = await _context.Board
+                EF.Board board = await _context.Board
                     .Where(i => i.Deleted == false)
-                    .Where(i => i.Key == clientKey)
+                    .Where(i => i.Key == boardKey)
                     .SingleAsync();
 
-                b.Deleted = true;
-                b.DeletedIp = clientIp;
-                b.DeletedUserId = clientId;
-                b.DeletedUtc = DateTime.UtcNow;
+                board.Deleted = true;
+                board.DeletedIp = clientIp;
+                board.DeletedUserId = clientId;
+                board.DeletedUtc = DateTime.UtcNow;
 
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
@@ -105,9 +105,9 @@ namespace NoPony.CarClub.Api.Features.Board
                 .Where(i => i.Deleted == false)
                 .CountAsync();
 
-            List<BoardSearchDto> items = await _context.Board
+            List<BoardSearchDto> boards = await _context.Board
                 .Where(i => i.Deleted == false)
-                .OrderBy(i => i.Ordinal)
+                //.OrderBy(i => i.Ordinal)
                 .Skip(((request.Page ?? 1) - 1) * request.Size ?? 10)
                 .Take(request.Size ?? 10)
                 .Select(i => new BoardSearchDto
@@ -125,7 +125,7 @@ namespace NoPony.CarClub.Api.Features.Board
             {
                 Page = request.Page,
                 Count = count,
-                Items = items,
+                Items = boards,
             };
         }
     }

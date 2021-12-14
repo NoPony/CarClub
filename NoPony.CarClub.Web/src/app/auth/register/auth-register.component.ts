@@ -8,9 +8,10 @@ import { AuthRegisterRequestDto } from '../../common/dto/auth-register-request-d
 @Component({
   selector: 'app-auth-register',
   templateUrl: './auth-register.component.html',
-  styleUrls: ['./auth-register.component.scss']
+  styleUrls: ['./auth-register.component.scss'],
 })
-export class AuthRegisterComponent implements OnInit {
+// export class AuthRegisterComponent implements OnInit {
+export class AuthRegisterComponent {
   public hidePassword = true;
 
   public stateIdle = 0;
@@ -37,11 +38,13 @@ export class AuthRegisterComponent implements OnInit {
     Validators.pattern(this.passwordControl.value),
   ]);
 
-  constructor(private dialogRef: MatDialogRef<AuthRegisterComponent>, private authService: AuthService) {
-  }
+  constructor(
+    private dialogRef: MatDialogRef<AuthRegisterComponent>,
+    private authService: AuthService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  // ngOnInit(): void {
+  // }
 
   public join(): void {
     if (!this.emailControl.valid) {
@@ -66,16 +69,15 @@ export class AuthRegisterComponent implements OnInit {
 
     this.email = this.emailControl.value;
 
-    this.authService.register(request)
-      .subscribe(
-        () => {
-          this.state = this.stateSuccess;
-        },
+    this.authService.register(request).subscribe(
+      () => {
+        this.state = this.stateSuccess;
+      },
 
-        () => {
-          this.state = this.stateError;
-        }
-      );
+      () => {
+        this.state = this.stateError;
+      }
+    );
   }
 
   public close(): void {

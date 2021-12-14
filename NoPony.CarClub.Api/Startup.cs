@@ -48,7 +48,7 @@ namespace NoPony.CarClub.Api
             services.AddControllers()
                 .AddJsonOptions(options =>
                 {
-                    options.JsonSerializerOptions.IgnoreNullValues = true;
+                    options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
                 });
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -82,7 +82,6 @@ namespace NoPony.CarClub.Api
             builder.RegisterLogger();
 
             builder.RegisterType<EF.Context>().InstancePerLifetimeScope();
-
 
             builder.RegisterType<RazorTemplateEngine>().As<ITemplateEngine>().SingleInstance();
 

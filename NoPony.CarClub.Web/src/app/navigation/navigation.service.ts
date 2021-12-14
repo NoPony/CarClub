@@ -10,55 +10,73 @@ import { AuthService } from '../auth/auth.service';
 import { UserModel } from '../common/model/user-model.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NavigationService {
-  private itemsSubject: BehaviorSubject<NavigationModel[]>;
+  private menusSubject: BehaviorSubject<NavigationModel[]>;
   public Menus: Observable<NavigationModel[]>;
 
-  private currentUser: UserModel | null = null;
+  private authenticated = false;
 
   constructor(private dialog: MatDialog, private authService: AuthService) {
-    this.authService.currentUser.subscribe(x => this.currentUser = x);
+    this.authService.Authenticated.subscribe((x) => (this.authenticated = x));
 
-    this.itemsSubject = new BehaviorSubject<NavigationModel[]>(
-      [
-        { Icon: "home", Label: "Home", Show: () => true, RouterLink: "/home" },
+    this.menusSubject = new BehaviorSubject<NavigationModel[]>([
+      {
+        Icon: 'home',
+        Label: 'Home',
+        Show: () => true,
+        RouterLink: '/home',
+      },
 
-        {
-          Icon: "login", Label: "Login", Show: () => !this.currentUser, Click: () => {
-            const dialogRef = this.dialog.open(AuthLoginComponent, {
-              width: '400px',
-            });
+      {
+        Icon: 'login',
+        Label: 'Login',
+        Show: () => !this.authenticated,
+        Click: () => {
+          const dialogRef = this.dialog.open(AuthLoginComponent, {
+            width: '400px',
+          });
 
-            dialogRef.afterClosed().subscribe();
-          }
+          dialogRef.afterClosed().subscribe();
         },
+      },
 
-        {
-          Icon: "app_registration", Label: "Join", Show: () => !this.currentUser, Click: () => {
-            const dialogRef = this.dialog.open(AuthRegisterComponent, {
-              width: '400px',
-            });
+      {
+        Icon: 'app_registration',
+        Label: 'Join',
+        Show: () => !this.authenticated,
+        Click: () => {
+          const dialogRef = this.dialog.open(AuthRegisterComponent, {
+            width: '400px',
+          });
 
-            dialogRef.afterClosed().subscribe();
-          }
+          dialogRef.afterClosed().subscribe();
         },
+      },
 
-        { Icon: "forum", Label: "Forum", RouterLink: "/forum", Show: () => !!this.currentUser },
+      {
+        Icon: 'forum',
+        Label: 'Forum',
+        RouterLink: '/forum',
+        Show: () => this.authenticated,
+      },
 
-        {
-          Icon: "logout", Label: "Logout", RouterLink: "/home", Show: () => this.currentUser != null, Click: () => {
-            authService.logout();
-          }
+      {
+        Icon: 'logout',
+        Label: 'Logout',
+        RouterLink: '/home',
+        Show: () => this.authenticated,
+        Click: () => {
+          authService.logout();
         },
-      ]
-    );
+      },
+    ]);
 
-    this.Menus = this.itemsSubject.asObservable();
+    this.Menus = this.menusSubject.asObservable();
   }
 
-  public get ItemsValue(): NavigationModel[] {
-    return this.itemsSubject.value;
+  public get MenusCurrent(): NavigationModel[] {
+    return this.menusSubject.value;
   }
 }

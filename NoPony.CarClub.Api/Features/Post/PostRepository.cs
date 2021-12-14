@@ -19,15 +19,12 @@ namespace NoPony.CarClub.Api.Features.Post
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<Guid?> PostCreate(Guid clientKey, IPAddress clientIp, PostDto request)
+        public async Task PostCreate(Guid clientKey, IPAddress clientIp, PostDto request)
         {
-            DateTime dt = DateTime.UtcNow;
-
-            //using (EF.Context context = new EF.Context())
-            //{
-            //using (IDbContextTransaction transaction = context.Database.BeginTransaction())
             using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
+                DateTime now = DateTime.UtcNow;
+
                 long userId = await _context.User
                     .Where(i => i.Key == clientKey)
                     .Where(i => i.Deleted == false)
@@ -40,9 +37,11 @@ namespace NoPony.CarClub.Api.Features.Post
                     .Select(i => i.Id)
                     .SingleAsync();
 
+                Guid postKey = Guid.NewGuid();
+
                 _context.Post.Add(new EF.Post
                 {
-                    Key = clientKey,
+                    Key = postKey,
                     BoardId = boardId,
 
                     Title = request.Title,
@@ -51,58 +50,49 @@ namespace NoPony.CarClub.Api.Features.Post
                     Thread = new EF.Thread
                     {
                         CreatedIp = clientIp,
-                        CreatedUtc = dt,
+                        CreatedUtc = now,
                         CreatedUserId = userId,
                     },
 
                     CreatedIp = clientIp,
-                    CreatedUtc = dt,
+                    CreatedUtc = now,
                     CreatedUserId = userId,
                 });
 
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
             }
-            //}
-
-            return null;
         }
 
-        public async Task<PostDto> PostRead(Guid clientKey, Guid? key)
+        public async Task<PostDto> PostRead(Guid clientKey, Guid? postKey)
         {
-            byte[] k = key.Value.ToByteArray();
-
             return await _context.Post
-                //.Where(i => i.Key == k)
+                .Where(i => i.Key == postKey)
                 .Select(i => new PostDto
                 {
-
+                    Key=i.Key,
+                    Board=i.Board.Key,
+                    Title=i.Title,
+                    Content =   i.Content,
                 })
                 .SingleAsync();
         }
 
-        public async Task<bool> PostUpdate(Guid clientKey, IPAddress clientIp, PostDto request)
+        public async Task PostUpdate(Guid clientKey, IPAddress clientIp, PostDto request)
         {
-            //byte[] k = request.Key?.ToByteArray();
-
-            //if (k == null)
-            //    return false;
-
             using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
-                //EF.Post b = context.Post.Single(i => i.Key == k);
+                EF.Post b = _context.Post.Single(i => i.Key == request.Key);
 
-                //b.Title = request.Title;
-                //b.Note = request.Note;
+                b.Title = request.Title;
+                b.Content = request.Content;
 
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
-
-                return true;
             }
         }
 
-        public async Task<bool> PostDelete(Guid clientKey, IPAddress clientIp, Guid? key)
+        public async Task PostDelete(Guid clientKey, IPAddress clientIp, Guid? key)
         {
             using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
@@ -124,8 +114,6 @@ namespace NoPony.CarClub.Api.Features.Post
 
                 await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
-
-                return true;
             }
         }
 

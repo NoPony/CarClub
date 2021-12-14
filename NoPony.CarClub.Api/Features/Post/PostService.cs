@@ -17,9 +17,9 @@ namespace NoPony.CarClub.Api.Features.Post
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         }
 
-        public async Task<Guid?> PostCreate(Guid clientKey, IPAddress clientIp, PostDto request)
+        public async Task PostCreate(Guid clientKey, IPAddress clientIp, PostDto request)
         {
-            return await _repository.PostCreate(clientKey, clientIp, request);
+            await _repository.PostCreate(clientKey, clientIp, request);
         }
 
         public async Task<PostDto> PostRead(Guid clientKey, Guid? key)
@@ -27,20 +27,19 @@ namespace NoPony.CarClub.Api.Features.Post
             return await _repository.PostRead(clientKey, key);
         }
 
-        public async Task<bool> PostUpdate(Guid clientKey, IPAddress clientIp, PostDto request)
+        public async Task PostUpdate(Guid clientKey, IPAddress clientIp, PostDto request)
         {
-            return await _repository.PostUpdate(clientKey, clientIp, request);
+            await _repository.PostUpdate(clientKey, clientIp, request);
         }
 
-        public async Task<bool> PostDelete(Guid clientKey, IPAddress clientIp, Guid? PostKey)
+        public async Task PostDelete(Guid clientKey, IPAddress clientIp, Guid? PostKey)
         {
-            return await _repository.PostDelete(clientKey, clientIp, PostKey);
+            await _repository.PostDelete(clientKey, clientIp, PostKey);
         }
 
         public async Task<PageResponseDto<PostSearchDto>> PostSearch(Guid clientKey, PageRequestDto request)
         {
             return await _repository.PostSearch(clientKey, request);
         }
-
     }
 }

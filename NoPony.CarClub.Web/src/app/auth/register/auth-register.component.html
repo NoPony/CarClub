@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Join</h2>
 <mat-dialog-content>
-  <div *ngIf="state == stateIdle">
+  <div *ngIf="state === stateIdle">
     <p>Enter your Email and Password to join.</p>
     <mat-form-field appearance="fill" class="text">
       <mat-label>Email Address</mat-label>
@@ -33,25 +33,25 @@
     </mat-form-field>
   </div>
 
-  <div *ngIf="state == stateBusy">
+  <div *ngIf="state === stateBusy">
     <p>Joining</p>
     <div class="spinContainer">
       <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
     </div>
   </div>
 
-  <div *ngIf="state == stateSuccess">
+  <div *ngIf="state === stateSuccess">
     <p>An verification email has been sent to <u>{{ email }}</u>.</p>
     <p>Please check your emails, and click the link to verify your account.</p>
   </div>
 </mat-dialog-content>
 
-<mat-dialog-actions *ngIf="state == stateIdle">
+<mat-dialog-actions *ngIf="state === stateIdle">
   <span class="spacer"></span>
   <button mat-raised-button (click)="join()" color="primary">Join</button>
 </mat-dialog-actions>
 
-<mat-dialog-actions *ngIf="state == stateSuccess">
+<mat-dialog-actions *ngIf="state === stateSuccess">
   <span class="spacer"></span>
   <button mat-raised-button (click)="close()" color="primary">Ok</button>
 </mat-dialog-actions>

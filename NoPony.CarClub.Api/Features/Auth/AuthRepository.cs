@@ -1,11 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using NoPony.CarClub.Api.EF;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using NoPony.CarClub.Api.Exceptions;
 using NoPony.CarClub.Api.Features.Auth.Record;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace NoPony.CarClub.Api.Features.Auth
 {
@@ -20,49 +22,47 @@ namespace NoPony.CarClub.Api.Features.Auth
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public bool TryRegister(IPAddress clientIp, string email, string password, out AuthRegisterModel result)
+        public async Task<AuthRegisterResponseModel> Register(IPAddress clientIp, string email, string password)
         {
             Guid loginKey = Guid.NewGuid();
             Guid verifyKey = Guid.NewGuid();
 
-            var u = _context.User.ToList();
+            if (_context.User
+                .Where(i => !i.Deleted)
+                .Where(i => i.Email == email)
+                .Any())
+                throw new DuplicateRecordException();
 
-            _context.User.Add(new User
+            await _context.User.AddAsync(new EF.User
             {
-                Key = loginKey/*.ToByteArray()*/,
+                Key = loginKey,
                 Email = email,
                 Password = password,
-                EmailVerifyKey = verifyKey/*.ToByteArray()*/,
+                EmailVerifyKey = verifyKey,
 
                 CreatedIp = clientIp,
                 CreatedUtc = DateTime.UtcNow,
             });
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
-            result = new AuthRegisterModel
+            return new AuthRegisterResponseModel
             {
                 Email = email,
                 EmailVerifyKey = verifyKey,
             };
-
-            return true;
         }
 
-        public bool TryVerify(IPAddress clientIp, Guid? key)
+        public async Task Verify(IPAddress clientIp, Guid? key)
         {
             using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
-                User record = _context.User
+                EF.User record = await _context.User
                     .Where(i => i.Deleted == false)
                     .Where(i => i.EmailVerified == false)
                     .Where(i => i.EmailVerifyKey == key)
-                    .SingleOrDefault();
-
-                if (record == null)
-                {
-                    return false;
-                }
+                    .SingleOrDefaultAsync()
+                ?? throw new InvalidKeyException();
 
                 record.EmailVerified = true;
                 record.EmailVerifiedIp = clientIp;
@@ -74,50 +74,37 @@ namespace NoPony.CarClub.Api.Features.Auth
                 record.UpdatedUtc = DateTime.UtcNow;
                 record.UpdatedUserId = record.Id;
 
-                _context.SaveChanges();
-
-                transaction.Commit();
-
-                return true;
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
             }
         }
 
-        public bool TryLogin(IPAddress clientIp, string email, out AuthLoginModel result)
+        public async Task<AuthUserModel> Login(IPAddress clientIp, string email)
         {
-            result = _context.User
+            return await _context.User
                 .Where(i => i.Deleted == false)
                 .Where(i => i.EmailVerified == true)
                 .Where(i => i.Email == email)
                 .Where(i => i.FailedLoginCount < 5)
-                .Select(i => new AuthLoginModel
+                .Select(i => new AuthUserModel
                 {
                     Key = i.Key,
                     Password = i.Password,
                 })
-                .SingleOrDefault();
-
-            if (result == null)
-            {
-                return false;
-            }
-
-            return true;
+                .SingleOrDefaultAsync()
+            ?? throw new LoginFailedException();
         }
 
-        public bool TryLoginSuccess(IPAddress clientIp, Guid? key)
+        public async Task LoginSuccess(IPAddress clientIp, Guid? key)
         {
             using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
-                User record = _context.User
+                EF.User record = await _context.User
                     .Where(i => i.Deleted == false)
                     .Where(i => i.EmailVerified == true)
                     .Where(i => i.Key == key)
-                    .SingleOrDefault();
-
-                if (record == null)
-                {
-                    return false;
-                }
+                    .SingleOrDefaultAsync()
+                ?? throw new InvalidKeyException();
 
                 if (record.FailedLogin)
                 {
@@ -135,26 +122,20 @@ namespace NoPony.CarClub.Api.Features.Auth
                 record.UpdatedUtc = DateTime.UtcNow;
                 record.UpdatedUserId = record.Id;
 
-                _context.SaveChanges();
-
-                transaction.Commit();
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
             }
-
-            return true;
         }
 
-        public bool TryLoginFailure(IPAddress clientIp, Guid? key)
+        public async Task LoginFailure(IPAddress clientIp, Guid? key)
         {
             using (IDbContextTransaction transaction = _context.Database.BeginTransaction())
             {
-                User record = _context.User
+                EF.User record = _context.User
+                    .Where(i => i.Deleted == false)
                     .Where(i => i.Key == key)
-                    .SingleOrDefault();
-
-                if (record == null)
-                {
-                    return false;
-                }
+                    .SingleOrDefault()
+                ?? throw new InvalidKeyException();
 
                 record.FailedLogin = true;
                 record.FailedLoginIp = clientIp;
@@ -166,27 +147,23 @@ namespace NoPony.CarClub.Api.Features.Auth
                 record.UpdatedUtc = DateTime.UtcNow;
                 record.UpdatedUserId = record.Id;
 
-                _context.SaveChanges();
-                transaction.Commit();
-
-                return true;
+                await _context.SaveChangesAsync();
+                await transaction.CommitAsync();
             }
         }
 
-        public bool TryGetPermissions(Guid? key, out IEnumerable<string> result)
+        public async Task<IEnumerable<string>> GetPermissions(Guid? key)
         {
-            result = _context.User
-                .Where(i => i.Key == key)
+            return await _context.User
                 .Where(i => i.Deleted == false)
+                .Where(i => i.Key == key)
                 .Where(i => i.FailedLoginCount < 5)
-                .SelectMany(u => u.UserRoleUser/*.UserRole*/)
+                .SelectMany(u => u.UserRoleUser)
                 .Select(i => i.Role)
                 .SelectMany(rp => rp.RolePermissionSecurable)
                 .Select(i => i.Permission)
                 .Select(i => i.Code)
-                .ToList();
-
-            return true;
+                .ToListAsync();
         }
     }
 }

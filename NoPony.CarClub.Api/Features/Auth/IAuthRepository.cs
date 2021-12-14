@@ -2,16 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace NoPony.CarClub.Api.Features.Auth
 {
     public interface IAuthRepository
     {
-        bool TryRegister(IPAddress clientIp, string email, string password, out AuthRegisterModel result);
-        bool TryVerify(IPAddress ClientIp, Guid? key);
-        bool TryLogin(IPAddress ClientIp, string email, out AuthLoginModel result);
-        bool TryLoginSuccess(IPAddress clientIp, Guid? key);
-        bool TryLoginFailure(IPAddress clientIp, Guid? key);
-        bool TryGetPermissions(Guid? key, out IEnumerable<string> result);
+        Task<AuthRegisterResponseModel> Register(IPAddress clientIp, string email, string password);
+        Task Verify(IPAddress ClientIp, Guid? key);
+        Task<AuthUserModel> Login(IPAddress ClientIp, string email);
+        Task LoginSuccess(IPAddress clientIp, Guid? key);
+        Task LoginFailure(IPAddress clientIp, Guid? key);
+        Task<IEnumerable<string>> GetPermissions(Guid? key);
     }
 }

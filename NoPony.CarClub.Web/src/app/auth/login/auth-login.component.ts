@@ -9,9 +9,10 @@ import { AuthLoginRequestDto } from '../../common/dto/auth-login-request-dto.int
 @Component({
   selector: 'app-auth-login',
   templateUrl: './auth-login.component.html',
-  styleUrls: ['./auth-login.component.scss']
+  styleUrls: ['./auth-login.component.scss'],
 })
-export class AuthLoginComponent implements OnInit {
+// export class AuthLoginComponent implements OnInit {
+export class AuthLoginComponent {
   public emailControl: FormControl = new FormControl('', [
     Validators.required,
     Validators.email,
@@ -28,11 +29,13 @@ export class AuthLoginComponent implements OnInit {
   public idle = true;
   public busy = false;
 
-  constructor(public dialogRef: MatDialogRef<AuthLoginComponent>, private authService: AuthService) {
-  }
+  constructor(
+    public dialogRef: MatDialogRef<AuthLoginComponent>,
+    private authService: AuthService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  // ngOnInit(): void {
+  // }
 
   public login(): void {
     if (!this.emailControl.valid) {
@@ -51,14 +54,13 @@ export class AuthLoginComponent implements OnInit {
       password: this.passwordControl.value,
     };
 
-    this.authService.login(request)
-      .subscribe(
-        () => {
-          this.dialogRef.close();
-        },
-        (e) => {
-          console.log(`Error ${e}`);
-        }
-      );
+    this.authService.login(request).subscribe(
+      () => {
+        this.dialogRef.close();
+      },
+      (e) => {
+        console.log(`Error ${e}`);
+      }
+    );
   }
 }
