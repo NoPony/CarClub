@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Create new Post</h2>
+
+<mat-dialog-content>
+  <div *ngIf="status === 'IDLE'">
+    <p>Enter a Title and the Content for your new post.</p>
+    <mat-form-field appearance="fill" class="text">
+      <mat-label>Title</mat-label>
+      <input matInput [formControl]="titleControl">
+      <mat-error *ngIf="titleControl.hasError('required')">
+        A Title is required.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="text">
+      <mat-label>Content</mat-label>
+      <input matInput [formControl]="contentControl">
+      <mat-error *ngIf="contentControl.hasError('required')">
+        Some content is required.
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="status === 'POSTING'">
+    <p>Creating post</p>
+    <div class="container">
+      <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <span class="spacer"></span>
+  <button mat-raised-button color="primary" (click)="create()">Create</button>
+</mat-dialog-actions>

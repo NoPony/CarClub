@@ -1,0 +1,8 @@
+<div class="container">
+  <div fxFill fxLayout="row" fxLayoutAlign="space-between center">
+      <div><h1>{{post?.title}}</h1></div>
+      <div><button mat-button (click)="createPost()">Create Post</button></div>
+  </div>
+  {{post?.content}}
+  <!-- <app-post-list></app-post-list> -->
+</div>

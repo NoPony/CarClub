@@ -33,7 +33,7 @@ namespace NoPony.CarClub.Api.Features.Post
 
                 long boardId = await _context.Board
                     .Where(i => i.Deleted == false)
-                    .Where(i => i.Key == request.Board)
+                    .Where(i => i.Key == request.Key)
                     .Select(i => i.Id)
                     .SingleAsync();
 
